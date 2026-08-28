@@ -266,10 +266,29 @@ const categories = [
 			dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
 		}
 
-		prevBtn.addEventListener('click', () => goTo(current - 1));
-		nextBtn.addEventListener('click', () => goTo(current + 1));
-		dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+		prevBtn.addEventListener('click', () => {
+			goTo(current - 1);
+			resetAutoplay();
+		});
+		nextBtn.addEventListener('click', () => {
+			goTo(current + 1);
+			resetAutoplay();
+		});
+		dots.forEach((dot, i) => dot.addEventListener('click', () => {
+			goTo(i);
+			resetAutoplay();
+		}));
+
+		let autoplayTimer;
+		function startAutoplay() {
+			autoplayTimer = setInterval(() => goTo(current + 1), 5000);
+		}
+		function resetAutoplay() {
+			clearInterval(autoplayTimer);
+			startAutoplay();
+		}
 
 		goTo(0);
+		startAutoplay();
 	</script>
 </Layout>
