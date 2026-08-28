@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const categories = [
+	{
+		name: "論壇",
+		tagClass: "tag-forum",
+		activities: [
+			{
+				title: "第一屆臺灣青少年科學發展論壇",
+				date: "2026.12.25－12.26",
+				link: "/activities/forum"
+			}
+		]
+	},
+	{
+		name: "課程",
+		tagClass: "tag-course",
+		activities: []
+	},
+	{
+		name: "工作坊",
+		tagClass: "tag-workshop",
+		activities: []
+	},
+	{
+		name: "會員活動",
+		tagClass: "tag-assembly",
+		activities: [
+			{
+				title: "第一屆第二次會員大會",
+				date: "2026.8.30",
+				link: "/activities/assembly"
+			}
+		]
+	}
+];
+---
+
+<Layout title="協會活動">
+	<div class="panel">
+		<div class="panel-inner">
+			<div class="category-columns">
+				{categories.map((cat) => (
+					<div class="category-col">
+						<h3 class={`col-title ${cat.tagClass}`}>{cat.name}</h3>
+						{cat.activities.length > 0 ? (
+							<ul class="col-list">
+								{cat.activities.map((a) => (
+									<li>
+										<a href={a.link}>
+											<span class="col-item-title">{a.title}</span>
+											<span class="col-item-date">{a.date}</span>
+										</a>
+									</li>
+								))}
+							</ul>
+						) : (
+							<p class="col-empty">尚無活動</p>
+						)}
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+		.category-columns {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 2rem;
+		}
+		.category-col {
+			border-left: 3px solid;
+			padding-left: 1rem;
+		}
+		.col-title {
+			margin: 0 0 1rem;
+			font-size: 1.05rem;
+			font-weight: 700;
+		}
+		.tag-forum { border-color: #4E9975; }
+		.tag-course { border-color: #B87333; }
+		.tag-workshop { border-color: #A6863C; }
+		.tag-assembly { border-color: #7A6BA6; }
+		.col-title.tag-forum { color: #4E9975; }
+		.col-title.tag-course { color: #B87333; }
+		.col-title.tag-workshop { color: #A6863C; }
+		.col-title.tag-assembly { color: #7A6BA6; }
+		.col-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		.col-list li {
+			border-bottom: 1px solid #DDD2BE;
+			padding: 0.75rem 0;
+		}
+		.col-list li:last-child {
+			border-bottom: none;
+		}
+		.col-list a {
+			display: block;
+			text-decoration: none;
+			color: var(--card-text);
+		}
+		.col-list a:hover .col-item-title {
+			color: var(--orange);
+		}
+		.col-item-title {
+			display: block;
+			font-size: 0.9rem;
+			font-weight: 600;
+			margin-bottom: 0.25rem;
+		}
+		.col-item-date {
+			display: block;
+			font-size: 0.8rem;
+			color: var(--card-text-muted);
+		}
+		.col-empty {
+			font-size: 0.85rem;
+			color: var(--card-text-muted);
+			margin: 0;
+		}
+
+		@media (max-width: 700px) {
+			.category-columns {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+		@media (max-width: 450px) {
+			.category-columns {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</Layout>

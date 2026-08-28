@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="關於我們">
+	<div class="panel">
+		<div class="panel-inner">
+			<section>
+				<h2>協會簡介</h2>
+				<p>這裡放協會宗旨、成立緣起的詳細說明。</p>
+			</section>
+
+			<section>
+				<h2>聯繫方式</h2>
+				<p>Email：（協會信箱）</p>
+				<p>地址：（如有）</p>
+			</section>
+		</div>
+	</div>
+
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+		}
+		.panel h1, .panel h2, .panel h3 {
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+	</style>
+</Layout>

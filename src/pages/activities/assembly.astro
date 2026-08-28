@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="第一屆第二次會員大會">
+	<div class="panel">
+		<div class="panel-inner">
+			<a href="/activities">← 返回活動列表</a>
+
+			<h2>第一屆第二次會員大會</h2>
+			<p>時間：2026年8月30日（日）16:00</p>
+			<p>地點：喝點兒小酒 風味小館（臺中市西區市府路35號）</p>
+			<p>本次大會通知既有會員參加，會前請留意協會通知信件，無需另行報名。</p>
+		</div>
+	</div>
+
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+		}
+		.panel h1, .panel h2, .panel h3 {
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+	</style>
+</Layout>

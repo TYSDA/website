@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const members = [
+	{
+		name: "（姓名）",
+		title: "理事長",
+		bio: "這裡放學經歷、專長領域，或一句話的自我介紹。"
+	},
+	{
+		name: "（姓名）",
+		title: "理事",
+		bio: "這裡放學經歷、專長領域，或一句話的自我介紹。"
+	},
+	{
+		name: "（姓名）",
+		title: "監事",
+		bio: "這裡放學經歷、專長領域，或一句話的自我介紹。"
+	}
+];
+---
+
+<Layout title="理監事成員">
+	<div class="panel">
+		<div class="panel-inner">
+			<section>
+				<h2>第一屆理監事成員</h2>
+				<div class="member-grid">
+					{members.map((m) => (
+						<div class="member-card">
+							<div class="member-photo"></div>
+							<h3>{m.name}</h3>
+							<p class="member-title">{m.title}</p>
+							<p class="member-bio">{m.bio}</p>
+						</div>
+					))}
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+		}
+		.panel h1, .panel h2, .panel h3 {
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+		.member-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: 2rem;
+			margin-top: 1.5rem;
+		}
+		.member-card {
+			text-align: center;
+			background: var(--card-bg);
+			color: var(--card-text);
+			border-radius: 12px;
+			padding: 1.5rem;
+		}
+		.member-photo {
+			width: 140px;
+			height: 140px;
+			border-radius: 50%;
+			background: linear-gradient(135deg, var(--green), var(--purple));
+			margin: 0 auto 1rem;
+		}
+		.member-card h3 {
+			margin-bottom: 0.25rem;
+			color: var(--card-text);
+		}
+		.member-title {
+			color: var(--orange);
+			font-size: 0.9rem;
+			margin-bottom: 0.5rem;
+		}
+		.member-bio {
+			font-size: 0.9rem;
+			text-align: left;
+			color: var(--card-text-muted);
+		}
+	</style>
+</Layout>
