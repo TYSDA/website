@@ -7,13 +7,25 @@ import Layout from '../layouts/Layout.astro';
 		<div class="panel-inner">
 			<section>
 				<h2>協會簡介</h2>
-				<p>這裡放協會宗旨、成立緣起的詳細說明。</p>
+				<p>
+					臺灣青少年科學發展協會於民國114年發起籌組，同年10月召開第一屆第一次會員大會正式成立，
+					是一個依法設立、非以營利為目的之公益性社會團體，以促進臺灣青少年的科學發展為宗旨。
+					我們致力於：
+				</p>
+				<ul>
+					<li>提供臺灣青少年公平獲取學術及研究資源的機會</li>
+					<li>促進大專院校學術資源對青少年的開放與流通</li>
+					<li>提升青少年之科學素養及興趣</li>
+					<li>增進青少年對於科學研究工作的認識</li>
+					<li>協助對科學有興趣之青少年得到較好的科學訓練</li>
+					<li>協助參與科學研究之青少年得到較好的研究資源</li>
+				</ul>
 			</section>
 
 			<section>
 				<h2>聯繫方式</h2>
-				<p>Email：（協會信箱）</p>
-				<p>地址：（如有）</p>
+				<p>Email：ScienceJourney.ctw@outlook.com</p>
+				<p>地址：402台中市南區興大路145號</p>
 			</section>
 		</div>
 	</div>
@@ -22,6 +34,8 @@ import Layout from '../layouts/Layout.astro';
 		.panel {
 			background: var(--panel-bg);
 			color: var(--card-text);
+			margin-top: -6rem;
+			padding-top: 6rem;
 		}
 		.panel h1, .panel h2, .panel h3 {
 			color: var(--card-text);
