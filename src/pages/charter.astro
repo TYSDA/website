@@ -135,8 +135,8 @@ import Layout from '../layouts/Layout.astro';
 		.panel {
 			background: var(--panel-bg);
 			color: var(--card-text);
-			margin-top: -6rem;
-			padding-top: 6rem;
+			margin-top: calc(-1 * var(--header-h, 72px));
+            padding-top: var(--header-h, 72px);
 		}
 		.panel h1, .panel h2, .panel h3 {
 			color: var(--card-text);

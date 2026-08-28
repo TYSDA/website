@@ -17,10 +17,10 @@ const slides = [
 ];
 
 const categories = [
-	{ name: "論壇", tagClass: "tag-forum", link: "/activities#forum" },
-	{ name: "課程", tagClass: "tag-course", link: "/activities#course" },
-	{ name: "工作坊", tagClass: "tag-workshop", link: "/activities#workshop" },
-	{ name: "會員活動", tagClass: "tag-assembly", link: "/activities#assembly" }
+	{ name: "論壇", link: "/activities#forum", bg: "/forum.png" },
+	{ name: "課程", link: "/activities#course", bg: "/lecture.png" },
+	{ name: "工作坊", link: "/activities#workshop", bg: "/workshop.png" },
+	{ name: "會員活動", link: "/activities#assembly", bg: "/assembly.png" }
 ];
 ---
 
@@ -59,7 +59,7 @@ const categories = [
 			<h2>協會活動</h2>
 			<div class="category-preview-grid">
 				{categories.map((cat) => (
-					<a href={cat.link} class={`category-preview-card ${cat.tagClass}`}>
+					<a href={cat.link} class="category-preview-card" style={`background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${cat.bg})`}>
 						{cat.name}
 					</a>
 				))}
@@ -70,28 +70,27 @@ const categories = [
 
 	<div class="panel">
 		<div class="panel-inner">
-			<h2>理監事成員</h2>
+			<h2>協會成員</h2>
 			<div class="member-preview-grid">
-				<div class="member-card">
-					<img src="/logo.png" alt="（姓名）" class="member-photo" />
-					<div>
-						<h3>（姓名）</h3>
-						<p class="member-title">理事長</p>
-					</div>
+				<div class="member-preview-item">
+					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+					<p class="member-name">（姓名）</p>
 				</div>
-				<div class="member-card">
-					<img src="/logo.png" alt="（姓名）" class="member-photo" />
-					<div>
-						<h3>（姓名）</h3>
-						<p class="member-title">理事</p>
-					</div>
+				<div class="member-preview-item">
+					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+					<p class="member-name">（姓名）</p>
 				</div>
-				<div class="member-card">
-					<img src="/logo.png" alt="（姓名）" class="member-photo" />
-					<div>
-						<h3>（姓名）</h3>
-						<p class="member-title">監事</p>
-					</div>
+				<div class="member-preview-item">
+					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+					<p class="member-name">（姓名）</p>
+				</div>
+				<div class="member-preview-item">
+					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+					<p class="member-name">（姓名）</p>
+				</div>
+				<div class="member-preview-item">
+					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+					<p class="member-name">（姓名）</p>
 				</div>
 			</div>
 			<a href="/members">查看全部成員 →</a>
@@ -114,7 +113,6 @@ const categories = [
 		}
 		.hero-carousel {
 			position: relative;
-			margin-top: -6rem;
 			width: 100%;
 			overflow: hidden;
 		}
@@ -129,7 +127,7 @@ const categories = [
 			justify-content: center;
 			background: linear-gradient(135deg, #242B26, #2E362F);
 			padding: 10rem 10vw 5rem;
-			min-height: 450px;
+			min-height: 100vh;
 			text-decoration: none;
 			color: var(--text);
 			box-sizing: border-box;
@@ -209,70 +207,48 @@ const categories = [
 		}
 		.category-preview-grid {
 			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+			grid-template-columns: repeat(4, 1fr);
 			gap: 1rem;
 			margin: 1rem 0;
 		}
 		.category-preview-card {
-			display: block;
-			text-align: center;
+			display: flex;
+			align-items: flex-end;
 			padding: 1.5rem 1rem;
 			border-radius: 12px;
 			text-decoration: none;
-			font-weight: 600;
-			font-size: 1rem;
+			font-weight: 700;
+			font-size: 1.1rem;
+			color: #FFFFFF;
+			background-size: cover;
+			background-position: center;
+			min-height: 140px;
 			transition: transform 0.2s;
 		}
 		.category-preview-card:hover {
 			transform: translateY(-2px);
 		}
-		.category-preview-card.tag-forum {
-			background: rgba(78, 153, 117, 0.15);
-			color: #4E9975;
-		}
-		.category-preview-card.tag-course {
-			background: rgba(184, 115, 51, 0.15);
-			color: #B87333;
-		}
-		.category-preview-card.tag-workshop {
-			background: rgba(166, 134, 60, 0.15);
-			color: #A6863C;
-		}
-		.category-preview-card.tag-assembly {
-			background: rgba(122, 107, 166, 0.15);
-			color: #7A6BA6;
-		}
 		.member-preview-grid {
 			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			grid-template-columns: repeat(5, 1fr);
 			gap: 1rem;
 			margin: 1rem 0;
 		}
-		.member-card {
-			display: flex;
-			align-items: center;
-			gap: 1rem;
-			background: var(--card-bg);
-			color: var(--card-text);
-			border-radius: 12px;
-			padding: 1rem 1.5rem;
+		.member-preview-item {
+			text-align: center;
 		}
 		.member-photo {
-			width: 60px;
-			height: 60px;
+			width: 72px;
+			height: 72px;
 			border-radius: 50%;
 			object-fit: cover;
-			flex-shrink: 0;
+			display: block;
+			margin: 0 auto 0.5rem;
 		}
-		.member-card h3 {
-			margin: 0 0 0.25rem;
-			font-size: 1rem;
+		.member-name {
+			font-size: 0.9rem;
 			color: var(--card-text);
-		}
-		.member-title {
 			margin: 0;
-			color: var(--orange);
-			font-size: 0.85rem;
 		}
 	</style>
 
