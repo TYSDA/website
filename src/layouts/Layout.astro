@@ -1,151 +1,327 @@
 ---
-const { title } = Astro.props;
+import Layout from '../layouts/Layout.astro';
+
+const slides = [
+	{
+		label: "最新活動",
+		title: "第一屆臺灣青少年科學發展論壇",
+		date: "2026年12月25日－12月26日・國立臺灣科學教育館",
+		link: "/activities/forum"
+	},
+	{
+		label: "會員通知",
+		title: "第一屆第二次會員大會",
+		date: "2026年8月30日（日）16:00・喝點兒小酒 風味小館",
+		link: "/activities/assembly"
+	}
+];
+
+const categories = [
+	{ name: "論壇", link: "/activities#forum", bg: "/forum.png" },
+	{ name: "課程", link: "/activities#course", bg: "/lecture.png" },
+	{ name: "工作坊", link: "/activities#workshop", bg: "/workshop.png" },
+	{ name: "會員活動", link: "/activities#assembly", bg: "/assembly.png" }
+];
 ---
 
-<html lang="zh-Hant">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/logo2.png" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title} | 臺灣青少年科學發展協會</title>
-		<style>
-			:root {
-				--bg: #1B211D;
-				--panel-bg: #EFE6D8;
-				--card-bg: #FFFFFF;
-				--card-text: #2A2620;
-				--card-text-muted: #6B6355;
-				--text: #E8E9ED;
-				--text-muted: #8B8F9C;
-				--green: #4E9975;
-				--orange: #B87333;
-				--yellow: #A6863C;
-				--purple: #7A6BA6;
-			}
-			body {
-				font-family: system-ui, sans-serif;
-				margin: 0;
-				line-height: 1.6;
-				background: var(--bg);
-				color: var(--text);
-			}
-			a {
-				color: var(--green);
-			}
-			h1, h2, h3 {
-				color: var(--text);
-			}
-			.content {
-				max-width: 800px;
-				margin: 0 auto;
-				padding: 2rem;
-			}
-			header {
-				position: fixed;
-				top: 0;
-				left: 0;
-				right: 0;
-				z-index: 10;
-				background: rgba(27, 33, 29, 0.6);
-				backdrop-filter: blur(8px);
-			}
-			header .content {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				padding-top: 0.4rem;
-				padding-bottom: 0.4rem;
-			}
-			.brand {
-				display: flex;
-				align-items: center;
-				gap: 0.6rem;
-				color: inherit;
-				text-decoration: none;
-			}
-			.brand img {
-				width: 40px;
-				height: 40px;
-				object-fit: contain;
-			}
-			.brand-text {
-				display: flex;
-				flex-direction: column;
-				line-height: 1.15;
-			}
-			.brand-zh {
-				font-size: 1.25rem;
-				font-weight: 700;
-			}
-			.brand-en {
-				font-size: 0.7rem;
-				color: var(--text-muted);
-				letter-spacing: 0.02em;
-			}
-			nav a {
-				margin-left: 1.5rem;
-				color: var(--text);
-				text-decoration: none;
-				font-weight: 600;
-				font-size: 0.95rem;
-			}
-			nav a:hover {
-				color: var(--green);
-			}
-			footer {
-				margin-top: 1rem;
-				padding: 1.5rem 2rem;
-				color: var(--text-muted);
-				font-size: 0.85rem;
-				max-width: 800px;
-				margin-left: auto;
-				margin-right: auto;
-			}
-			article {
-				background: var(--card-bg);
-				color: var(--card-text);
-				border-radius: 12px;
-				padding: 1.5rem;
-			}
-		</style>
-	</head>
-	<body>
-		<header id="site-header">
-			<div class="content">
-				<a href="/" class="brand">
-					<img src="/logo2.png" alt="臺灣青少年科學發展協會 logo" />
-					<div class="brand-text">
-						<span class="brand-zh">臺灣青少年科學發展協會</span>
-						<span class="brand-en">Taiwan Young Science Development Association</span>
-					</div>
+<Layout title="首頁">
+	<div class="hero-carousel">
+		<div class="hero-track" id="hero-track">
+			{slides.map((s) => (
+				<a href={s.link} class="hero-slide">
+					<p class="hero-label">{s.label}</p>
+					<h2>{s.title}</h2>
+					<p class="hero-date">{s.date}</p>
+					<span class="hero-cta">查看詳情 →</span>
 				</a>
-				<nav>
-					<a href="/about">關於我們</a>
-					<a href="/members">協會成員</a>
-					<a href="/activities">協會活動</a>
-					<a href="/charter">組織章程</a>
-				</nav>
+			))}
+		</div>
+		<button class="hero-arrow hero-prev" id="hero-prev" aria-label="上一張">‹</button>
+		<button class="hero-arrow hero-next" id="hero-next" aria-label="下一張">›</button>
+		<div class="hero-dots" id="hero-dots">
+			{slides.map((_, i) => (
+				<button class="hero-dot" data-index={i} aria-label={`第 ${i + 1} 張`}></button>
+			))}
+		</div>
+	</div>
+
+	<div class="panel">
+		<div class="panel-inner">
+			<p>
+				我們相信每一位對科學充滿好奇的青少年，都值得公平獲取學術與研究資源的機會。
+				在這裡，你可以認識我們的團隊、瀏覽最新活動，一起探索科學的世界。
+			</p>
+		</div>
+	</div>
+
+	<div class="panel">
+		<div class="panel-inner">
+			<h2>協會活動</h2>
+			<div class="category-preview-grid">
+				{categories.map((cat) => (
+					<a href={cat.link} class="category-preview-card" style={`background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${cat.bg})`}>
+						{cat.name}
+					</a>
+				))}
 			</div>
-		</header>
+			<a href="/activities">查看所有活動 →</a>
+		</div>
+	</div>
 
-		<main>
-			<slot />
-		</main>
+	<div class="panel">
+		<div class="panel-inner">
+			<h2>協會成員</h2>
+			<div class="member-preview-grid">
+				<div class="member-preview-item">
+					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+					<p class="member-name">（姓名）</p>
+				</div>
+				<div class="member-preview-item">
+					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+					<p class="member-name">（姓名）</p>
+				</div>
+				<div class="member-preview-item">
+					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+					<p class="member-name">（姓名）</p>
+				</div>
+				<div class="member-preview-item">
+					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+					<p class="member-name">（姓名）</p>
+				</div>
+				<div class="member-preview-item">
+					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+					<p class="member-name">（姓名）</p>
+				</div>
+			</div>
+			<a href="/members">查看全部成員 →</a>
+		</div>
+	</div>
 
-		<footer>
-			<p>© 2026 臺灣青少年科學發展協會</p>
-		</footer>
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+			margin-bottom: 1.5rem;
+		}
+		.panel h1, .panel h2, .panel h3 {
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+		.hero-carousel {
+			position: relative;
+			width: 100%;
+			overflow: hidden;
+		}
+		.hero-track {
+			display: flex;
+			transition: transform 0.4s ease;
+		}
+		.hero-slide {
+			flex: 0 0 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			background: linear-gradient(135deg, #242B26, #2E362F);
+			padding: 10rem 10vw 5rem;
+			min-height: 100svh;
+			text-decoration: none;
+			color: var(--text);
+			box-sizing: border-box;
+		}
+		.hero-slide:nth-child(1) {
+			background:
+				linear-gradient(rgba(27, 33, 29, 0.65), rgba(27, 33, 29, 0.65)),
+				url('/forum-bg.png');
+			background-size: cover;
+			background-position: center;
+		}
+		.hero-slide:nth-child(2) {
+			background:
+				linear-gradient(rgba(27, 33, 29, 0.55), rgba(27, 33, 29, 0.55)),
+				url('/assembly-bg.png');
+			background-size: cover;
+			background-position: center;
+		}
+		.hero-label {
+			color: var(--yellow);
+			font-size: 0.9rem;
+			font-weight: 600;
+			margin: 0 0 0.75rem;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+		}
+		.hero-slide h2 {
+			margin: 0 0 0.75rem;
+			font-size: 2.25rem;
+			color: var(--text);
+		}
+		.hero-date {
+			color: var(--text-muted);
+			margin: 0 0 1.5rem;
+			font-size: 1.1rem;
+		}
+		.hero-cta {
+			color: var(--yellow);
+			font-weight: 600;
+			font-size: 1rem;
+		}
+		.hero-arrow {
+			position: absolute;
+			top: 55%;
+			transform: translateY(-50%);
+			background: rgba(0, 0, 0, 0.4);
+			color: var(--text);
+			border: none;
+			border-radius: 50%;
+			width: 44px;
+			height: 44px;
+			font-size: 1.5rem;
+			cursor: pointer;
+			line-height: 1;
+		}
+		.hero-prev { left: 2rem; }
+		.hero-next { right: 2rem; }
+		.hero-dots {
+			position: absolute;
+			bottom: 1.5rem;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			gap: 0.5rem;
+		}
+		.hero-dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.3);
+			border: none;
+			cursor: pointer;
+			padding: 0;
+		}
+		.hero-dot.active {
+			background: var(--yellow);
+		}
+		.category-preview-grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 1rem;
+			margin: 1rem 0;
+		}
+		.category-preview-card {
+			display: flex;
+			align-items: flex-end;
+			padding: 1.5rem 1rem;
+			border-radius: 12px;
+			text-decoration: none;
+			font-weight: 700;
+			font-size: 1.1rem;
+			color: #FFFFFF;
+			background-size: cover;
+			background-position: center;
+			min-height: 140px;
+			transition: transform 0.2s;
+		}
+		.category-preview-card:hover {
+			transform: translateY(-2px);
+		}
+		.member-preview-grid {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: 1rem;
+			margin: 1rem 0;
+		}
+		.member-preview-item {
+			text-align: center;
+		}
+		.member-photo {
+			width: 72px;
+			height: 72px;
+			border-radius: 50%;
+			object-fit: cover;
+			display: block;
+			margin: 0 auto 0.5rem;
+		}
+		.member-name {
+			font-size: 0.9rem;
+			color: var(--card-text);
+			margin: 0;
+		}
 
-		<script>
-			function setHeaderHeight() {
-				const header = document.getElementById('site-header');
-				if (header) {
-					document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
-				}
+		@media (max-width: 700px) {
+			.hero-slide {
+				padding: 8rem 6vw 6rem;
 			}
-			setHeaderHeight();
-			window.addEventListener('resize', setHeaderHeight);
-		</script>
-	</body>
-</html>
+			.hero-slide h2 {
+				font-size: 1.6rem;
+			}
+			.hero-arrow {
+				top: auto;
+				bottom: 1.5rem;
+				transform: none;
+				width: 36px;
+				height: 36px;
+				font-size: 1.25rem;
+			}
+			.hero-prev {
+				left: auto;
+				right: 4.5rem;
+			}
+			.hero-next {
+				right: 1.5rem;
+			}
+			.hero-dots {
+				display: none;
+			}
+			.category-preview-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			.member-preview-grid {
+				grid-template-columns: repeat(3, 1fr);
+			}
+		}
+	</style>
+
+	<script>
+		const track = document.getElementById('hero-track');
+		const dots = document.querySelectorAll('.hero-dot');
+		const prevBtn = document.getElementById('hero-prev');
+		const nextBtn = document.getElementById('hero-next');
+		let current = 0;
+		const total = dots.length;
+
+		function goTo(index) {
+			current = (index + total) % total;
+			track.style.transform = `translateX(-${current * 100}%)`;
+			dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+		}
+
+		prevBtn.addEventListener('click', () => {
+			goTo(current - 1);
+			resetAutoplay();
+		});
+		nextBtn.addEventListener('click', () => {
+			goTo(current + 1);
+			resetAutoplay();
+		});
+		dots.forEach((dot, i) => dot.addEventListener('click', () => {
+			goTo(i);
+			resetAutoplay();
+		}));
+
+		let autoplayTimer;
+		function startAutoplay() {
+			autoplayTimer = setInterval(() => goTo(current + 1), 5000);
+		}
+		function resetAutoplay() {
+			clearInterval(autoplayTimer);
+			startAutoplay();
+		}
+
+		goTo(0);
+		startAutoplay();
+	</script>
+</Layout>
