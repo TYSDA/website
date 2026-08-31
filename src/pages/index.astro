@@ -127,7 +127,7 @@ const categories = [
 			justify-content: center;
 			background: linear-gradient(135deg, #242B26, #2E362F);
 			padding: 10rem 10vw 5rem;
-			min-height: 100vh;
+			min-height: 100svh;
 			text-decoration: none;
 			color: var(--text);
 			box-sizing: border-box;
@@ -249,6 +249,39 @@ const categories = [
 			font-size: 0.9rem;
 			color: var(--card-text);
 			margin: 0;
+		}
+
+		@media (max-width: 700px) {
+			.hero-slide {
+				padding: 8rem 6vw 6rem;
+			}
+			.hero-slide h2 {
+				font-size: 1.6rem;
+			}
+			.hero-arrow {
+				top: auto;
+				bottom: 1.5rem;
+				transform: none;
+				width: 36px;
+				height: 36px;
+				font-size: 1.25rem;
+			}
+			.hero-prev {
+				left: auto;
+				right: 4.5rem;
+			}
+			.hero-next {
+				right: 1.5rem;
+			}
+			.hero-dots {
+				display: none;
+			}
+			.category-preview-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			.member-preview-grid {
+				grid-template-columns: repeat(3, 1fr);
+			}
 		}
 	</style>
 
