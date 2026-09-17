@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="臺灣青少年科學發展論壇">
+	<div class="panel">
+		<div class="panel-inner">
+			<h2>臺灣青少年科學發展論壇</h2>
+			<p>
+				由臺灣青少年科學發展協會主辦，邀請青年科學家、大學生、國高中教師與大學教授跨世代對談，
+				促進青少年科學研究與學研風氣。
+			</p>
+
+			<div class="forum-editions">
+				<a href="/forum/2026" class="forum-edition-card">
+					<span class="edition-tag">第一屆</span>
+					<h3>2026 臺灣青少年科學發展論壇</h3>
+					<p>2026年12月25日－12月26日・國立臺灣科學教育館</p>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+			padding-top: var(--header-h, 90px);
+		}
+		.panel h1, .panel h2, .panel h3 {
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+		.forum-editions {
+			margin-top: 2rem;
+		}
+		.forum-edition-card {
+			display: block;
+			background: var(--card-bg);
+			border-radius: 12px;
+			padding: 1.5rem;
+			text-decoration: none;
+			color: var(--card-text);
+			border: 1px solid transparent;
+			transition: border-color 0.2s;
+		}
+		.forum-edition-card:hover {
+			border-color: var(--orange);
+		}
+		.edition-tag {
+			display: inline-block;
+			background: rgba(184, 115, 51, 0.15);
+			color: var(--orange);
+			font-size: 0.8rem;
+			font-weight: 600;
+			padding: 0.2rem 0.7rem;
+			border-radius: 999px;
+			margin-bottom: 0.5rem;
+		}
+		.forum-edition-card h3 {
+			margin: 0 0 0.4rem;
+		}
+		.forum-edition-card p {
+			margin: 0;
+			color: var(--card-text-muted);
+			font-size: 0.9rem;
+		}
+	</style>
+</Layout>

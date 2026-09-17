@@ -1,0 +1,355 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+---
+const day1 = [
+  {
+    forum: "論壇一",
+    title: "青年科學家經驗演講與交流",
+    description:
+      "邀請台灣青年科學家分享其研究與科研之路歷程，提供高中生、大學生與教師現場交流問答。",
+    tag: "青年研究者"
+  },
+  {
+    forum: "論壇二",
+    title: "早期開啟科研道路的大學生經驗分享與對談",
+    description:
+      "邀請長期投入科研的大學生分享從高中科展、大學研究到跨領域探索的科研歷程。",
+    tag: "大學生論壇"
+  },
+  {
+    forum: "論壇三",
+    title: "國高中老師對於科學教育的經驗分享",
+    description:
+      "邀請長期投入科研教育的老師分享第一線科學教育經驗、挑戰與需求。（講者待邀）",
+    tag: "科學教育"
+  },
+  {
+    forum: "論壇四",
+    title: "大學教授引領的科學道路",
+    description:
+      "邀請教授分享帶領高中生與大學生投入研究的經驗，並開放高中生、大學生與教師問答。",
+    tag: "教授論壇"
+  }
+];
+
+const day2 = [
+  {
+    forum: "論壇五",
+    title: "臺灣青少年科教論壇",
+    description:
+      "高中師生交流聚會，以科學教育為主題演講與討論。",
+    tag: "Science Education"
+  },
+  {
+    forum: "論壇六",
+    title: "臺灣青少年科普論壇",
+    description:
+      "科普論壇交流聚會，與高中師生進行主題演講與討論。",
+    tag: "Popular Science"
+  },
+  {
+    forum: "論壇七",
+    title: "青少年科學藝術科幻論壇",
+    description:
+      "顧廣毅老師主題演講，結合科學藝術、科幻與跨領域交流。",
+    tag: "Science × Art"
+  }
+];
+---
+
+<section class="schedule-section">
+  <div class="container">
+
+    <div class="section-heading">
+      <p class="eyebrow">Forum Schedule</p>
+      <h2>議程時間表</h2>
+      <p class="subtitle">
+        兩天論壇將涵蓋青年研究、科學教育、跨領域探索、科普與科學藝術交流。
+      </p>
+    </div>
+
+    <!-- Day 1 -->
+    <div class="day-block">
+      <div class="day-header">
+        <span class="day-pill day1">DAY 1</span>
+        <h3>青年研究 × 科學教育</h3>
+      </div>
+
+      <div class="timeline">
+        <div class="line day1"></div>
+
+        {day1.map((item) => (
+          <article class="timeline-event">
+            <div class="dot day1"></div>
+
+            <div class="event-card">
+              <span class="tag">{item.tag}</span>
+
+              <p class="forum-number">{item.forum}</p>
+
+              <h4>{item.title}</h4>
+
+              <p class="description">{item.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-block">
+      <div class="day-header">
+        <span class="day-pill day2">DAY 2</span>
+        <h3>跨領域論壇 × 科普 × 科學藝術</h3>
+      </div>
+
+      <div class="timeline">
+        <div class="line day2"></div>
+
+        {day2.map((item) => (
+          <article class="timeline-event">
+            <div class="dot day2"></div>
+
+            <div class="event-card">
+              <span class="tag gold">{item.tag}</span>
+
+              <p class="forum-number">{item.forum}</p>
+
+              <h4>{item.title}</h4>
+
+              <p class="description">{item.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .schedule-section {
+    background:
+      radial-gradient(circle at top, rgba(78,153,117,.18), transparent 45%),
+      #1B211D;
+    padding: 7rem 1.5rem;
+    color: #E8E9ED;
+  }
+
+  .container {
+    max-width: 1050px;
+    margin: auto;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .eyebrow {
+    color: #73C8A9;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    font-size: .8rem;
+    margin-bottom: .75rem;
+    font-weight: 700;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    margin: 0;
+    color: white;
+  }
+
+  .subtitle {
+    color: #B9C3BD;
+    max-width: 680px;
+    margin: 1rem auto 0;
+    line-height: 1.8;
+  }
+
+  .day-block {
+    margin-bottom: 5rem;
+  }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .day-header h3 {
+    margin: 0;
+    font-size: clamp(1.3rem, 2vw, 2rem);
+    color: white;
+  }
+
+  .day-pill {
+    padding: .45rem .9rem;
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+
+  .day-pill.day1 {
+    background: rgba(115,200,169,.15);
+    color: #8FE3B9;
+    border: 1px solid rgba(115,200,169,.3);
+  }
+
+  .day-pill.day2 {
+    background: rgba(212,184,118,.15);
+    color: #E5C777;
+    border: 1px solid rgba(212,184,118,.3);
+  }
+
+  /* Timeline */
+
+  .timeline {
+    position: relative;
+    padding-left: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .line {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+  }
+
+  .line.day1 {
+    background: linear-gradient(#73C8A9, transparent);
+  }
+
+  .line.day2 {
+    background: linear-gradient(#D4B876, transparent);
+  }
+
+  .timeline-event {
+    position: relative;
+  }
+
+  .dot {
+    position: absolute;
+    left: -2rem;
+    top: 2rem;
+
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  .dot.day1 {
+    background: #73C8A9;
+    box-shadow: 0 0 16px rgba(115,200,169,.6);
+  }
+
+  .dot.day2 {
+    background: #D4B876;
+    box-shadow: 0 0 16px rgba(212,184,118,.55);
+  }
+
+  /* Card */
+
+  .event-card {
+    background: rgba(255,255,255,.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 22px;
+
+    padding: 1.5rem;
+    transition:
+      transform .25s ease,
+      border-color .25s ease,
+      background .25s ease;
+  }
+
+  .event-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(115,200,169,.3);
+    background: rgba(255,255,255,.08);
+  }
+
+  .tag {
+    display: inline-block;
+
+    padding: .28rem .7rem;
+    border-radius: 999px;
+
+    background: rgba(115,200,169,.12);
+    color: #90E2B9;
+
+    font-size: .75rem;
+    letter-spacing: .08em;
+    margin-bottom: .9rem;
+  }
+
+  .tag.gold {
+    background: rgba(212,184,118,.12);
+    color: #E4C978;
+  }
+
+  .forum-number {
+    margin: 0;
+    color: #D4B876;
+    font-weight: 700;
+    letter-spacing: .08em;
+    font-size: .85rem;
+  }
+
+  .event-card h4 {
+    margin: .5rem 0 1rem;
+    color: white;
+    font-size: 1.35rem;
+    line-height: 1.4;
+  }
+
+  .description {
+    margin: 0;
+    color: #D0D6D2;
+    line-height: 1.8;
+    font-size: .96rem;
+  }
+
+  /* Mobile */
+
+  @media (max-width: 700px) {
+
+    .schedule-section {
+      padding: 5rem 1.25rem;
+    }
+
+    .day-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .6rem;
+    }
+
+    .timeline {
+      padding-left: 1.8rem;
+    }
+
+    .dot {
+      left: -1.45rem;
+    }
+
+    .event-card {
+      padding: 1.25rem;
+    }
+
+    .event-card h4 {
+      font-size: 1.15rem;
+    }
+  }
+</style>
+</Layout>

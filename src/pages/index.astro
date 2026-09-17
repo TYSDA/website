@@ -6,7 +6,7 @@ const slides = [
 		label: "最新活動",
 		title: "第一屆臺灣青少年科學發展論壇",
 		date: "2026年12月25日－12月26日・國立臺灣科學教育館",
-		link: "/activities/forum"
+		link: "/forum/2026"
 	},
 	{
 		label: "會員通知",
@@ -72,24 +72,19 @@ const categories = [
 		<div class="panel-inner">
 			<h2>協會成員</h2>
 			<div class="member-preview-grid">
-				<div class="member-preview-item">
-					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+				<div class="member-preview-card">
 					<p class="member-name">（姓名）</p>
 				</div>
-				<div class="member-preview-item">
-					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+				<div class="member-preview-card">
 					<p class="member-name">（姓名）</p>
 				</div>
-				<div class="member-preview-item">
-					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+				<div class="member-preview-card">
 					<p class="member-name">（姓名）</p>
 				</div>
-				<div class="member-preview-item">
-					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+				<div class="member-preview-card">
 					<p class="member-name">（姓名）</p>
 				</div>
-				<div class="member-preview-item">
-					<img src="/logo2.png" alt="（姓名）" class="member-photo" />
+				<div class="member-preview-card">
 					<p class="member-name">（姓名）</p>
 				</div>
 			</div>
@@ -231,24 +226,20 @@ const categories = [
 		.member-preview-grid {
 			display: grid;
 			grid-template-columns: repeat(5, 1fr);
-			gap: 1rem;
+			gap: 0.75rem;
 			margin: 1rem 0;
 		}
-		.member-preview-item {
+		.member-preview-card {
+			background: var(--card-bg);
+			color: var(--card-text);
+			border-radius: 10px;
+			padding: 0.9rem 0.5rem;
 			text-align: center;
 		}
-		.member-photo {
-			width: 72px;
-			height: 72px;
-			border-radius: 50%;
-			object-fit: cover;
-			display: block;
-			margin: 0 auto 0.5rem;
-		}
-		.member-name {
-			font-size: 0.9rem;
-			color: var(--card-text);
+		.member-preview-card .member-name {
 			margin: 0;
+			font-size: 0.85rem;
+			font-weight: 600;
 		}
 
 		@media (max-width: 700px) {

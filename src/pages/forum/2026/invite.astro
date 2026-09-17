@@ -1,0 +1,127 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+---
+
+<Layout title="專屬邀請 | 第一屆臺灣青少年科學發展論壇">
+	<div class="panel">
+		<div class="panel-inner">
+			<a href="/forum/2026">← 返回論壇詳情</a>
+
+			<h2>專屬邀請報名</h2>
+			<p class="notice">感謝您受邀參與第一屆臺灣青少年科學發展論壇。</p>
+
+			<div class="steps">
+				<div class="step">
+					<span class="step-num">1</span>
+					<div>
+						<h3>完成匯款</h3>
+						<p>請依下方資訊完成報名費匯款，並記下匯款帳號後五碼、日期與金額。</p>
+					</div>
+				</div>
+				<div class="step">
+					<span class="step-num">2</span>
+					<div>
+						<h3>填寫報名表單</h3>
+						<p>匯款完成後，請填寫線上表單並附上匯款資訊，完成初步報名。</p>
+					</div>
+				</div>
+				<div class="step">
+					<span class="step-num">3</span>
+					<div>
+						<h3>等待確認通知</h3>
+						<p>我們將於確認匯款後，以 Email 通知您報名成功，此時報名才正式完成。</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="payment-info">
+				<h3>匯款資訊</h3>
+				<p>銀行：（待補）</p>
+				<p>戶名：（待補）</p>
+				<p>帳號：（待補）</p>
+				<p>報名費：（待補）</p>
+			</div>
+
+			<a href="#" class="register-button">前往報名表單</a>
+		</div>
+	</div>
+
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+			padding-top: var(--header-h, 90px);
+		}
+		.panel h1, .panel h2, .panel h3 {
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+		.notice {
+			color: var(--orange);
+			font-weight: 600;
+			margin: 0.5rem 0 2rem;
+		}
+		.steps {
+			display: flex;
+			flex-direction: column;
+			gap: 1.25rem;
+			margin-bottom: 2rem;
+		}
+		.step {
+			display: flex;
+			gap: 1rem;
+			align-items: flex-start;
+		}
+		.step-num {
+			flex-shrink: 0;
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			background: var(--orange);
+			color: #FFFFFF;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 700;
+			font-size: 0.95rem;
+		}
+		.step h3 {
+			margin: 0 0 0.3rem;
+			font-size: 1rem;
+		}
+		.step p {
+			margin: 0;
+			font-size: 0.9rem;
+			color: var(--card-text-muted);
+		}
+		.payment-info {
+			background: var(--card-bg);
+			border-radius: 12px;
+			padding: 1.5rem;
+			margin-bottom: 2rem;
+		}
+		.payment-info h3 {
+			margin: 0 0 1rem;
+		}
+		.payment-info p {
+			margin: 0.4rem 0;
+			font-size: 0.95rem;
+		}
+		.register-button {
+			display: inline-block;
+			background: var(--orange);
+			color: #FFFFFF;
+			padding: 0.9rem 2.5rem;
+			border-radius: 8px;
+			font-weight: 600;
+			text-decoration: none;
+		}
+		.register-button:hover {
+			opacity: 0.9;
+		}
+	</style>
+</Layout>

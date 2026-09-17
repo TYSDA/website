@@ -19,16 +19,15 @@ const members = Array.from({ length: 11 }, () => ({
 }));
 ---
 
-<Layout title="理監事成員">
+<Layout title="協會成員">
 	<div class="panel">
 		<div class="panel-inner">
 			<section>
 				<h2>第一屆理監事成員</h2>
-				<div class="member-grid">
+				<div class="member-card-grid">
 					{officers.map((m) => (
-						<div class="member-card">
-							<img src="/logo.png" alt={m.name} class="member-photo" />
-							<h3>{m.name}</h3>
+						<div class="member-mini-card">
+							<p class="member-name">{m.name}</p>
 							<p class="member-title">{m.title}</p>
 						</div>
 					))}
@@ -37,11 +36,10 @@ const members = Array.from({ length: 11 }, () => ({
 
 			<section class="second-section">
 				<h2>第一屆協會成員</h2>
-				<div class="member-grid">
+				<div class="member-card-grid">
 					{members.map((m) => (
-						<div class="member-card">
-							<img src="/logo.png" alt={m.name} class="member-photo" />
-							<h3>{m.name}</h3>
+						<div class="member-mini-card">
+							<p class="member-name">{m.name}</p>
 							<p class="member-title">{m.title}</p>
 						</div>
 					))}
@@ -54,8 +52,7 @@ const members = Array.from({ length: 11 }, () => ({
 		.panel {
 			background: var(--panel-bg);
 			color: var(--card-text);
-			margin-top: -6rem;
-			padding-top: 6rem;
+			padding-top: var(--header-h, 90px);
 		}
 		.panel h1, .panel h2, .panel h3 {
 			color: var(--card-text);
@@ -70,37 +67,28 @@ const members = Array.from({ length: 11 }, () => ({
 			padding-top: 1.5rem;
 			border-top: 1px solid #DDD2BE;
 		}
-		.member-grid {
+		.member-card-grid {
 			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-			gap: 1.5rem;
-			margin-top: 1.5rem;
+			grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+			gap: 0.75rem;
+			margin-top: 1rem;
 		}
-		.member-card {
-			text-align: center;
+		.member-mini-card {
 			background: var(--card-bg);
 			color: var(--card-text);
-			border-radius: 12px;
-			padding: 1.25rem 1rem;
+			border-radius: 10px;
+			padding: 0.9rem 0.5rem;
+			text-align: center;
 		}
-		.member-photo {
-			width: 100px;
-			height: 100px;
-			border-radius: 50%;
-			object-fit: cover;
-			background: #1B211D;
-			margin: 0 auto 0.75rem;
-			display: block;
+		.member-mini-card .member-name {
+			margin: 0 0 0.2rem;
+			font-size: 0.9rem;
+			font-weight: 600;
 		}
-		.member-card h3 {
-			margin: 0 0 0.25rem;
-			font-size: 0.95rem;
-			color: var(--card-text);
-		}
-		.member-title {
-			color: var(--orange);
-			font-size: 0.8rem;
+		.member-mini-card .member-title {
 			margin: 0;
+			font-size: 0.75rem;
+			color: var(--orange);
 		}
 	</style>
 </Layout>

@@ -1,0 +1,323 @@
+cat > ~/Documents/Projects/adorable-aperture/src/pages/forum/2026/speakers.astro << 'EOF'
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const speakers = [
+	{
+		name: "謝至亮",
+		title: "當閃光燈快到能看見電子？站在諾獎巨人們的肩上走科研之路",
+		bio: "世界上最快的「閃光燈」，究竟能拍下什麼？從熟悉的相機閃光燈出發，我們將一路把光的時間尺度壓縮：從毫秒、微秒、奈秒、皮秒，到飛秒、甚至阿秒。這條路上，不僅誕生了改變現代科技的雷射與超快光學，也留下多項諾貝爾獎的精彩故事。而這也是我的科研旅程：從台灣交大碩士班的飛秒顯微術，到瑞士洛桑理工學院(EPFL)研究飛秒光與物質的非線性交互作用，以及讓光進行 AI 運算；如今，我在德國 attoworld 實驗室探索阿秒尺度的超快現象與應用。",
+		photo: "/speaker-xie-zhiliang.jpg"
+	},
+	{
+		name: "尉遲和妘",
+		title: "黑洞能量提取與磁重聯",
+		bio: "我於北京大學取得理論物理碩士學位。黑洞過往被認為是時空與信息的終點，然而隨著物理學家們的狂想與理論的發展，發現黑洞其實並非完全「只進不出」——自旋黑洞蘊藏的能量，有一部分是可以被合理提取出來的。磁重聯是磁化電漿中很常見的現象，從太陽閃焰到黑洞周圍的吸積流都看得到；而我的研究，正是探討這個現象在黑洞能量提取問題中，扮演什麼樣的角色。我目前最新的研究正將這套方法推廣到更一般的黑洞時空，檢驗當重力理論偏離廣義相對論時，對於黑洞的能量提取效率會如何改變。",
+		photo: "/speaker-yuchih-hoyun.jpg"
+	},
+	{
+		name: "王翊語",
+		title: "跨領域的科學探索之路",
+		bio: "國中小的科展是我對自然科學的啟蒙，後來幾個夏天在台灣野鳥協會做志工、高中接觸數學建模，這些培養了我探索不同領域的好奇心。大學時，我從資工的角度在中研院生物多樣性中心實習，後來以電腦模擬分析白蟻彈性大顎力學效能的大專學生計畫。除了資工系的分散式系統研究，我也因對後量子密碼學的興趣，再次進入中研院實習。一路輾轉不同學科後，我最後選擇在倫敦成為一名軟體工程師。雖然沒有走上學術研究，但這些科學探索帶給我的好奇、觀察與批判思考，至今仍深深影響我。",
+		photo: "/speaker-wang-yiyu.jpg"
+	},
+	{
+		name: "徐士展",
+		title: "同樣的豉甲，不同的問題",
+		bio: "從國小第一次接觸豉甲，到高中重新以物理的角度研究牠快速下潛的原因，我逐漸體會到，科學研究並不是一開始就要有多厲害的題目，而是從好奇、觀察與一個個問題慢慢累積而來。隨著學習力學、3D 建模與流體分析，我開始能將單純的現象轉化成假說，再透過模型與實驗驗證。這次分享希望從自己的成長經驗出發，談談哪些學習、環境與選擇能幫助青少年把好奇真正變成研究，以及在 AI 時代中，如何保有判斷與驗證答案的能力。",
+		photo: "/speaker-xu-shizhan.jpg"
+	},
+	{
+		name: "許禾臻",
+		title: "高中：蚤蠅的高頻率間歇性運動之探討｜大學：未定",
+		bio: "目前就讀國立臺灣大學牙醫學系三年級，高中就讀彰化高中科學班。受科學班課程規劃影響，我於高二開始接觸科學研究，因對物理與生物感興趣，進入中興大學生物力學實驗室，研究蚤蠅的高頻率間歇性運動。進入大學後，我因研究導論課接觸牙周幹細胞，並結合自身十字韌帶受傷的經驗，開始思考牙周幹細胞應用於韌帶修復的可能性，也由此踏上新的研究歷程。",
+		photo: "/speaker-xu-hezhen.jpg"
+	},
+	{
+		name: "張雨恩",
+		title: "純爪抓附的意外多樣性：白蟻爪形態、抓附力與生態適應之力學分析",
+		bio: "目前就讀陽明交通大學百川學程。高中時因為對物理與生物的興趣而投入生物力學研究，從白蟻在不同粗糙表面的抓附表現出發，延伸到物種、形態與行為等方面。進入百川不分系後，我仍持續投入科學研究，同時開始接觸程式軟體設計，在跨領域的環境中慢慢形塑自己的未來走向。對我而言，基礎科學不只是高中階段的研究，更是促使我持續探索興趣與增進能力、結合不同領域的起點。",
+		photo: "/speaker-zhang-yuen.jpg"
+	}
+];
+---
+
+<Layout title="講者陣容 | 第一屆臺灣青少年科學發展論壇">
+	<div class="speaker-pin-wrap" id="pin-wrap" style={`height: calc(var(--header-h) + ${speakers.length} * 100vh);`}>
+		<div class="speaker-pin" id="speaker-pin">
+			<div class="pin-topbar">
+				<a href="/forum/2026">← 論壇詳情</a>
+				<span class="pin-title">講者陣容</span>
+			</div>
+
+			{speakers.map((s, i) => (
+				<div class={`speaker-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
+					<div class="speaker-bg" style={`background-image: url(${s.photo})`}></div>
+					<div class="speaker-inner">
+						<div class="speaker-text-col">
+							<span class="speaker-index">{String(i + 1).padStart(2, '0')} / {String(speakers.length).padStart(2, '0')}</span>
+							<h3>{s.name}</h3>
+							<p class="speaker-title">{s.title}</p>
+							<p class="speaker-bio">{s.bio}</p>
+						</div>
+						<div class="speaker-photo-col">
+							<img src={s.photo} alt={s.name} class="speaker-photo" />
+						</div>
+					</div>
+				</div>
+			))}
+			<div class="speaker-progress">
+				{speakers.map((_, i) => (
+					<span class={`progress-dot ${i === 0 ? 'active' : ''}`} data-index={i}></span>
+				))}
+			</div>
+		</div>
+	</div>
+
+	<style>
+		.speaker-pin-wrap {
+			position: relative;
+			background: #1B211D;
+			margin-top: calc(var(--header-h) * -1);
+			padding-top: var(--header-h);
+		}
+		.speaker-pin {
+			position: sticky;
+			top: 0;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+		}
+		.pin-topbar {
+			position: absolute;
+			top: calc(var(--header-h, 74px) + 1rem);
+			left: 50%;
+			transform: translateX(-50%);
+			width: 100%;
+			max-width: 900px;
+			padding: 0 2rem;
+			box-sizing: border-box;
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			z-index: 3;
+		}
+		.pin-topbar a {
+			color: #E8E9ED;
+			text-decoration: none;
+			font-size: 0.85rem;
+			opacity: 0.85;
+		}
+		.pin-topbar a:hover {
+			opacity: 1;
+		}
+		.pin-title {
+			color: #E8D9C4;
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.1em;
+		}
+		.speaker-slide {
+			position: absolute;
+			inset: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 0;
+			transition: opacity 0.45s ease;
+			pointer-events: none;
+			padding: 0 2rem;
+			box-sizing: border-box;
+		}
+		.speaker-slide.active {
+			opacity: 1;
+			pointer-events: auto;
+		}
+		.speaker-bg {
+			position: absolute;
+			inset: 0;
+			background-size: cover;
+			background-position: center;
+			filter: blur(35px) brightness(0.4);
+			transform: scale(1.15);
+		}
+		.speaker-inner {
+			position: relative;
+			z-index: 1;
+			max-width: 900px;
+			width: 100%;
+			max-height: calc(100vh - var(--header-h) - 4rem);
+			display: flex;
+			align-items: center;
+			gap: 2.5rem;
+		}
+		.speaker-text-col {
+			flex: 1 1 auto;
+			max-height: calc(100vh - var(--header-h) - 5rem);
+			overflow-y: auto;
+			text-align: left;
+			padding-right: 0.5rem;
+		}
+		.speaker-photo-col {
+			flex: 0 0 38%;
+		}
+		.speaker-photo {
+			width: 100%;
+			aspect-ratio: 3 / 4;
+			object-fit: cover;
+			border-radius: 12px;
+			display: block;
+			box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+		}
+		.speaker-index {
+			display: block;
+			font-size: 0.85rem;
+			font-weight: 700;
+			color: #D4B876;
+			letter-spacing: 0.1em;
+			margin-bottom: 1rem;
+		}
+		.speaker-slide h3 {
+			font-size: 1.9rem;
+			margin: 0 0 0.5rem;
+			color: #FFFFFF;
+		}
+		.speaker-title {
+			color: #D4B876;
+			font-weight: 600;
+			font-size: 1rem;
+			margin: 0 0 1.25rem;
+		}
+		.speaker-bio {
+			font-size: 0.95rem;
+			color: #D8D8D8;
+			line-height: 1.75;
+			margin: 0;
+		}
+		.speaker-progress {
+			position: absolute;
+			bottom: 1.25rem;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			gap: 0.5rem;
+			z-index: 3;
+		}
+		.progress-dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: rgba(255,255,255,0.25);
+			transition: background 0.3s;
+		}
+		.progress-dot.active {
+			background: #D4B876;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.speaker-slide {
+				transition: none;
+			}
+		}
+
+		@media (max-width: 700px) {
+			.pin-topbar {
+				max-width: none;
+				left: 1.5rem;
+				right: 1.5rem;
+				transform: none;
+				width: auto;
+				padding: 0;
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 0.3rem;
+			}
+			.speaker-inner {
+				flex-direction: column;
+				gap: 1rem;
+				max-height: 78vh;
+				overflow-y: auto;
+			}
+			.speaker-photo-col {
+				flex: 0 0 auto;
+				width: 55%;
+			}
+			.speaker-text-col {
+				max-height: none;
+				overflow-y: visible;
+				text-align: center;
+			}
+			.speaker-slide h3 {
+				font-size: 1.4rem;
+			}
+		}
+	</style>
+
+	<script>
+		const wrap = document.getElementById('pin-wrap');
+		const pin = document.getElementById('speaker-pin');
+		const slides = Array.from(document.querySelectorAll('.speaker-slide'));
+		const dots = Array.from(document.querySelectorAll('.progress-dot'));
+		const total = slides.length;
+
+		let current = 0;
+		let lastScrollY = window.scrollY;
+		let isLooping = false;
+
+		function setActive(index) {
+			if (index === current) return;
+			current = index;
+			slides.forEach((s, i) => s.classList.toggle('active', i === current));
+			dots.forEach((d, i) => d.classList.toggle('active', i === current));
+		}
+
+		function onScroll() {
+			if (!wrap || !pin || total === 0) return;
+
+			if (isLooping) {
+				lastScrollY = window.scrollY;
+				return;
+			}
+
+			const currentScrollY = window.scrollY;
+			const direction = currentScrollY > lastScrollY ? 'down' : 'up';
+			lastScrollY = currentScrollY;
+
+			const scrollable = wrap.offsetHeight - pin.offsetHeight;
+			if (scrollable <= 0) {
+				setActive(0);
+				return;
+			}
+
+			const top = wrap.getBoundingClientRect().top;
+			const scrolled = Math.min(Math.max(-top, 0), scrollable);
+
+			if (direction === 'down' && scrolled >= scrollable - 5) {
+				isLooping = true;
+				window.scrollTo({ top: wrap.offsetTop + 5, behavior: 'auto' });
+				setActive(0);
+				lastScrollY = window.scrollY;
+				setTimeout(() => { isLooping = false; }, 100);
+				return;
+			}
+
+			if (direction === 'up' && scrolled <= 5) {
+				isLooping = true;
+				window.scrollTo({ top: wrap.offsetTop + scrollable - 5, behavior: 'auto' });
+				setActive(total - 1);
+				lastScrollY = window.scrollY;
+				setTimeout(() => { isLooping = false; }, 100);
+				return;
+			}
+
+			const progress = scrolled / scrollable;
+			setActive(Math.min(total - 1, Math.floor(progress * total)));
+		}
+
+		window.addEventListener('scroll', onScroll, { passive: true });
+		onScroll();
+	</script>
+</Layout>
+EOF

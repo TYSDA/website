@@ -1,0 +1,318 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const days = [
+	{
+		label: "DAY 1",
+		theme: "青年研究 × 科學教育",
+		color: "green",
+		items: [
+			{ time: "09:00", tag: "論壇一", title: "青年科學家經驗演講與交流", desc: "青年科學家分享研究歷程，並開放高中生、大學生與教師交流問答。" },
+			{ time: "10:00", tag: "論壇二", title: "早期開啟科研道路的大學生經驗分享與對談", desc: "分享從高中科展、大學研究到跨領域探索的科研歷程。" },
+			{ time: "11:00", tag: "論壇三", title: "國高中老師的科學教育經驗分享", desc: "探討第一線科學教育的經驗、挑戰與需求。" },
+			{ time: "13:30", tag: "論壇四", title: "大學教授引領的科學道路", desc: "教授分享帶領高中生、大學生投入研究的經驗與觀點。" }
+		]
+	},
+	{
+		label: "DAY 2",
+		theme: "跨領域論壇 × 科普 × 科學藝術",
+		color: "yellow",
+		items: [
+			{ time: "09:00", tag: "論壇五", title: "臺灣青少年科教論壇", desc: "高中師生交流聚會，科教主題演講與討論。" },
+			{ time: "10:30", tag: "論壇六", title: "臺灣青少年科普論壇", desc: "高中師生交流聚會，科普主題演講與討論。" },
+			{ time: "13:00", tag: "論壇七", title: "青少年科學藝術科幻論壇", desc: "科學藝術主題演講（顧廣毅老師）與討論。" }
+		]
+	}
+];
+---
+
+<Layout title="議程時間表 | 第一屆臺灣青少年科學發展論壇">
+	<a href="/forum/2026" class="back-fab" aria-label="返回論壇詳情">←</a>
+
+	<div class="panel">
+		<div class="starfield"></div>
+		<div class="panel-inner">
+			<h1 class="page-title">議程時間表</h1>
+			<p class="time-hint">時段為預定安排，正式議程時間將於活動前公布。</p>
+
+			<div class="day-tabs">
+				{days.map((day, i) => (
+					<button class={`day-tab ${day.color} ${i === 0 ? 'active' : ''}`} data-day-index={i} type="button">
+						{day.label}
+					</button>
+				))}
+			</div>
+
+			{days.map((day, i) => (
+				<div class={`day-block ${i === 0 ? 'active' : ''}`} data-day-panel={i}>
+					<h3 class="day-theme">{day.theme}</h3>
+
+					<div class={`vline ${day.color}`}>
+						{day.items.map((item) => (
+							<div class="vnode">
+								<div class="vnode-marker">
+									<span class="vnode-dot"></span>
+								</div>
+								<div class="vnode-body">
+									<div class="vnode-time-tag">
+										<span class="vnode-time">{item.time}</span>
+										<span class="vnode-tag">{item.tag}</span>
+									</div>
+									<div class="vnode-card">
+										<p class="vnode-title">{item.title}</p>
+										<p class="vnode-desc">{item.desc}</p>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+
+	<style>
+		.back-fab {
+			position: fixed;
+			top: calc(var(--header-h, 74px) + 1.25rem);
+			left: 2rem;
+			width: 42px;
+			height: 42px;
+			border-radius: 50%;
+			background: rgba(255,255,255,0.1);
+			backdrop-filter: blur(8px);
+			border: 1px solid rgba(255,255,255,0.2);
+			color: #E8E9ED;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.2rem;
+			text-decoration: none;
+			z-index: 20;
+			transition: background 0.2s;
+		}
+		.back-fab:hover {
+			background: rgba(255,255,255,0.2);
+		}
+		.panel {
+			position: relative;
+			background: #14181A;
+			color: var(--text);
+			overflow: hidden;
+		}
+		.starfield {
+			position: absolute;
+			inset: 0;
+			background-image:
+				radial-gradient(1px 1px at 20% 30%, rgba(212,184,118,0.4), transparent),
+				radial-gradient(1px 1px at 70% 15%, rgba(212,184,118,0.3), transparent),
+				radial-gradient(1px 1px at 40% 70%, rgba(212,184,118,0.35), transparent),
+				radial-gradient(1px 1px at 85% 60%, rgba(212,184,118,0.25), transparent),
+				radial-gradient(1px 1px at 10% 85%, rgba(212,184,118,0.3), transparent);
+			pointer-events: none;
+		}
+		.panel-inner {
+			position: relative;
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem 4rem;
+		}
+		.page-title {
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.1em;
+			color: #D4B876;
+			margin: 0 0 0.75rem;
+		}
+		.time-hint {
+			position: relative;
+			font-size: 0.85rem;
+			color: #7C8090;
+			margin: 0 0 2rem;
+		}
+		.day-tabs {
+			position: relative;
+			display: flex;
+			gap: 0.75rem;
+			margin-bottom: 2.5rem;
+		}
+		.day-tab {
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			padding: 0.6rem 1.4rem;
+			border-radius: 999px;
+			cursor: pointer;
+			backdrop-filter: blur(6px);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			background: rgba(255, 255, 255, 0.03);
+			color: #7C8090;
+			transition: all 0.2s ease;
+		}
+		.day-tab.green.active {
+			background: rgba(78, 153, 117, 0.18);
+			color: #6FBF98;
+			border-color: rgba(111, 191, 152, 0.5);
+			box-shadow: 0 0 16px rgba(111, 191, 152, 0.25);
+		}
+		.day-tab.yellow.active {
+			background: rgba(212, 184, 118, 0.18);
+			color: #D4B876;
+			border-color: rgba(212, 184, 118, 0.5);
+			box-shadow: 0 0 16px rgba(212, 184, 118, 0.25);
+		}
+		.day-block {
+			display: none;
+		}
+		.day-block.active {
+			display: block;
+		}
+		.day-theme {
+			font-size: 1.2rem;
+			margin: 0 0 2rem;
+			color: #B8BCC8;
+			font-weight: 400;
+		}
+		.vline {
+			position: relative;
+			padding-left: 2rem;
+		}
+		.vline::before {
+			content: "";
+			position: absolute;
+			left: 5px;
+			top: 10px;
+			bottom: 10px;
+			width: 2px;
+			background: linear-gradient(180deg, rgba(212,184,118,0.5), rgba(212,184,118,0.05));
+		}
+		.vline.green::before {
+			background: linear-gradient(180deg, rgba(111,191,152,0.5), rgba(111,191,152,0.05));
+		}
+		.vnode {
+			position: relative;
+			display: flex;
+			gap: 1.25rem;
+			margin-bottom: 2rem;
+		}
+		.vnode:last-child {
+			margin-bottom: 0;
+		}
+		.vnode-marker {
+			position: absolute;
+			left: -2rem;
+			top: 0.4rem;
+		}
+		.vnode-dot {
+			display: block;
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			background: #D4B876;
+			box-shadow: 0 0 10px 3px rgba(212, 184, 118, 0.6);
+		}
+		.vline.green .vnode-dot {
+			background: #6FBF98;
+			box-shadow: 0 0 10px 3px rgba(111, 191, 152, 0.6);
+		}
+		.vnode-body {
+			flex: 1;
+			min-width: 0;
+		}
+		.vnode-time-tag {
+			display: flex;
+			align-items: baseline;
+			gap: 0.6rem;
+			margin-bottom: 0.5rem;
+			transform: skewX(-8deg);
+			transform-origin: left;
+		}
+		.vnode-time {
+			font-size: 0.85rem;
+			font-weight: 700;
+			color: #D4B876;
+			font-variant-numeric: tabular-nums;
+			letter-spacing: 0.03em;
+		}
+		.vline.green .vnode-time {
+			color: #6FBF98;
+		}
+		.vnode-tag {
+			font-size: 0.75rem;
+			color: #7C8090;
+			letter-spacing: 0.05em;
+		}
+		.vnode-card {
+			background: rgba(212, 184, 118, 0.08);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid rgba(212, 184, 118, 0.25);
+			border-radius: 12px;
+			padding: 1rem 1.15rem;
+			box-shadow:
+				0 0 0 1px rgba(212, 184, 118, 0.08),
+				0 0 20px rgba(212, 184, 118, 0.1);
+		}
+		.vline.green .vnode-card {
+			background: rgba(111, 191, 152, 0.06);
+			border-color: rgba(111, 191, 152, 0.25);
+			box-shadow:
+				0 0 0 1px rgba(111, 191, 152, 0.08),
+				0 0 20px rgba(111, 191, 152, 0.1);
+		}
+		.vnode-title {
+			font-size: 0.98rem;
+			font-weight: 600;
+			color: #F0F0F0;
+			margin: 0 0 0.4rem;
+			line-height: 1.4;
+		}
+		.vnode-desc {
+			font-size: 0.85rem;
+			color: #A8ACBA;
+			margin: 0;
+			line-height: 1.6;
+		}
+
+		@media (max-width: 700px) {
+			.back-fab {
+				left: 1.25rem;
+				width: 36px;
+				height: 36px;
+				font-size: 1.05rem;
+				top: calc(var(--header-h, 74px) + 0.75rem);
+			}
+			.page-title {
+				font-size: 0.7rem;
+			}
+		}
+		@media (max-width: 600px) {
+			.vnode-title {
+				font-size: 0.9rem;
+			}
+			.vnode-desc {
+				font-size: 0.8rem;
+			}
+		}
+	</style>
+
+	<script>
+		const footer = document.querySelector('footer');
+		if (footer) {
+			footer.style.display = 'none';
+		}
+
+		const tabs = document.querySelectorAll('.day-tab');
+		const panels = document.querySelectorAll('.day-block');
+
+		tabs.forEach((tab) => {
+			tab.addEventListener('click', () => {
+				const index = tab.getAttribute('data-day-index');
+				tabs.forEach((t) => t.classList.remove('active'));
+				panels.forEach((p) => p.classList.remove('active'));
+				tab.classList.add('active');
+				document.querySelector(`[data-day-panel="${index}"]`)?.classList.add('active');
+			});
+		});
+	</script>
+</Layout>

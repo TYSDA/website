@@ -3,212 +3,389 @@ const { title } = Astro.props;
 ---
 
 <html lang="zh-Hant">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/logo2.png" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title} | 臺灣青少年科學發展協會</title>
-		<style>
-			html {
-				overflow-x: hidden;
-			}
-			:root {
-				--bg: #1B211D;
-				--panel-bg: #EFE6D8;
-				--card-bg: #FFFFFF;
-				--card-text: #2A2620;
-				--card-text-muted: #6B6355;
-				--text: #E8E9ED;
-				--text-muted: #8B8F9C;
-				--green: #4E9975;
-				--orange: #B87333;
-				--yellow: #A6863C;
-				--purple: #7A6BA6;
-			}
-			body {
-				font-family: system-ui, sans-serif;
-				margin: 0;
-				line-height: 1.6;
-				background: var(--bg);
-				color: var(--text);
-				overflow-x: hidden;
-			}
-			a {
-				color: var(--green);
-			}
-			h1, h2, h3 {
-				color: var(--text);
-			}
-			.content {
-				max-width: 800px;
-				margin: 0 auto;
-				padding: 2rem;
-			}
-			header {
-				position: fixed;
-				top: 0;
-				left: 0;
-				right: 0;
-				z-index: 10;
-				background: rgba(27, 33, 29, 0.6);
-				backdrop-filter: blur(8px);
-			}
-			header .content {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				padding-top: 0.4rem;
-				padding-bottom: 0.4rem;
-			}
-			.brand {
-				display: flex;
-				align-items: center;
-				gap: 0.6rem;
-				color: inherit;
-				text-decoration: none;
-			}
-			.brand img {
-				width: 40px;
-				height: 40px;
-				object-fit: contain;
-				flex-shrink: 0;
-			}
-			.brand-text {
-				display: flex;
-				flex-direction: column;
-				line-height: 1.15;
-			}
-			.brand-zh {
-				font-size: 1.25rem;
-				font-weight: 700;
-				white-space: nowrap;
-			}
-			.brand-en {
-				font-size: 0.7rem;
-				color: var(--text-muted);
-				letter-spacing: 0.02em;
-				white-space: nowrap;
-			}
-			nav {
-				display: flex;
-				align-items: center;
-			}
-			nav a {
-				margin-left: 1.5rem;
-				color: var(--text);
-				text-decoration: none;
-				font-weight: 600;
-				font-size: 0.95rem;
-				white-space: nowrap;
-			}
-			nav a:hover {
-				color: var(--green);
-			}
-			.menu-toggle {
-				display: none;
-				background: none;
-				border: none;
-				color: var(--text);
-				font-size: 1.75rem;
-				cursor: pointer;
-				padding: 0;
-				line-height: 1;
-			}
-			footer {
-				margin-top: 1rem;
-				padding: 1.5rem 2rem;
-				color: var(--text-muted);
-				font-size: 0.85rem;
-				max-width: 800px;
-				margin-left: auto;
-				margin-right: auto;
-			}
-			article {
-				background: var(--card-bg);
-				color: var(--card-text);
-				border-radius: 12px;
-				padding: 1.5rem;
-			}
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/logo2.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | 臺灣青少年科學發展協會</title>
 
-			@media (max-width: 700px) {
-				.brand-zh {
-					font-size: 1rem;
-				}
-				.brand-en {
-					display: none;
-				}
-				.menu-toggle {
-					display: block;
-				}
-				nav {
-					display: none;
-					position: absolute;
-					top: 100%;
-					left: 0;
-					right: 0;
-					flex-direction: column;
-					background: rgba(27, 33, 29, 0.95);
-					backdrop-filter: blur(8px);
-					padding: 1rem 2rem;
-				}
-				nav.open {
-					display: flex;
-				}
-				nav a {
-					margin-left: 0;
-					padding: 0.75rem 0;
-					border-bottom: 1px solid rgba(255,255,255,0.1);
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<header id="site-header">
-			<div class="content">
-				<a href="/" class="brand">
-					<img src="/logo2.png" alt="臺灣青少年科學發展協會 logo" />
-					<div class="brand-text">
-						<span class="brand-zh">臺灣青少年科學發展協會</span>
-						<span class="brand-en">Taiwan Young Science Development Association</span>
-					</div>
-				</a>
-				<button class="menu-toggle" id="menu-toggle" aria-label="選單">☰</button>
-				<nav id="site-nav">
-					<a href="/about">關於我們</a>
-					<a href="/members">協會成員</a>
-					<a href="/activities">協會活動</a>
-					<a href="/charter">組織章程</a>
-				</nav>
-			</div>
-		</header>
+    <style>
+      :root {
+        --bg: #1b211d;
+        --panel-bg: #efe6d8;
+        --card-bg: #ffffff;
+        --card-text: #2a2620;
+        --card-text-muted: #6b6355;
+        --text: #e8e9ed;
+        --text-muted: #b4b8c0;
 
-		<main>
-			<slot />
-		</main>
+        --green: #4e9975;
+        --orange: #b87333;
+        --yellow: #a6863c;
+        --purple: #7a6ba6;
 
-		<footer>
-			<p>© 2026 臺灣青少年科學發展協會</p>
-		</footer>
+        --header-h: 74px;
+      }
 
-		<script>
-			function setHeaderHeight() {
-				const header = document.getElementById('site-header');
-				if (header) {
-					document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
-				}
-			}
-			setHeaderHeight();
-			window.addEventListener('resize', setHeaderHeight);
+      * {
+        box-sizing: border-box;
+      }
 
-			const menuToggle = document.getElementById('menu-toggle');
-			const siteNav = document.getElementById('site-nav');
-			if (menuToggle && siteNav) {
-				menuToggle.addEventListener('click', () => {
-					siteNav.classList.toggle('open');
-					setTimeout(setHeaderHeight, 50);
-				});
-			}
-		</script>
-	</body>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          "Noto Sans TC",
+          "PingFang TC",
+          "Microsoft JhengHei",
+          system-ui,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a {
+        color: var(--green);
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--text);
+      }
+
+      main {
+        min-height: 100vh;
+        padding-top: var(--header-h);
+      }
+
+      /* ===========================
+         一般內容容器
+      ============================ */
+
+      .content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      article {
+        background: var(--card-bg);
+        color: var(--card-text);
+        border-radius: 14px;
+        padding: 1.5rem;
+      }
+
+      /* ===========================
+         Header
+      ============================ */
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+
+        background: rgba(27, 33, 29, 0.45);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        transition:
+          background 0.35s ease,
+          backdrop-filter 0.35s ease,
+          border-color 0.35s ease;
+      }
+
+      header.scrolled {
+        background: rgba(27, 33, 29, 0.82);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .header-content {
+        width: min(1400px, calc(100% - 48px));
+        margin: 0 auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+
+        height: var(--header-h);
+      }
+
+      /* ===========================
+         Logo
+      ============================ */
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        color: inherit;
+        text-decoration: none;
+
+        flex-shrink: 0;
+        min-width: 0;
+        height: 100%;
+      }
+
+      .brand img {
+        width: clamp(38px, 2vw, 48px);
+        height: clamp(38px, 2vw, 48px);
+        object-fit: contain;
+        display: block;
+      }
+
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: 1.1;
+        min-width: 0;
+      }
+
+      .brand-zh {
+        font-size: clamp(1rem, 1vw + 0.6rem, 1.3rem);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .brand-en {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+
+      /* ===========================
+         Desktop Nav
+      ============================ */
+
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: clamp(1rem, 2vw, 2.5rem);
+        flex-wrap: nowrap;
+      }
+
+      nav a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: clamp(0.9rem, 0.5vw + 0.8rem, 1rem);
+        position: relative;
+        transition: color 0.25s ease;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 2px;
+        background: var(--green);
+
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.25s ease;
+      }
+
+      nav a:hover {
+        color: #7bd0a7;
+      }
+
+      nav a:hover::after {
+        transform: scaleX(1);
+      }
+
+      /* ===========================
+         Mobile Menu Button
+      ============================ */
+
+      .menu-toggle {
+        display: none;
+
+        background: none;
+        border: none;
+        color: var(--text);
+
+        font-size: 1.8rem;
+        cursor: pointer;
+
+        padding: 0;
+        line-height: 1;
+      }
+
+      /* ===========================
+         Footer
+      ============================ */
+
+      footer {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 24px;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
+
+      /* ===========================
+         Responsive
+      ============================ */
+
+      @media (max-width: 900px) {
+        .header-content {
+          width: calc(100% - 32px);
+          gap: 1rem;
+        }
+
+        .brand-zh {
+          font-size: 0.95rem;
+        }
+
+        .brand-en {
+          display: none;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        nav {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+
+          position: absolute;
+          top: var(--header-h);
+          left: 0;
+          right: 0;
+
+          background: rgba(27, 33, 29, 0.96);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+
+          padding: 0 24px;
+          gap: 0;
+
+          max-height: 0;
+          overflow: hidden;
+
+          transition: max-height 0.28s ease;
+        }
+
+        nav.open {
+          max-height: 360px;
+        }
+
+        nav a {
+          padding: 0.95rem 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          font-size: 1rem;
+        }
+
+        nav a::after {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header-content {
+          width: calc(100% - 24px);
+        }
+
+        .brand img {
+          width: 36px;
+          height: 36px;
+        }
+
+        .brand-zh {
+          font-size: 0.88rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header id="site-header">
+      <div class="header-content">
+        <a href="/" class="brand">
+          <img src="/logo2.png" alt="臺灣青少年科學發展協會 logo" />
+
+          <div class="brand-text">
+            <span class="brand-zh">臺灣青少年科學發展協會</span>
+            <span class="brand-en">
+              Taiwan Young Science Development Association
+            </span>
+          </div>
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-label="開啟選單"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+        <nav id="site-nav">
+          <a href="/about">關於我們</a>
+          <a href="/members">協會成員</a>
+          <a href="/activities">協會活動</a>
+          <a href="/charter">組織章程</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <p>© 2026 臺灣青少年科學發展協會</p>
+    </footer>
+
+    <script>
+      const header = document.getElementById("site-header");
+      const menuToggle = document.getElementById("menu-toggle");
+      const siteNav = document.getElementById("site-nav");
+
+      /* Header 滾動玻璃效果 */
+      const handleScroll = () => {
+        header.classList.toggle("scrolled", window.scrollY > 40);
+      };
+
+      handleScroll();
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      /* 手機選單 */
+      menuToggle?.addEventListener("click", () => {
+        const opened = siteNav.classList.toggle("open");
+
+        menuToggle.setAttribute("aria-expanded", String(opened));
+        menuToggle.textContent = opened ? "✕" : "☰";
+      });
+
+      /* 點選選單後自動收起（手機） */
+      siteNav?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          siteNav.classList.remove("open");
+          menuToggle.textContent = "☰";
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    </script>
+  </body>
 </html>

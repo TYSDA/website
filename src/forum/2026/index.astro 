@@ -1,0 +1,69 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+---
+
+<Layout title="第一屆臺灣青少年科學發展論壇">
+	<div class="panel">
+		<div class="panel-inner">
+			<a href="/forum">← 返回論壇專區</a>
+
+			<h2>第一屆臺灣青少年科學發展論壇</h2>
+			<p>時間：2026年12月25日（五）－12月26日（六）</p>
+			<p>地點：國立臺灣科學教育館</p>
+			<p>邀請單位：國立臺灣科學教育館</p>
+
+			<div class="quick-links">
+				<a href="/forum/2026/speakers" class="quick-link">講者陣容</a>
+				<a href="/forum/2026/schedule" class="quick-link">議程時間表</a>
+				<a href="/forum/2026/register" class="quick-link register">立即報名</a>
+			</div>
+
+			<p>
+				為促進台灣青少年科學研究發展，舉辦相關論壇，透過青年科學家、大學生、國高中老師與大學教師對話交流，
+				提出問題並加以討論尋求解決方向。多方經驗分享增加不同群體視野思考角度，共同成長，
+				並透過科教、科普、科學藝術領域的工作者與青少年交流，促進科學精神與學研風氣。
+			</p>
+		</div>
+	</div>
+
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+			padding-top: var(--header-h, 90px);
+		}
+		.panel h1, .panel h2, .panel h3 {
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+		.quick-links {
+			display: flex;
+			gap: 1rem;
+			margin: 1.5rem 0;
+			flex-wrap: wrap;
+		}
+		.quick-link {
+			display: inline-block;
+			padding: 0.6rem 1.2rem;
+			border-radius: 8px;
+			background: var(--card-bg);
+			color: var(--card-text);
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 0.9rem;
+			border: 1px solid #DDD2BE;
+		}
+		.quick-link.register {
+			background: var(--orange);
+			color: #FFFFFF;
+			border-color: transparent;
+		}
+		.quick-link:hover {
+			opacity: 0.85;
+		}
+	</style>
+</Layout>
