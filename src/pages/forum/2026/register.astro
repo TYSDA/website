@@ -41,10 +41,10 @@ const steps = [
 
 			<div class="payment-info">
 				<h3>匯款資訊</h3>
-				<p>銀行：（待補）</p>
-				<p>戶名：（待補）</p>
-				<p>帳號：（待補）</p>
-				<p>報名費：（待補）</p>
+				<p><span class="payment-label">銀行代號</span>700（郵局）</p>
+				<p><span class="payment-label">帳號</span>0021532 0473660</p>
+				<p><span class="payment-label">戶名</span>臺灣青少年科學發展協會關貫之</p>
+				<p><span class="payment-label">郵局</span>臺中淡溝郵局</p>
 			</div>
 
 			<a href="#" class="register-button">前往報名表單</a>
@@ -215,18 +215,28 @@ const steps = [
 				0 0 24px rgba(212, 184, 118, 0.08);
 		}
 		.payment-info h3 {
-			margin: 0 0 1rem;
+			margin: 0 0 1.1rem;
 			color: #D4B876;
 			font-size: 1rem;
 		}
 		.payment-info p {
-			margin: 0.4rem 0;
-			font-size: 0.95rem;
+			margin: 0.55rem 0;
+			font-size: 0.98rem;
 			color: #E8E9ED;
+			display: flex;
+			gap: 0.75rem;
+		}
+		.payment-label {
+			flex-shrink: 0;
+			width: 5.5rem;
+			color: #A8ACBA;
+			font-size: 0.85rem;
 		}
 		.register-button {
 			position: relative;
-			display: inline-block;
+			display: block;
+			width: fit-content;
+			margin-left: auto;
 			background: #D4B876;
 			color: #14181A;
 			padding: 0.9rem 2.5rem;
@@ -257,6 +267,18 @@ const steps = [
 			}
 			.vnode-desc {
 				font-size: 0.8rem;
+			}
+			.payment-info p {
+				flex-direction: column;
+				gap: 0.15rem;
+			}
+			.payment-label {
+				width: auto;
+			}
+			.register-button {
+				margin-left: 0;
+				width: 100%;
+				text-align: center;
 			}
 		}
 	</style>
