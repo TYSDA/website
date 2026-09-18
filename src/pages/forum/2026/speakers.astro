@@ -1,71 +1,157 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 
-const speakers = [
+const groups = [
 	{
-		name: "謝至亮",
-		title: "當閃光燈快到能看見電子？站在諾獎巨人們的肩上走科研之路",
-		bio: "世界上最快的「閃光燈」，究竟能拍下什麼？從熟悉的相機閃光燈出發，我們將一路把光的時間尺度壓縮：從毫秒、微秒、奈秒、皮秒，到飛秒、甚至阿秒。這條路上，不僅誕生了改變現代科技的雷射與超快光學，也留下多項諾貝爾獎的精彩故事。而這也是我的科研旅程：從台灣交大碩士班的飛秒顯微術，到瑞士洛桑理工學院(EPFL)研究飛秒光與物質的非線性交互作用，以及讓光進行 AI 運算；如今，我在德國 attoworld 實驗室探索阿秒尺度的超快現象與應用。",
-		photo: "/speaker-xie-zhiliang.jpg"
+		label: "論壇一",
+		theme: "青年科學家論壇",
+		speakers: [
+			{
+				name: "謝至亮",
+				title: "當閃光燈快到能看見電子？站在諾獎巨人們的肩上走科研之路",
+				bio: "世界上最快的「閃光燈」，究竟能拍下什麼？從熟悉的相機閃光燈出發，我們將一路把光的時間尺度壓縮：從毫秒、微秒、奈秒、皮秒，到飛秒、甚至阿秒。這條路上，不僅誕生了改變現代科技的雷射與超快光學，也留下多項諾貝爾獎的精彩故事。而這也是我的科研旅程：從台灣交大碩士班的飛秒顯微術，到瑞士洛桑理工學院(EPFL)研究飛秒光與物質的非線性交互作用，以及讓光進行 AI 運算；如今，我在德國 attoworld 實驗室探索阿秒尺度的超快現象與應用。",
+				photo: "/speaker-xie-zhiliang.jpg"
+			},
+			{
+				name: "尉遲和妘",
+				title: "黑洞能量提取與磁重聯",
+				bio: "我於北京大學取得理論物理碩士學位。黑洞過往被認為是時空與信息的終點，然而隨著物理學家們的狂想與理論的發展，發現黑洞其實並非完全「只進不出」——自旋黑洞蘊藏的能量，有一部分是可以被合理提取出來的。磁重聯是磁化電漿中很常見的現象，從太陽閃焰到黑洞周圍的吸積流都看得到；而我的研究，正是探討這個現象在黑洞能量提取問題中，扮演什麼樣的角色。我目前最新的研究正將這套方法推廣到更一般的黑洞時空，檢驗當重力理論偏離廣義相對論時，對於黑洞的能量提取效率會如何改變。",
+				photo: "/speaker-yuchih-hoyun.jpg"
+			},
+			{
+				name: "王翊語",
+				title: "跨領域的科學探索之路",
+				bio: "國中小的科展是我對自然科學的啟蒙，後來幾個夏天在台灣野鳥協會做志工、高中接觸數學建模，這些培養了我探索不同領域的好奇心。大學時，我從資工的角度在中研院生物多樣性中心實習，後來以電腦模擬分析白蟻彈性大顎力學效能的大專學生計畫。除了資工系的分散式系統研究，我也因對後量子密碼學的興趣，再次進入中研院實習。一路輾轉不同學科後，我最後選擇在倫敦成為一名軟體工程師。雖然沒有走上學術研究，但這些科學探索帶給我的好奇、觀察與批判思考，至今仍深深影響我。",
+				photo: "/speaker-wang-yiyu.jpg"
+			}
+		]
 	},
 	{
-		name: "尉遲和妘",
-		title: "黑洞能量提取與磁重聯",
-		bio: "我於北京大學取得理論物理碩士學位。黑洞過往被認為是時空與信息的終點，然而隨著物理學家們的狂想與理論的發展，發現黑洞其實並非完全「只進不出」——自旋黑洞蘊藏的能量，有一部分是可以被合理提取出來的。磁重聯是磁化電漿中很常見的現象，從太陽閃焰到黑洞周圍的吸積流都看得到；而我的研究，正是探討這個現象在黑洞能量提取問題中，扮演什麼樣的角色。我目前最新的研究正將這套方法推廣到更一般的黑洞時空，檢驗當重力理論偏離廣義相對論時，對於黑洞的能量提取效率會如何改變。",
-		photo: "/speaker-yuchih-hoyun.jpg"
+		label: "論壇二",
+		theme: "大學科學參與論壇",
+		speakers: [
+			{
+				name: "徐士展",
+				title: "同樣的豉甲，不同的問題",
+				bio: "從國小第一次接觸豉甲，到高中重新以物理的角度研究牠快速下潛的原因，我逐漸體會到，科學研究並不是一開始就要有多厲害的題目，而是從好奇、觀察與一個個問題慢慢累積而來。隨著學習力學、3D 建模與流體分析，我開始能將單純的現象轉化成假說，再透過模型與實驗驗證。這次分享希望從自己的成長經驗出發，談談哪些學習、環境與選擇能幫助青少年把好奇真正變成研究，以及在 AI 時代中，如何保有判斷與驗證答案的能力。",
+				photo: "/speaker-xu-shizhan.jpg"
+			},
+			{
+				name: "許禾臻",
+				title: "高中：蚤蠅的高頻率間歇性運動之探討｜大學：未定",
+				bio: "目前就讀國立臺灣大學牙醫學系三年級，高中就讀彰化高中科學班。受科學班課程規劃影響，我於高二開始接觸科學研究，因對物理與生物感興趣，進入中興大學生物力學實驗室，研究蚤蠅的高頻率間歇性運動。進入大學後，我因研究導論課接觸牙周幹細胞，並結合自身十字韌帶受傷的經驗，開始思考牙周幹細胞應用於韌帶修復的可能性，也由此踏上新的研究歷程。",
+				photo: "/speaker-xu-hezhen.jpg"
+			},
+			{
+				name: "張雨恩",
+				title: "純爪抓附的意外多樣性：白蟻爪形態、抓附力與生態適應之力學分析",
+				bio: "目前就讀陽明交通大學百川學程。高中時因為對物理與生物的興趣而投入生物力學研究，從白蟻在不同粗糙表面的抓附表現出發，延伸到物種、形態與行為等方面。進入百川不分系後，我仍持續投入科學研究，同時開始接觸程式軟體設計，在跨領域的環境中慢慢形塑自己的未來走向。對我而言，基礎科學不只是高中階段的研究，更是促使我持續探索興趣與增進能力、結合不同領域的起點。",
+				photo: "/speaker-zhang-yuen.jpg"
+			}
+		]
 	},
 	{
-		name: "王翊語",
-		title: "跨領域的科學探索之路",
-		bio: "國中小的科展是我對自然科學的啟蒙，後來幾個夏天在台灣野鳥協會做志工、高中接觸數學建模，這些培養了我探索不同領域的好奇心。大學時，我從資工的角度在中研院生物多樣性中心實習，後來以電腦模擬分析白蟻彈性大顎力學效能的大專學生計畫。除了資工系的分散式系統研究，我也因對後量子密碼學的興趣，再次進入中研院實習。一路輾轉不同學科後，我最後選擇在倫敦成為一名軟體工程師。雖然沒有走上學術研究，但這些科學探索帶給我的好奇、觀察與批判思考，至今仍深深影響我。",
-		photo: "/speaker-wang-yiyu.jpg"
+		label: "論壇三",
+		theme: "高中老師科學發展論壇",
+		speakers: [
+			{ name: "蔡任圃", title: "北一女中", bio: "個人簡介待補充。", photo: null },
+			{ name: "龔雍任", title: "台中一中", bio: "個人簡介待補充。", photo: null },
+			{ name: "林獻升", title: "麗山高中", bio: "個人簡介待補充。", photo: null },
+			{ name: "郭瓊華", title: "麗山高中", bio: "個人簡介待補充。", photo: null },
+			{ name: "陳琬婷", title: "竹崎高中", bio: "個人簡介待補充。", photo: null }
+		]
 	},
 	{
-		name: "徐士展",
-		title: "同樣的豉甲，不同的問題",
-		bio: "從國小第一次接觸豉甲，到高中重新以物理的角度研究牠快速下潛的原因，我逐漸體會到，科學研究並不是一開始就要有多厲害的題目，而是從好奇、觀察與一個個問題慢慢累積而來。隨著學習力學、3D 建模與流體分析，我開始能將單純的現象轉化成假說，再透過模型與實驗驗證。這次分享希望從自己的成長經驗出發，談談哪些學習、環境與選擇能幫助青少年把好奇真正變成研究，以及在 AI 時代中，如何保有判斷與驗證答案的能力。",
-		photo: "/speaker-xu-shizhan.jpg"
+		label: "論壇四",
+		theme: "大學老師科學發展論壇",
+		speakers: [
+			{ name: "紀凱容", title: "大學老師科學發展論壇", bio: "個人簡介待補充。", photo: null },
+			{ name: "李後鋒", title: "大學老師科學發展論壇", bio: "個人簡介待補充。", photo: null }
+		]
 	},
 	{
-		name: "許禾臻",
-		title: "高中：蚤蠅的高頻率間歇性運動之探討｜大學：未定",
-		bio: "目前就讀國立臺灣大學牙醫學系三年級，高中就讀彰化高中科學班。受科學班課程規劃影響，我於高二開始接觸科學研究，因對物理與生物感興趣，進入中興大學生物力學實驗室，研究蚤蠅的高頻率間歇性運動。進入大學後，我因研究導論課接觸牙周幹細胞，並結合自身十字韌帶受傷的經驗，開始思考牙周幹細胞應用於韌帶修復的可能性，也由此踏上新的研究歷程。",
-		photo: "/speaker-xu-hezhen.jpg"
+		label: "科教論壇",
+		theme: "",
+		speakers: [
+			{ name: "鄭夢慈", title: "教授・科教論壇", bio: "個人簡介待補充。", photo: null }
+		]
 	},
 	{
-		name: "張雨恩",
-		title: "純爪抓附的意外多樣性：白蟻爪形態、抓附力與生態適應之力學分析",
-		bio: "目前就讀陽明交通大學百川學程。高中時因為對物理與生物的興趣而投入生物力學研究，從白蟻在不同粗糙表面的抓附表現出發，延伸到物種、形態與行為等方面。進入百川不分系後，我仍持續投入科學研究，同時開始接觸程式軟體設計，在跨領域的環境中慢慢形塑自己的未來走向。對我而言，基礎科學不只是高中階段的研究，更是促使我持續探索興趣與增進能力、結合不同領域的起點。",
-		photo: "/speaker-zhang-yuen.jpg"
+		label: "科創論壇",
+		theme: "",
+		speakers: [
+			{ name: "施鈞瀚", title: "博士・科創論壇", bio: "個人簡介待補充。", photo: null }
+		]
+	},
+	{
+		label: "工作坊",
+		theme: "",
+		speakers: [
+			{ name: "顧廣毅", title: "老師・科學藝術工作坊", bio: "個人簡介待補充。", photo: null },
+			{ name: "關貫之", title: "老師・科學漫畫工作坊", bio: "個人簡介待補充。", photo: null },
+			{ name: "鄂禹臻", title: "老師・科學漫畫工作坊", bio: "個人簡介待補充。", photo: null }
+		]
 	}
 ];
+
+const flatSpeakers = groups.flatMap((g, gi) =>
+	g.speakers.map((s) => ({ ...s, groupIndex: gi, groupLabel: g.label, groupTheme: g.theme }))
+);
 ---
 
 <Layout title="講者陣容 | 第一屆臺灣青少年科學發展論壇">
 	<a href="/forum/2026" class="back-fab" aria-label="返回論壇詳情">←</a>
 
 	<div class="speaker-pin-fixed" id="speaker-pin">
-		{speakers.map((s, i) => (
-			<div class={`speaker-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
-				<div class="speaker-bg" style={`background-image: url(${s.photo})`}></div>
+		{flatSpeakers.map((s, i) => (
+			<div class={`speaker-slide ${i === 0 ? 'active' : ''}`} data-index={i} data-group={s.groupIndex}>
+				<div class="speaker-bg" style={s.photo ? `background-image: url(${s.photo})` : ''}></div>
 				<div class="speaker-inner">
 					<div class="speaker-text-col">
-						<span class="speaker-section-label">講者陣容</span>
-						<span class="speaker-index">{String(i + 1).padStart(2, '0')} / {String(speakers.length).padStart(2, '0')}</span>
+						<span class="speaker-section-label">
+							講者陣容・{s.groupLabel}{s.groupTheme ? `・${s.groupTheme}` : ''}
+						</span>
 						<h3>{s.name}</h3>
 						<p class="speaker-title">{s.title}</p>
 						<p class="speaker-bio">{s.bio}</p>
 					</div>
+
+					{groups[s.groupIndex].speakers.length > 1 && (
+						<div class="member-dots-vertical">
+							{groups[s.groupIndex].speakers.map((_, si) => {
+								const globalIndex = groups.slice(0, s.groupIndex).reduce((sum, gg) => sum + gg.speakers.length, 0) + si;
+								return (
+									<button
+										class={`member-dot ${globalIndex === i ? 'active' : ''}`}
+										data-index={globalIndex}
+										type="button"
+										aria-label={`第 ${si + 1} 位講者`}
+									></button>
+								);
+							})}
+						</div>
+					)}
+
 					<div class="speaker-photo-col">
-						<img src={s.photo} alt={s.name} class="speaker-photo" />
+						{s.photo ? (
+							<img src={s.photo} alt={s.name} class="speaker-photo" />
+						) : (
+							<div class="speaker-photo-placeholder">
+								<span>{s.name.charAt(0)}</span>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
 		))}
+
 		<div class="speaker-veil" id="speaker-veil"></div>
-		<div class="speaker-progress">
-			{speakers.map((_, i) => (
-				<span class={`progress-dot ${i === 0 ? 'active' : ''}`} data-index={i}></span>
+
+		<div class="group-list" id="group-list">
+			{groups.map((g, gi) => (
+				<button class={`group-list-item ${gi === 0 ? 'active' : ''}`} data-group-index={gi} type="button">
+					{g.label}
+				</button>
 			))}
 		</div>
 	</div>
@@ -102,6 +188,41 @@ const speakers = [
 			background: #1B211D;
 			overflow: hidden;
 		}
+
+		.group-list {
+			position: absolute;
+			right: 1.75rem;
+			top: 50%;
+			transform: translateY(-50%);
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			gap: 0.15rem;
+			z-index: 21;
+		}
+		.group-list-item {
+			background: none;
+			border: none;
+			border-right: 2px solid transparent;
+			color: #5C6070;
+			font-size: 0.8rem;
+			font-weight: 600;
+			letter-spacing: 0.04em;
+			padding: 0.45rem 0.9rem 0.45rem 0.6rem;
+			cursor: pointer;
+			text-align: right;
+			transition: color 0.2s ease, border-color 0.2s ease;
+			white-space: nowrap;
+		}
+		.group-list-item:hover {
+			color: #B8BCC8;
+		}
+		.group-list-item.active {
+			color: #D4B876;
+			border-right-color: #D4B876;
+			font-weight: 700;
+		}
+
 		.speaker-slide {
 			position: absolute;
 			inset: 0;
@@ -140,19 +261,44 @@ const speakers = [
 		.speaker-inner {
 			position: relative;
 			z-index: 1;
-			max-width: 900px;
+			max-width: 860px;
 			width: 100%;
-			max-height: calc(100vh - var(--header-h) - 4rem);
+			max-height: calc(100vh - var(--header-h) - 4.5rem);
 			display: flex;
 			align-items: center;
-			gap: 2.5rem;
+			gap: 1.5rem;
 		}
 		.speaker-text-col {
 			flex: 1 1 auto;
-			max-height: calc(100vh - var(--header-h) - 5rem);
+			max-height: calc(100vh - var(--header-h) - 5.5rem);
 			overflow-y: auto;
 			text-align: left;
 			padding-right: 0.5rem;
+		}
+		.member-dots-vertical {
+			flex: 0 0 auto;
+			display: flex;
+			flex-direction: column;
+			gap: 0.55rem;
+			align-items: center;
+		}
+		.member-dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: rgba(255,255,255,0.25);
+			transition: background 0.3s, transform 0.2s;
+			cursor: pointer;
+			border: none;
+			padding: 0;
+			flex-shrink: 0;
+		}
+		.member-dot:hover {
+			background: rgba(212, 184, 118, 0.5);
+		}
+		.member-dot.active {
+			background: #D4B876;
+			transform: scale(1.2);
 		}
 		.speaker-photo-col {
 			flex: 0 0 38%;
@@ -165,60 +311,47 @@ const speakers = [
 			display: block;
 			box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 		}
-		.speaker-section-label {
-			display: block;
-			font-size: 0.85rem;
-			font-weight: 700;
-			color: #E8D9C4;
-			letter-spacing: 0.1em;
-			margin-bottom: 0.75rem;
+		.speaker-photo-placeholder {
+			width: 100%;
+			aspect-ratio: 3 / 4;
+			border-radius: 12px;
+			background: rgba(212, 184, 118, 0.1);
+			border: 1px solid rgba(212, 184, 118, 0.3);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 		}
-		.speaker-index {
-			display: block;
-			font-size: 0.85rem;
+		.speaker-photo-placeholder span {
+			font-size: 3.5rem;
 			font-weight: 700;
 			color: #D4B876;
-			letter-spacing: 0.1em;
-			margin-bottom: 1rem;
+			opacity: 0.6;
+		}
+		.speaker-section-label {
+			display: block;
+			font-size: 0.78rem;
+			font-weight: 700;
+			color: #E8D9C4;
+			letter-spacing: 0.06em;
+			margin-bottom: 0.85rem;
 		}
 		.speaker-slide h3 {
-			font-size: 1.9rem;
-			margin: 0 0 0.5rem;
+			font-size: 1.7rem;
+			margin: 0 0 0.4rem;
 			color: #FFFFFF;
 		}
 		.speaker-title {
 			color: #D4B876;
 			font-weight: 600;
-			font-size: 1rem;
-			margin: 0 0 1.25rem;
+			font-size: 0.9rem;
+			margin: 0 0 1rem;
 		}
 		.speaker-bio {
-			font-size: 0.95rem;
+			font-size: 0.82rem;
 			color: #D8D8D8;
-			line-height: 1.75;
+			line-height: 1.65;
 			margin: 0;
-		}
-		.speaker-progress {
-			position: absolute;
-			bottom: 1.25rem;
-			left: 50%;
-			transform: translateX(-50%);
-			display: flex;
-			gap: 0.5rem;
-			z-index: 6;
-		}
-		.progress-dot {
-			width: 8px;
-			height: 8px;
-			border-radius: 50%;
-			background: rgba(255,255,255,0.25);
-			transition: background 0.3s;
-			cursor: pointer;
-			border: none;
-			padding: 0;
-		}
-		.progress-dot.active {
-			background: #D4B876;
 		}
 
 		@media (max-width: 700px) {
@@ -229,6 +362,14 @@ const speakers = [
 				font-size: 1.05rem;
 				top: calc(var(--header-h, 74px) + 0.75rem);
 			}
+			.group-list {
+				right: 0.6rem;
+				gap: 0.05rem;
+			}
+			.group-list-item {
+				font-size: 0.62rem;
+				padding: 0.3rem 0.55rem 0.3rem 0.4rem;
+			}
 			.speaker-slide {
 				padding: 0 1.25rem;
 				align-items: flex-start;
@@ -237,16 +378,21 @@ const speakers = [
 			.speaker-inner {
 				flex-direction: column-reverse;
 				gap: 0.6rem;
-				max-height: calc(100vh - var(--header-h) - 5.5rem);
+				max-height: calc(100vh - var(--header-h) - 6rem);
 				overflow-y: auto;
+				max-width: calc(100% - 3.5rem);
 			}
 			.speaker-photo-col {
 				flex: 0 0 auto;
 				width: 38%;
 				margin: 0 auto;
 			}
-			.speaker-photo {
+			.speaker-photo,
+			.speaker-photo-placeholder {
 				border-radius: 10px;
+			}
+			.speaker-photo-placeholder span {
+				font-size: 2rem;
 			}
 			.speaker-text-col {
 				max-height: none;
@@ -254,29 +400,26 @@ const speakers = [
 				text-align: center;
 				padding-right: 0;
 			}
-			.speaker-section-label {
-				font-size: 0.7rem;
-				margin-bottom: 0.4rem;
+			.member-dots-vertical {
+				flex-direction: row;
+				justify-content: center;
 			}
-			.speaker-index {
-				font-size: 0.7rem;
-				margin-bottom: 0.4rem;
+			.speaker-section-label {
+				font-size: 0.65rem;
+				margin-bottom: 0.55rem;
 			}
 			.speaker-slide h3 {
-				font-size: 1.2rem;
+				font-size: 1.15rem;
 				margin: 0 0 0.3rem;
 			}
 			.speaker-title {
-				font-size: 0.8rem;
-				margin: 0 0 0.6rem;
+				font-size: 0.75rem;
+				margin: 0 0 0.55rem;
 				line-height: 1.4;
 			}
 			.speaker-bio {
-				font-size: 0.78rem;
-				line-height: 1.5;
-			}
-			.speaker-progress {
-				bottom: 0.6rem;
+				font-size: 0.72rem;
+				line-height: 1.55;
 			}
 		}
 	</style>
@@ -288,7 +431,8 @@ const speakers = [
 		}
 
 		const slides = Array.from(document.querySelectorAll('.speaker-slide'));
-		const dots = Array.from(document.querySelectorAll('.progress-dot'));
+		const memberDots = Array.from(document.querySelectorAll('.member-dot'));
+		const groupListItems = Array.from(document.querySelectorAll('.group-list-item'));
 		const veil = document.getElementById('speaker-veil');
 		const total = slides.length;
 
@@ -300,13 +444,35 @@ const speakers = [
 		const SETTLE_MS = 30;
 		const VEIL_MS = 90;
 
-		function setActive(index) {
-			current = Math.max(0, Math.min(total - 1, index));
-			slides.forEach((s, i) => s.classList.toggle('active', i === current));
-			dots.forEach((d, i) => d.classList.toggle('active', i === current));
+		function groupOf(index) {
+			return parseInt(slides[index].dataset.group, 10);
 		}
 
-		function doSwitch(target) {
+		function groupStart(g) {
+			return slides.findIndex((s) => parseInt(s.dataset.group, 10) === g);
+		}
+
+		function groupEnd(g) {
+			for (let i = slides.length - 1; i >= 0; i--) {
+				if (parseInt(slides[i].dataset.group, 10) === g) return i;
+			}
+			return 0;
+		}
+
+		function setActive(index) {
+			current = Math.max(0, Math.min(total - 1, index));
+			const activeGroup = groupOf(current);
+
+			slides.forEach((s, i) => s.classList.toggle('active', i === current));
+			memberDots.forEach((d) => {
+				d.classList.toggle('active', parseInt(d.dataset.index, 10) === current);
+			});
+			groupListItems.forEach((item) => {
+				item.classList.toggle('active', parseInt(item.dataset.groupIndex, 10) === activeGroup);
+			});
+		}
+
+		function jumpTo(target) {
 			if (locked) return;
 			if (target < 0 || target > total - 1) return;
 			locked = true;
@@ -320,6 +486,13 @@ const speakers = [
 			}, VEIL_MS);
 		}
 
+		function doSwitchWithinGroup(target) {
+			const activeGroup = groupOf(current);
+			const clamped = Math.max(groupStart(activeGroup), Math.min(groupEnd(activeGroup), target));
+			if (clamped === current) return;
+			jumpTo(clamped);
+		}
+
 		document.body.style.overflow = 'hidden';
 
 		window.addEventListener('wheel', (e) => {
@@ -331,8 +504,8 @@ const speakers = [
 			settleTimer = setTimeout(() => {
 				const acc = wheelAccumulated;
 				wheelAccumulated = 0;
-				if (acc > 5) doSwitch(current + 1);
-				else if (acc < -5) doSwitch(current - 1);
+				if (acc > 5) doSwitchWithinGroup(current + 1);
+				else if (acc < -5) doSwitchWithinGroup(current - 1);
 			}, SETTLE_MS);
 		}, { passive: false });
 
@@ -349,23 +522,33 @@ const speakers = [
 			if (locked) return;
 			const touchEndY = e.changedTouches[0].clientY;
 			const diff = touchStartY - touchEndY;
-			if (diff > 30) doSwitch(current + 1);
-			else if (diff < -30) doSwitch(current - 1);
+			if (diff > 30) doSwitchWithinGroup(current + 1);
+			else if (diff < -30) doSwitchWithinGroup(current - 1);
 		});
 
 		window.addEventListener('keydown', (e) => {
 			if (locked) return;
 			if (e.key === 'ArrowDown' || e.key === 'PageDown') {
 				e.preventDefault();
-				doSwitch(current + 1);
+				doSwitchWithinGroup(current + 1);
 			} else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
 				e.preventDefault();
-				doSwitch(current - 1);
+				doSwitchWithinGroup(current - 1);
 			}
 		});
 
-		dots.forEach((dot, i) => {
-			dot.addEventListener('click', () => doSwitch(i));
+		memberDots.forEach((dot) => {
+			dot.addEventListener('click', () => {
+				const target = parseInt(dot.dataset.index, 10);
+				jumpTo(target);
+			});
+		});
+
+		groupListItems.forEach((item) => {
+			item.addEventListener('click', () => {
+				const g = parseInt(item.dataset.groupIndex, 10);
+				jumpTo(groupStart(g));
+			});
 		});
 
 		const backLink = document.querySelector('.back-fab');

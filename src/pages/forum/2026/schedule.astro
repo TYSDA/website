@@ -4,23 +4,31 @@ import Layout from '../../../layouts/Layout.astro';
 const days = [
 	{
 		label: "DAY 1",
-		theme: "青年研究 × 科學教育",
+		theme: "12/25（五）・青年科學家論壇與教育現場對話",
 		color: "green",
 		items: [
-			{ time: "09:00", tag: "論壇一", title: "青年科學家經驗演講與交流", desc: "青年科學家分享研究歷程，並開放高中生、大學生與教師交流問答。" },
-			{ time: "10:00", tag: "論壇二", title: "早期開啟科研道路的大學生經驗分享與對談", desc: "分享從高中科展、大學研究到跨領域探索的科研歷程。" },
-			{ time: "11:00", tag: "論壇三", title: "國高中老師的科學教育經驗分享", desc: "探討第一線科學教育的經驗、挑戰與需求。" },
-			{ time: "13:30", tag: "論壇四", title: "大學教授引領的科學道路", desc: "教授分享帶領高中生、大學生投入研究的經驗與觀點。" }
+			{ time: "08:30", tag: "報到", title: "現場報到", desc: "請提前完成報到，準備進入論壇會場。" },
+			{ time: "09:00", tag: "開幕", title: "開幕式", desc: "" },
+			{ time: "09:20", tag: "論壇一", title: "青年科學家論壇", desc: "講者：謝至亮博士、尉遲和妘、王翊語（10:00 起開放問答）" },
+			{ time: "10:40", tag: "論壇二", title: "大學科學參與論壇", desc: "講者：徐士展、許禾臻、張雨恩（11:20 起開放問答）" },
+			{ time: "12:00", tag: "午餐", title: "午餐時間", desc: "" },
+			{ time: "13:30", tag: "論壇三", title: "高中老師科學發展論壇", desc: "講者：北一女中蔡任圃老師、台中一中龔雍任老師、麗山高中林獻升老師、麗山高中郭瓊華老師、竹崎高中陳琬婷老師（14:30 起開放問答）" },
+			{ time: "15:20", tag: "論壇四", title: "大學老師科學發展論壇", desc: "講者：紀凱容老師、李後鋒老師（16:00 起開放問答）" },
+			{ time: "18:20", tag: "自由參加", title: "晚宴暨臺灣青少年科學發展協會會員大會", desc: "" }
 		]
 	},
 	{
 		label: "DAY 2",
-		theme: "跨領域論壇 × 科普 × 科學藝術",
+		theme: "12/26（六）・科創科教論壇與工作坊",
 		color: "yellow",
 		items: [
-			{ time: "09:00", tag: "論壇五", title: "臺灣青少年科教論壇", desc: "高中師生交流聚會，科教主題演講與討論。" },
-			{ time: "10:30", tag: "論壇六", title: "臺灣青少年科普論壇", desc: "高中師生交流聚會，科普主題演講與討論。" },
-			{ time: "13:00", tag: "論壇七", title: "青少年科學藝術科幻論壇", desc: "科學藝術主題演講（顧廣毅老師）與討論。" }
+			{ time: "09:00", tag: "論壇四", title: "科教論壇", desc: "講者：鄭夢慈教授" },
+			{ time: "10:20", tag: "論壇五", title: "科創論壇", desc: "講者：施鈞瀚博士（11:15 起開放問答）" },
+			{ time: "12:00", tag: "午餐", title: "午餐時間", desc: "" },
+			{ time: "13:30", tag: "工作坊一", title: "科學藝術工作坊", desc: "講者：顧廣毅老師" },
+			{ time: "13:30", tag: "工作坊二", title: "科學漫畫工作坊", desc: "講者：關貫之老師、鄂禹臻老師" },
+			{ time: "13:30", tag: "工作坊三", title: "科學教育工作坊", desc: "主辦：國立臺灣科學教育館" },
+			{ time: "16:30", tag: "閉幕", title: "閉幕及頒獎", desc: "" }
 		]
 	}
 ];
@@ -60,7 +68,7 @@ const days = [
 									</div>
 									<div class="vnode-card">
 										<p class="vnode-title">{item.title}</p>
-										<p class="vnode-desc">{item.desc}</p>
+										{item.desc && <p class="vnode-desc">{item.desc}</p>}
 									</div>
 								</div>
 							</div>
@@ -168,7 +176,7 @@ const days = [
 			display: block;
 		}
 		.day-theme {
-			font-size: 1.2rem;
+			font-size: 1.1rem;
 			margin: 0 0 2rem;
 			color: #B8BCC8;
 			font-weight: 400;
