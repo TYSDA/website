@@ -9,10 +9,12 @@ import Layout from '../../../layouts/Layout.astro';
 			<p class="forum-hero-label anim-item anim-1">第一屆</p>
 			<div id="title-hitbox" class="title-hitbox"></div>
 			<p class="forum-hero-date anim-item anim-3">2026年12月25日（五）－12月26日（六）・國立臺灣科學教育館</p>
+			<p class="forum-hero-organizer anim-item anim-3">主辦單位：臺灣青少年科學發展協會、國立臺灣科學教育館</p>
 			<div class="quick-links">
 				<a href="/forum/2026/speakers" class="quick-link anim-item anim-4">講者陣容</a>
 				<a href="/forum/2026/schedule" class="quick-link anim-item anim-5">議程時間表</a>
 				<a href="/forum/2026/register" class="quick-link register anim-item anim-6">立即報名</a>
+				<a href="/about" class="quick-link anim-item anim-6">聯絡我們</a>
 			</div>
 		</div>
 	</div>
@@ -77,6 +79,12 @@ import Layout from '../../../layouts/Layout.astro';
 		.forum-hero-date {
 			color: #A8ACBA;
 			font-size: 1rem;
+			margin: 0 0 clamp(0.4rem, 1.2vh, 0.6rem);
+			flex-shrink: 0;
+		}
+		.forum-hero-organizer {
+			color: #7C8090;
+			font-size: 0.85rem;
 			margin: 0 0 clamp(1rem, 3vh, 1.75rem);
 			flex-shrink: 0;
 		}
@@ -89,14 +97,19 @@ import Layout from '../../../layouts/Layout.astro';
 			flex-shrink: 0;
 		}
 		.quick-link {
-			display: inline-block;
-			padding: clamp(0.6rem, 2vh, 1rem) 2.2rem;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 9.5rem;
+			padding: clamp(0.6rem, 2vh, 1rem) 1.5rem;
 			border-radius: 12px;
 			background: rgba(255,255,255,0.04);
 			color: #E8E9ED;
 			text-decoration: none;
 			font-weight: 700;
 			font-size: 1rem;
+			text-align: center;
+			box-sizing: border-box;
 			border: 1px solid rgba(255,255,255,0.18);
 			backdrop-filter: blur(6px);
 			transition: box-shadow 0.25s ease, transform 0.2s ease, border-color 0.25s ease;
@@ -141,8 +154,15 @@ import Layout from '../../../layouts/Layout.astro';
 			.title-hitbox {
 				height: 8rem;
 			}
+			.forum-hero-date {
+				font-size: 0.9rem;
+			}
+			.forum-hero-organizer {
+				font-size: 0.75rem;
+			}
 			.quick-link {
-				padding: 0.8rem 1.6rem;
+				min-width: 8rem;
+				padding: 0.8rem 1.2rem;
 				font-size: 0.9rem;
 			}
 		}
@@ -161,9 +181,9 @@ import Layout from '../../../layouts/Layout.astro';
 		const PARTICLE_COLOR = '#6FBF98';
 		const TITLE_TEXT = '臺灣青少年科學發展論壇';
 		const TITLE_LINES_MOBILE = ['臺灣青少年', '科學發展論壇'];
-		const TITLE_FONT_WEIGHT = 400;
-		const REPEL_RADIUS = 70;
-		const REPEL_STRENGTH = 30;
+		const TITLE_FONT_WEIGHT = 500;
+		const REPEL_RADIUS = 40;
+		const REPEL_STRENGTH = 22;
 		const PARTICLE_GAP = 1.6;
 		const PARTICLE_SIZE = 1.6;
 

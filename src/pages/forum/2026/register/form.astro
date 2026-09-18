@@ -8,11 +8,6 @@ const speakers = [
 	"徐士展",
 	"許禾臻",
 	"張雨恩",
-	"蔡任圃 老師（北一女中）",
-	"龔雍任 老師（台中一中）",
-	"林獻升 老師（麗山高中）",
-	"郭瓊華 老師（麗山高中）",
-	"陳琬婷 老師（竹崎高中）",
 	"紀凱容 老師",
 	"李後鋒 老師",
 	"鄭夢慈 教授",
@@ -21,7 +16,13 @@ const speakers = [
 	"關貫之 老師",
 	"鄂禹臻 老師"
 ];
-const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科學漫畫工作坊", "工作坊三・科學教育工作坊"];
+
+const workshops = [
+	{ value: "工作坊一・科學藝術工作坊", cap: 30 },
+	{ value: "工作坊二・科學漫畫工作坊", cap: 30 },
+	{ value: "工作坊三・科學教育工作坊", cap: 30 },
+	{ value: "自由參觀", cap: null }
+];
 ---
 
 <Layout title="報名表單 | 第一屆臺灣青少年科學發展論壇">
@@ -71,10 +72,12 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 				</div>
 
 				<div class="form-group">
-					<label for="workshop_choice">第二天下午工作坊（三選一） <span class="req">*</span></label>
+					<label for="workshop_choice">
+						第二天下午工作坊 <span class="req">*</span>
+						<span class="hint-inline">（各工作坊限額 30 人，額滿將自動鎖定）</span>
+					</label>
 					<select id="workshop_choice" name="workshop_choice" required>
-						<option value="" disabled selected>請選擇工作坊</option>
-						{workshops.map((w) => <option value={w}>{w}</option>)}
+						<option value="" disabled selected>載入名額中...</option>
 					</select>
 				</div>
 
@@ -148,6 +151,7 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 			max-width: 800px;
 			margin: 0 auto;
 			padding: 2.5rem 2rem 4rem;
+			box-sizing: border-box;
 		}
 		.page-title {
 			font-size: 0.85rem;
@@ -186,6 +190,8 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 		}
 		.form-group input,
 		.form-group textarea {
+			width: 100%;
+			box-sizing: border-box;
 			background: rgba(255, 255, 255, 0.04);
 			border: 1px solid rgba(255, 255, 255, 0.15);
 			border-radius: 8px;
@@ -195,6 +201,8 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 			font-family: inherit;
 		}
 		.form-group select {
+			width: 100%;
+			box-sizing: border-box;
 			appearance: none;
 			-webkit-appearance: none;
 			-moz-appearance: none;
@@ -213,6 +221,9 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 		.form-group select option {
 			background: #14181A;
 			color: #E8E9ED;
+		}
+		.form-group select option:disabled {
+			color: #5C6070;
 		}
 		.form-group input:focus,
 		.form-group select:focus,
@@ -241,6 +252,7 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 			padding: 0.8rem 1rem;
 			color: #E8A38F;
 			font-size: 0.88rem;
+			box-sizing: border-box;
 		}
 		.register-button {
 			position: relative;
@@ -258,6 +270,7 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 			font-size: 1rem;
 			font-family: inherit;
 			box-shadow: 0 0 24px rgba(212, 184, 118, 0.35);
+			box-sizing: border-box;
 		}
 		.register-button:hover {
 			opacity: 0.9;
@@ -273,6 +286,7 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 			background: rgba(111, 191, 152, 0.08);
 			border: 1px solid rgba(111, 191, 152, 0.3);
 			border-radius: 14px;
+			box-sizing: border-box;
 		}
 		.success-message h3 {
 			color: #6FBF98;
@@ -330,6 +344,59 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 		const SUPABASE_URL = 'https://ckcxcdolmkcccolpnggb.supabase.co';
 		const SUPABASE_KEY = 'sb_publishable___5qC_1Aoz2OqXUr2iYMKg_PZokDoeG';
 		const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+		const EVENT_YEAR = 2026;
+
+		const WORKSHOPS = [
+			{ value: "工作坊一・科學藝術工作坊", cap: 30 },
+			{ value: "工作坊二・科學漫畫工作坊", cap: 30 },
+			{ value: "工作坊三・科學教育工作坊", cap: 30 },
+			{ value: "自由參觀", cap: null }
+		];
+
+		const workshopSelect = document.getElementById('workshop_choice');
+
+		async function loadWorkshopOptions() {
+			const counts = await Promise.all(
+				WORKSHOPS.map(async (w) => {
+					if (w.cap === null) return { ...w, count: 0, full: false };
+					const { data, error } = await supabase.rpc('get_workshop_count', {
+						workshop_name: w.value,
+						target_year: EVENT_YEAR
+					});
+					if (error) {
+						console.error('取得工作坊人數失敗:', error);
+						return { ...w, count: 0, full: false };
+					}
+					const count = typeof data === 'number' ? data : 0;
+					return { ...w, count, full: count >= w.cap };
+				})
+			);
+
+			workshopSelect.innerHTML = '';
+
+			const placeholder = document.createElement('option');
+			placeholder.value = '';
+			placeholder.disabled = true;
+			placeholder.selected = true;
+			placeholder.textContent = '請選擇工作坊';
+			workshopSelect.appendChild(placeholder);
+
+			counts.forEach((w) => {
+				const opt = document.createElement('option');
+				opt.value = w.value;
+				if (w.cap === null) {
+					opt.textContent = w.value;
+				} else if (w.full) {
+					opt.textContent = `${w.value}（已額滿）`;
+					opt.disabled = true;
+				} else {
+					opt.textContent = `${w.value}（剩 ${w.cap - w.count} 名）`;
+				}
+				workshopSelect.appendChild(opt);
+			});
+		}
+
+		loadWorkshopOptions();
 
 		const questionContent = document.getElementById('question_content');
 		const charCount = document.getElementById('char-count');
@@ -375,6 +442,7 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 
 				const data = new FormData(form);
 				const questionText = (data.get('question_content') || '').toString().trim();
+				const chosenWorkshop = (data.get('workshop_choice') || '').toString();
 
 				if (questionText.length < 50) {
 					showError('問題描述請至少輸入 50 字。');
@@ -384,6 +452,21 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 
 				submitBtn.disabled = true;
 				submitBtn.textContent = '送出中...';
+
+				const workshopDef = WORKSHOPS.find((w) => w.value === chosenWorkshop);
+				if (workshopDef && workshopDef.cap !== null) {
+					const { data: currentCount, error: countError } = await supabase.rpc('get_workshop_count', {
+						workshop_name: chosenWorkshop,
+						target_year: EVENT_YEAR
+					});
+					if (!countError && typeof currentCount === 'number' && currentCount >= workshopDef.cap) {
+						submitBtn.disabled = false;
+						submitBtn.textContent = '送出報名';
+						showError('抱歉，這個工作坊剛好額滿了，請重新選擇其他工作坊。');
+						await loadWorkshopOptions();
+						return;
+					}
+				}
 
 				let attempts = 0;
 				let lastError = null;
@@ -400,10 +483,10 @@ const workshops = ["工作坊一・科學藝術工作坊", "工作坊二・科�
 						school: data.get('school'),
 						question_speaker: data.get('question_speaker'),
 						question_content: questionText,
-						workshop_choice: data.get('workshop_choice'),
+						workshop_choice: chosenWorkshop,
 						transfer_last5: data.get('transfer_last5'),
 						transfer_date: data.get('transfer_date'),
-						event_year: 2026
+						event_year: EVENT_YEAR
 					};
 
 					const { error } = await supabase.from('registrations').insert(payload);

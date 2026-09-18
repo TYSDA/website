@@ -16,7 +16,7 @@ const steps = [
 		<div class="panel-inner">
 			<div class="page-title-row">
 				<h1 class="page-title">立即報名</h1>
-				<p class="time-hint">名額有限，額滿即止。</p>
+				<p class="time-hint" id="price-hint">名額有限，額滿即止。</p>
 			</div>
 
 			<div class="vline">
@@ -45,9 +45,10 @@ const steps = [
 				<p><span class="payment-label">帳號</span>0021532 0473660</p>
 				<p><span class="payment-label">戶名</span>臺灣青少年科學發展協會關貫之</p>
 				<p><span class="payment-label">郵局</span>臺中淡溝郵局</p>
+				<p class="fee-note" id="fee-note">費用資訊載入中...</p>
 			</div>
 
-			<a href="#" class="register-button">前往報名表單</a>
+			<a href="/forum/2026/register/form" class="register-button">前往報名表單</a>
 		</div>
 	</div>
 
@@ -79,6 +80,7 @@ const steps = [
 			background: #14181A;
 			color: var(--text);
 			overflow: hidden;
+			box-sizing: border-box;
 		}
 		.starfield {
 			position: absolute;
@@ -94,8 +96,10 @@ const steps = [
 		.panel-inner {
 			position: relative;
 			max-width: 800px;
+			width: 100%;
 			margin: 0 auto;
 			padding: 2.5rem 2rem 4rem;
+			box-sizing: border-box;
 		}
 		.page-title-row {
 			display: flex;
@@ -187,6 +191,7 @@ const steps = [
 			box-shadow:
 				0 0 0 1px rgba(212, 184, 118, 0.08),
 				0 0 20px rgba(212, 184, 118, 0.1);
+			box-sizing: border-box;
 		}
 		.vnode-title {
 			font-size: 0.98rem;
@@ -194,12 +199,14 @@ const steps = [
 			color: #F0F0F0;
 			margin: 0 0 0.4rem;
 			line-height: 1.4;
+			overflow-wrap: break-word;
 		}
 		.vnode-desc {
 			font-size: 0.85rem;
 			color: #A8ACBA;
 			margin: 0;
 			line-height: 1.6;
+			overflow-wrap: break-word;
 		}
 		.payment-info {
 			position: relative;
@@ -213,6 +220,8 @@ const steps = [
 			box-shadow:
 				0 0 0 1px rgba(212, 184, 118, 0.08),
 				0 0 24px rgba(212, 184, 118, 0.08);
+			box-sizing: border-box;
+			width: 100%;
 		}
 		.payment-info h3 {
 			margin: 0 0 1.1rem;
@@ -225,12 +234,24 @@ const steps = [
 			color: #E8E9ED;
 			display: flex;
 			gap: 0.75rem;
+			overflow-wrap: break-word;
 		}
 		.payment-label {
 			flex-shrink: 0;
 			width: 5.5rem;
 			color: #A8ACBA;
 			font-size: 0.85rem;
+		}
+		.fee-note {
+			margin-top: 0.9rem !important;
+			padding-top: 0.9rem;
+			border-top: 1px solid rgba(212, 184, 118, 0.2);
+			font-size: 0.9rem !important;
+			color: #D4B876 !important;
+			font-weight: 600;
+			overflow-wrap: break-word;
+			word-break: break-word;
+			display: block;
 		}
 		.register-button {
 			position: relative;
@@ -244,6 +265,7 @@ const steps = [
 			font-weight: 700;
 			text-decoration: none;
 			box-shadow: 0 0 24px rgba(212, 184, 118, 0.35);
+			box-sizing: border-box;
 		}
 		.register-button:hover {
 			opacity: 0.9;
@@ -287,6 +309,29 @@ const steps = [
 		const footer = document.querySelector('footer');
 		if (footer) {
 			footer.style.display = 'none';
+		}
+
+		const EARLY_BIRD_DEADLINE = new Date('2026-10-15T23:59:59+08:00');
+		const EARLY_BIRD_PRICE = 800;
+		const REGULAR_PRICE = 1200;
+
+		function getCurrentFee() {
+			return new Date() <= EARLY_BIRD_DEADLINE ? EARLY_BIRD_PRICE : REGULAR_PRICE;
+		}
+
+		const feeNote = document.getElementById('fee-note');
+		if (feeNote) {
+			const fee = getCurrentFee();
+			const isEarlyBird = fee === EARLY_BIRD_PRICE;
+			feeNote.textContent = isEarlyBird
+				? `報名費 NT$${fee}（含兩日午餐、科教館門票）・早鳥價至 10/15 止`
+				: `報名費 NT$${fee}（含兩日午餐、科教館門票）・已超過早鳥期限`;
+		}
+
+		const priceHint = document.getElementById('price-hint');
+		if (priceHint) {
+			const fee = getCurrentFee();
+			priceHint.textContent = `名額有限，額滿即止・目前報名費 NT$${fee}`;
 		}
 	</script>
 </Layout>
