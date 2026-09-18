@@ -186,6 +186,9 @@ import Layout from '../../../layouts/Layout.astro';
 		const REPEL_STRENGTH = 22;
 		const PARTICLE_GAP = 1.6;
 		const PARTICLE_SIZE = 1.6;
+		const EASE_AWAY = 0.50;
+		const EASE_RETURN = 0.1;
+		const INTRO_SCATTER_MARGIN = 0.7;
 
 		let mouseX = -9999;
 		let mouseY = -9999;
@@ -257,6 +260,11 @@ import Layout from '../../../layouts/Layout.astro';
 			}));
 		}
 
+		function randomScatterPos(dim) {
+			// 範圍擴大到超出畫布邊界，讓粒子從更遠的地方飄進來，避免矩形邊框收合的視覺感
+			return (Math.random() * (1 + INTRO_SCATTER_MARGIN * 2) - INTRO_SCATTER_MARGIN) * dim;
+		}
+
 		function drawLoop() {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			ctx.fillStyle = PARTICLE_COLOR;
@@ -268,16 +276,19 @@ import Layout from '../../../layouts/Layout.astro';
 
 				let targetX = p.homeX;
 				let targetY = p.homeY;
+				let isRepelled = false;
 
 				if (dist < REPEL_RADIUS) {
 					const force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH;
 					const angle = Math.atan2(dy, dx) || Math.random() * Math.PI * 2;
 					targetX = p.homeX + Math.cos(angle) * force * 3;
 					targetY = p.homeY + Math.sin(angle) * force * 3;
+					isRepelled = true;
 				}
 
-				p.x += (targetX - p.x) * 0.15;
-				p.y += (targetY - p.y) * 0.15;
+				const ease = isRepelled ? EASE_AWAY : EASE_RETURN;
+				p.x += (targetX - p.x) * ease;
+				p.y += (targetY - p.y) * ease;
 
 				ctx.fillRect(p.x, p.y, PARTICLE_SIZE, PARTICLE_SIZE);
 			});
@@ -292,8 +303,8 @@ import Layout from '../../../layouts/Layout.astro';
 			const totalFrames = 80;
 
 			particles.forEach((p) => {
-				p.x = Math.random() * canvas.width;
-				p.y = Math.random() * canvas.height;
+				p.x = randomScatterPos(canvas.width);
+				p.y = randomScatterPos(canvas.height);
 			});
 
 			function animateIntro() {
