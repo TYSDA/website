@@ -73,7 +73,6 @@ import Layout from '../../../layouts/Layout.astro';
 			width: 100%;
 			height: clamp(4.5rem, 18vh, 9rem);
 			margin: 0 0 clamp(0.5rem, 2vh, 1rem);
-			pointer-events: auto;
 			flex-shrink: 0;
 		}
 		.forum-hero-date {
@@ -333,12 +332,12 @@ import Layout from '../../../layouts/Layout.astro';
 			requestAnimationFrame(animateIntro);
 		}
 
-		titleHitbox.addEventListener('mousemove', (e) => {
+		hero.addEventListener('mousemove', (e) => {
 			const rect = hero.getBoundingClientRect();
 			mouseX = e.clientX - rect.left;
 			mouseY = e.clientY - rect.top;
 		});
-		titleHitbox.addEventListener('mouseleave', () => {
+		hero.addEventListener('mouseleave', () => {
 			mouseX = -9999;
 			mouseY = -9999;
 		});
