@@ -2,9 +2,9 @@
 import Layout from '../../../layouts/Layout.astro';
 
 const steps = [
-	{ time: "STEP 1", tag: "匯款", title: "完成報名費匯款", desc: "請依下方資訊完成匯款，並記下帳號後五碼、日期與金額。" },
-	{ time: "STEP 2", tag: "填表", title: "填寫線上報名表單", desc: "匯款完成後，請填寫表單並附上匯款資訊，完成初步報名。" },
-	{ time: "STEP 3", tag: "確認", title: "等待報名成功通知", desc: "我們將於確認匯款後以 Email 通知，屆時報名才正式完成。" }
+	{ time: "STEP 1", tag: "填表", title: "填寫線上報名表單", desc: "請先填寫報名表單，完成初步報名。" },
+	{ time: "STEP 2", tag: "審核", title: "等待審核通知", desc: "我們將審核報名資料，並以 Email 通知是否錄取。" },
+	{ time: "STEP 3", tag: "匯款", title: "審核通過後完成繳費", desc: "審核通過後，我們會另行通知匯款資訊與繳費方式，完成繳費後報名才正式確定。" }
 ];
 ---
 
@@ -40,12 +40,9 @@ const steps = [
 			</div>
 
 			<div class="payment-info">
-				<h3>匯款資訊</h3>
-				<p><span class="payment-label">銀行代號</span>700（郵局）</p>
-				<p><span class="payment-label">帳號</span>0021532 0473660</p>
-				<p><span class="payment-label">戶名</span>臺灣青少年科學發展協會關貫之</p>
-				<p><span class="payment-label">郵局</span>臺中淡溝郵局</p>
+				<h3>費用資訊</h3>
 				<p class="fee-note" id="fee-note">費用資訊載入中...</p>
+				<p class="fee-sub">費用包含兩日午餐、科教館門票。審核通過後將另行通知匯款帳號等繳費資訊，請先完成報名表單。</p>
 			</div>
 
 			<a href="/forum/2026/register/form" class="register-button">前往報名表單</a>
@@ -80,7 +77,6 @@ const steps = [
 			background: #14181A;
 			color: var(--text);
 			overflow: hidden;
-			box-sizing: border-box;
 		}
 		.starfield {
 			position: absolute;
@@ -228,30 +224,22 @@ const steps = [
 			color: #D4B876;
 			font-size: 1rem;
 		}
-		.payment-info p {
-			margin: 0.55rem 0;
-			font-size: 0.98rem;
-			color: #E8E9ED;
-			display: flex;
-			gap: 0.75rem;
-			overflow-wrap: break-word;
-		}
-		.payment-label {
-			flex-shrink: 0;
-			width: 5.5rem;
-			color: #A8ACBA;
-			font-size: 0.85rem;
-		}
 		.fee-note {
-			margin-top: 0.9rem !important;
-			padding-top: 0.9rem;
-			border-top: 1px solid rgba(212, 184, 118, 0.2);
-			font-size: 0.9rem !important;
+			margin: 0 !important;
+			font-size: 1.1rem !important;
 			color: #D4B876 !important;
-			font-weight: 600;
+			font-weight: 700;
 			overflow-wrap: break-word;
 			word-break: break-word;
-			display: block;
+		}
+		.fee-sub {
+			margin: 0.75rem 0 0 !important;
+			padding-top: 0.75rem;
+			border-top: 1px solid rgba(212, 184, 118, 0.2);
+			font-size: 0.88rem !important;
+			color: #A8ACBA !important;
+			line-height: 1.6;
+			overflow-wrap: break-word;
 		}
 		.register-button {
 			position: relative;
@@ -290,13 +278,6 @@ const steps = [
 			.vnode-desc {
 				font-size: 0.8rem;
 			}
-			.payment-info p {
-				flex-direction: column;
-				gap: 0.15rem;
-			}
-			.payment-label {
-				width: auto;
-			}
 			.register-button {
 				margin-left: 0;
 				width: 100%;
@@ -324,8 +305,8 @@ const steps = [
 			const fee = getCurrentFee();
 			const isEarlyBird = fee === EARLY_BIRD_PRICE;
 			feeNote.textContent = isEarlyBird
-				? `報名費 NT$${fee}（含兩日午餐、科教館門票）・早鳥價至 10/15 止`
-				: `報名費 NT$${fee}（含兩日午餐、科教館門票）・已超過早鳥期限`;
+				? `報名費 NT$${fee}・早鳥價至 10/15 止`
+				: `報名費 NT$${fee}・已超過早鳥期限`;
 		}
 
 		const priceHint = document.getElementById('price-hint');

@@ -81,17 +81,6 @@ const workshops = [
 					</select>
 				</div>
 
-				<div class="form-row">
-					<div class="form-group">
-						<label for="transfer_last5">匯款後五碼 <span class="req">*</span></label>
-						<input type="text" id="transfer_last5" name="transfer_last5" maxlength="5" required />
-					</div>
-					<div class="form-group">
-						<label for="transfer_date">匯款日期 <span class="req">*</span></label>
-						<input type="date" id="transfer_date" name="transfer_date" required />
-					</div>
-				</div>
-
 				<div id="form-error" class="form-error hidden"></div>
 
 				<button type="submit" class="register-button" id="submit-btn">送出報名</button>
@@ -99,9 +88,9 @@ const workshops = [
 
 			<div id="success-message" class="success-message hidden">
 				<h3>報名已送出！</h3>
-				<p>請記下您的報名編號，之後查詢錄取結果時會用到：</p>
+				<p>請記下您的報名編號，之後查詢審核結果時會用到：</p>
 				<div class="reg-number" id="reg-number-display"></div>
-				<p class="success-note">我們將於審核後以 Email 通知結果，也可持此編號至查詢頁面確認狀態。</p>
+				<p class="success-note">我們將審核報名資料，並以 Email 通知結果；審核通過後會另行通知繳費方式，也可持此編號至查詢頁面確認狀態。</p>
 			</div>
 		</div>
 	</div>
@@ -169,11 +158,6 @@ const workshops = [
 			display: flex;
 			flex-direction: column;
 			gap: 0.5rem;
-		}
-		.form-row {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 1.25rem;
 		}
 		.form-group label {
 			font-size: 0.88rem;
@@ -322,9 +306,6 @@ const workshops = [
 			}
 		}
 		@media (max-width: 600px) {
-			.form-row {
-				grid-template-columns: 1fr;
-			}
 			.register-button {
 				margin-left: 0;
 				width: 100%;
@@ -484,8 +465,6 @@ const workshops = [
 						question_speaker: data.get('question_speaker'),
 						question_content: questionText,
 						workshop_choice: chosenWorkshop,
-						transfer_last5: data.get('transfer_last5'),
-						transfer_date: data.get('transfer_date'),
 						event_year: EVENT_YEAR
 					};
 
