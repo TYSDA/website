@@ -54,6 +54,11 @@ const workshops = [
 					<input type="text" id="school" name="school" required />
 				</div>
 
+				<div class="question-notice">
+					<p>本次論壇非常注重學生的提問，請在閱讀各個老師的基本資料之後，提出與科學發展相關之問題。問題獲選的參與者會在論壇時代表提問，並且頒發相關的證明獎狀。</p>
+					<p class="question-notice-sub">（如果想要問兩名以上的講者，就選其中一名，剩下的在描述中寫明）</p>
+				</div>
+
 				<div class="form-group">
 					<label for="question_speaker">想提問的講者 <span class="req">*</span></label>
 					<select id="question_speaker" name="question_speaker" required>
@@ -171,6 +176,24 @@ const workshops = [
 			font-weight: 400;
 			color: #7C8090;
 			font-size: 0.8rem;
+		}
+		.question-notice {
+			background: rgba(212, 184, 118, 0.08);
+			border: 1px solid rgba(212, 184, 118, 0.25);
+			border-radius: 10px;
+			padding: 1rem 1.15rem;
+			box-sizing: border-box;
+		}
+		.question-notice p {
+			margin: 0;
+			font-size: 0.88rem;
+			color: #E8E9ED;
+			line-height: 1.65;
+		}
+		.question-notice-sub {
+			margin-top: 0.5rem !important;
+			font-size: 0.8rem !important;
+			color: #A8ACBA !important;
 		}
 		.form-group input,
 		.form-group textarea {
