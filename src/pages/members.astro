@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 
 const officers = [
 	{ name: "關貫之", title: "理事長" },
-	{ name: "邱奕寧", title: "秘書長" },
 	{ name: "謝至亮", title: "常務理事" },
 	{ name: "尉遲和妘", title: "常務理事" },
 	{ name: "顧廣毅", title: "理事" },
@@ -15,6 +14,10 @@ const officers = [
 	{ name: "施鈞瀚", title: "監事" },
 	{ name: "廖士宏", title: "監事" },
 	{ name: "柳鈞元", title: "監事" }
+];
+
+const secretary = [
+	{ name: "邱奕寧", title: "秘書長" }
 ];
 
 const members = Array.from({ length: 11 }, () => ({
@@ -30,6 +33,18 @@ const members = Array.from({ length: 11 }, () => ({
 				<h2>第一屆理監事成員</h2>
 				<div class="member-card-grid">
 					{officers.map((m) => (
+						<div class="member-mini-card">
+							<p class="member-name">{m.name}</p>
+							<p class="member-title">{m.title}</p>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section class="second-section">
+				<h2>秘書</h2>
+				<div class="member-card-grid">
+					{secretary.map((m) => (
 						<div class="member-mini-card">
 							<p class="member-name">{m.name}</p>
 							<p class="member-title">{m.title}</p>
