@@ -222,6 +222,36 @@ const c = content[lang];
 			border-color: #9ED8B8;
 			box-shadow: 0 0 14px rgba(158, 216, 184, 0.5), 0 0 30px rgba(158, 216, 184, 0.22);
 		}
+			/* quick links: equal size */
+		.quick-links {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px;
+			width: 100%;
+			max-width: 440px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.quick-links .quick-link,
+		.quick-links .quick-link.register {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-sizing: border-box;
+			width: 100%;
+			min-height: 48px;
+			padding: 0 12px;
+			margin: 0;
+			text-align: center;
+			font-size: 1rem;
+			transform: none;
+		}
+		@media (min-width: 768px) {
+			.quick-links {
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				max-width: 760px;
+			}
+		}
 	</style>
 
 	<script>
@@ -287,7 +317,7 @@ const c = content[lang];
 			}
 			offCtx.font = `${TITLE_FONT_WEIGHT} ${fontSize}px system-ui, sans-serif`;
 
-			if (TITLE_LANG === 'en') {
+			{
 				const widest = Math.max(...lines.map((line) => offCtx.measureText(line).width));
 				const maxWidth = boxW * 0.96;
 				if (widest > maxWidth) {
