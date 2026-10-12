@@ -367,4 +367,76 @@ const members = [
 		goTo(0);
 		startAutoplay();
 	</script>
+	<script>
+		(function () {
+			var KEY = 'tysda-lang-chosen';
+			if (location.pathname !== '/') return;
+			try {
+				if (localStorage.getItem(KEY)) return;
+			} catch (e) {}
+
+			var preferEn = !/^zh/i.test(navigator.language || 'zh');
+
+			var css = document.createElement('style');
+			css.textContent =
+				'.lang-gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.25rem;background:rgba(20,24,26,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}' +
+				'.lang-gate-card{width:min(92vw,380px);box-sizing:border-box;background:var(--panel-bg,#F6F0E2);color:var(--card-text,#2B2B2B);border-radius:16px;padding:1.75rem 1.5rem 1.5rem;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.45);}' +
+				'.lang-gate-title{margin:0 0 0.25rem;font-size:1.15rem;font-weight:700;}' +
+				'.lang-gate-sub{margin:0 0 1.4rem;font-size:0.9rem;opacity:0.7;}' +
+				'.lang-gate-btn{display:block;width:100%;box-sizing:border-box;margin:0 0 0.7rem;padding:0.85rem 1rem;border-radius:10px;font-size:1rem;font-weight:600;font-family:inherit;cursor:pointer;border:1.5px solid var(--orange,#B87333);background:transparent;color:var(--orange,#B87333);transition:opacity 0.15s ease;}' +
+				'.lang-gate-btn:last-child{margin-bottom:0;}' +
+				'.lang-gate-btn:hover{opacity:0.85;}' +
+				'.lang-gate-btn.primary{background:var(--orange,#B87333);color:#FFFFFF;}';
+			document.head.appendChild(css);
+
+			var overlay = document.createElement('div');
+			overlay.className = 'lang-gate';
+			overlay.setAttribute('role', 'dialog');
+			overlay.setAttribute('aria-modal', 'true');
+			overlay.setAttribute('aria-label', '選擇語言 Choose your language');
+			overlay.innerHTML =
+				'<div class="lang-gate-card">' +
+				'<p class="lang-gate-title">請選擇語言</p>' +
+				'<p class="lang-gate-sub">Choose your language</p>' +
+				'<button type="button" class="lang-gate-btn' + (preferEn ? '' : ' primary') + '" data-lang="zh">繁體中文</button>' +
+				'<button type="button" class="lang-gate-btn' + (preferEn ? ' primary' : '') + '" data-lang="en">English</button>' +
+				'</div>';
+			document.body.appendChild(overlay);
+
+			var previousOverflow = document.body.style.overflow;
+			document.body.style.overflow = 'hidden';
+
+			function close() {
+				document.body.style.overflow = previousOverflow;
+				document.removeEventListener('keydown', onKey);
+				overlay.remove();
+			}
+			function choose(lang) {
+				try {
+					localStorage.setItem(KEY, lang);
+				} catch (e) {}
+				if (lang === 'en') {
+					location.href = '/en/';
+				} else {
+					close();
+				}
+			}
+			function onKey(e) {
+				if (e.key === 'Escape') close();
+			}
+
+			overlay.addEventListener('click', function (e) {
+				if (e.target === overlay) close();
+			});
+			overlay.querySelectorAll('.lang-gate-btn').forEach(function (btn) {
+				btn.addEventListener('click', function () {
+					choose(btn.getAttribute('data-lang'));
+				});
+			});
+			document.addEventListener('keydown', onKey);
+
+			var first = overlay.querySelector('.lang-gate-btn.primary');
+			if (first) first.focus();
+		})();
+	</script>
 </Layout>
