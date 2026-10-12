@@ -18,12 +18,12 @@ export const people: Record<PersonKey, Person> = {
 	xuHezhen:  { zh: '許禾臻', en: 'Ho-Chen Hsu', titleZh: '', titleEn: '' },
 	zhang:     { zh: '張雨恩', en: 'Yu-En Chang', titleZh: '', titleEn: '' },
 	cai:       { zh: '蔡任圃', en: 'Jen-Pu Tsai', titleZh: '老師', titleEn: '' },
-	ji:        { zh: '紀凱容', en: 'Kai-Jung Chi', titleZh: '老師', titleEn: '' },
-	li:        { zh: '李後鋒', en: 'Hou-Feng Lee', titleZh: '老師', titleEn: '' },
+	ji:        { zh: '紀凱容', en: 'Kai-Jung Chi', titleZh: '老師', titleEn: 'Prof.' },
+	li:        { zh: '李後鋒', en: 'Hou-Feng Lee', titleZh: '老師', titleEn: 'Prof.' },
 	zheng:     { zh: '鄭夢慈', en: 'Meng-Tzu Cheng', titleZh: '教授', titleEn: 'Prof.' },
 	shi:       { zh: '施鈞瀚', en: 'Chun-Han Shih', titleZh: '博士', titleEn: 'Dr.' },
 	xuWeiting: { zh: '徐偉婷', en: 'Wei-Ting Hsu', titleZh: '博士', titleEn: 'Dr.' },
-	gu:        { zh: '顧廣毅', en: 'Kuang-Yi Ku', titleZh: '老師', titleEn: '' },
+	gu:        { zh: '顧廣毅', en: 'Kuang-Yi Ku', titleZh: '老師', titleEn: 'Asst. Prof.' },
 	guan:      { zh: '關貫之', en: 'Kuan-Chih Kuan', titleZh: '老師', titleEn: '' },
 	e:         { zh: '鄂禹臻', en: 'Yu-Chen E', titleZh: '老師', titleEn: '' }
 };
@@ -45,12 +45,12 @@ export const speakerEn: Record<string, { name: string; title: string }> = {
 	'許禾臻': { name: 'Ho-Chen Hsu', title: '' },
 	'張雨恩': { name: 'Yu-En Chang', title: '' },
 	'蔡任圃': { name: 'Jen-Pu Tsai', title: '' },
-	'紀凱容': { name: 'Kai-Jung Chi', title: '' },
-	'李後鋒': { name: 'Hou-Feng Lee', title: '' },
+	'紀凱容': { name: 'Kai-Jung Chi', title: 'Prof.' },
+	'李後鋒': { name: 'Hou-Feng Lee', title: 'Prof.' },
 	'鄭夢慈': { name: 'Meng-Tzu Cheng', title: 'Prof.' },
 	'施鈞瀚': { name: 'Chun-Han Shih', title: 'Dr.' },
 	'徐偉婷': { name: 'Wei-Ting Hsu', title: 'Dr.' },
-	'顧廣毅': { name: 'Kuang-Yi Ku', title: '' },
+	'顧廣毅': { name: 'Kuang-Yi Ku', title: 'Asst. Prof.' },
 	'關貫之': { name: 'Kuan-Chih Kuan', title: '' },
 	'鄂禹臻': { name: 'Yu-Chen E', title: '' }
 };

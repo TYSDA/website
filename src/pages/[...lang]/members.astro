@@ -12,7 +12,7 @@ const lang = getLangFromUrl(Astro.url);
 const officersZh = [
 	{ name: "關貫之", title: "理事長" },
 	{ name: "謝至亮", title: "常務理事" },
-	{ name: "尉遲和妘", title: "常務理事" },
+	{ name: "尉遲和妘", title: "常務理事", link: "https://hoyunyuchih.github.io/#intro" },
 	{ name: "顧廣毅", title: "理事" },
 	{ name: "邱俊禕", title: "理事" },
 	{ name: "莊宇權", title: "理事" },
@@ -38,6 +38,7 @@ const titleEn = {
 };
 
 const localize = (m) => ({
+	link: m.link,
 	name: lang === 'en' ? (anyEnName(m.name) || m.name) : m.name,
 	title: lang === 'en' ? (titleEn[m.title] || m.title) : m.title
 });
@@ -60,7 +61,7 @@ const c = content[lang];
 				<div class="member-card-grid">
 					{officers.map((m) => (
 						<div class="member-mini-card">
-							<p class="member-name">{m.name}</p>
+							<p class="member-name">{m.link ? <a href={m.link} target="_blank" rel="noopener noreferrer">{m.name}</a> : m.name}</p>
 							<p class="member-title">{m.title}</p>
 						</div>
 					))}
@@ -72,7 +73,7 @@ const c = content[lang];
 				<div class="member-card-grid">
 					{secretary.map((m) => (
 						<div class="member-mini-card">
-							<p class="member-name">{m.name}</p>
+							<p class="member-name">{m.link ? <a href={m.link} target="_blank" rel="noopener noreferrer">{m.name}</a> : m.name}</p>
 							<p class="member-title">{m.title}</p>
 						</div>
 					))}
@@ -117,6 +118,15 @@ const c = content[lang];
 			margin: 0 0 0.2rem;
 			font-size: 0.9rem;
 			font-weight: 600;
+		}
+		.member-mini-card .member-name a {
+			color: inherit;
+			text-decoration: underline;
+			text-decoration-color: var(--orange);
+			text-underline-offset: 3px;
+		}
+		.member-mini-card .member-name a:hover {
+			color: var(--orange);
 		}
 		.member-mini-card .member-title {
 			margin: 0;
