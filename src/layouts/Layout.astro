@@ -1,14 +1,39 @@
 ---
+import {
+	getLangFromUrl,
+	useTranslations,
+	stripLang,
+	localizePath,
+	translatedPaths,
+	type Lang
+} from '../i18n/ui';
+
 const { title } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const cleanPath = stripLang(Astro.url.pathname);
+const targetLang: Lang = lang === 'en' ? 'zh' : 'en';
+const switchHref =
+	targetLang === 'en' && !translatedPaths.has(cleanPath)
+		? '/en/'
+		: localizePath(cleanPath, targetLang);
+
+const hasEnglish = translatedPaths.has(cleanPath);
+const zhHref = new URL(localizePath(cleanPath, 'zh'), Astro.url.origin).toString();
+const enHref = new URL(localizePath(cleanPath, 'en'), Astro.url.origin).toString();
 ---
 
-<html lang="zh-Hant">
+<html lang={lang === 'en' ? 'en' : 'zh-Hant'}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/logo2.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} | 臺灣青少年科學發展協會</title>
+    <title>{title} | {t('brand.main')}</title>
+    {hasEnglish && <link rel="alternate" hreflang="zh-Hant" href={zhHref} />}
+    {hasEnglish && <link rel="alternate" hreflang="en" href={enHref} />}
 
     <style>
       :root {
@@ -160,6 +185,14 @@ const { title } = Astro.props;
         white-space: nowrap;
       }
 
+      /* 英文版：主標題是英文全名，允許換行 */
+      .brand-zh.is-en {
+        white-space: normal;
+        font-size: clamp(0.8rem, 0.5vw + 0.6rem, 1rem);
+        line-height: 1.15;
+        max-width: 22rem;
+      }
+
       .brand-en {
         font-size: 0.72rem;
         color: var(--text-muted);
@@ -210,6 +243,23 @@ const { title } = Astro.props;
         transform: scaleX(1);
       }
 
+      /* 語言切換按鈕 */
+      nav a.lang-switch {
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 999px;
+        padding: 0.2rem 0.85rem;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+      }
+
+      nav a.lang-switch::after {
+        display: none;
+      }
+
+      nav a.lang-switch:hover {
+        border-color: #7bd0a7;
+      }
+
       /* ===========================
          Mobile Menu Button
       ============================ */
@@ -254,6 +304,11 @@ const { title } = Astro.props;
           font-size: 0.95rem;
         }
 
+        .brand-zh.is-en {
+          font-size: 0.78rem;
+          max-width: 11.5rem;
+        }
+
         .brand-en {
           display: none;
         }
@@ -286,7 +341,7 @@ const { title } = Astro.props;
         }
 
         nav.open {
-          max-height: 360px;
+          max-height: 420px;
         }
 
         nav a {
@@ -297,6 +352,14 @@ const { title } = Astro.props;
 
         nav a::after {
           display: none;
+        }
+
+        nav a.lang-switch {
+          border: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 0;
+          padding: 0.95rem 0;
+          font-size: 1rem;
         }
       }
 
@@ -313,6 +376,11 @@ const { title } = Astro.props;
         .brand-zh {
           font-size: 0.88rem;
         }
+
+        .brand-zh.is-en {
+          font-size: 0.72rem;
+          max-width: 10rem;
+        }
       }
     </style>
   </head>
@@ -320,13 +388,15 @@ const { title } = Astro.props;
   <body>
     <header id="site-header">
       <div class="header-content">
-        <a href="/" class="brand">
-          <img src="/logo2.png" alt="臺灣青少年科學發展協會 logo" />
+        <a href={localizePath('/', lang)} class="brand">
+          <img src="/logo2.png" alt={t('logo.alt')} />
 
           <div class="brand-text">
-            <span class="brand-zh">臺灣青少年科學發展協會</span>
+            <span class:list={['brand-zh', { 'is-en': lang === 'en' }]}>
+              {t('brand.main')}
+            </span>
             <span class="brand-en">
-              Taiwan Young Science Development Association
+              {t('brand.sub')}
             </span>
           </div>
         </a>
@@ -334,17 +404,25 @@ const { title } = Astro.props;
         <button
           class="menu-toggle"
           id="menu-toggle"
-          aria-label="開啟選單"
+          aria-label={t('menu.open')}
           aria-expanded="false"
         >
           ☰
         </button>
 
         <nav id="site-nav">
-          <a href="/about">關於我們</a>
-          <a href="/members">協會成員</a>
-          <a href="/activities">協會活動</a>
-          <a href="/charter">組織章程</a>
+          <a href={localizePath('/about', lang)}>{t('nav.about')}</a>
+          <a href={localizePath('/members', lang)}>{t('nav.members')}</a>
+          <a href={localizePath('/activities', lang)}>{t('nav.activities')}</a>
+          <a href={localizePath('/charter', lang)}>{t('nav.charter')}</a>
+          <a
+            href={switchHref}
+            class="lang-switch"
+            hreflang={targetLang === 'en' ? 'en' : 'zh-Hant'}
+            aria-label={t('lang.switchLabel')}
+          >
+            {t('lang.switch')}
+          </a>
         </nav>
       </div>
     </header>
@@ -354,7 +432,7 @@ const { title } = Astro.props;
     </main>
 
     <footer>
-      <p>© 2026 臺灣青少年科學發展協會</p>
+      <p>{t('footer.copyright')}</p>
     </footer>
 
     <script>

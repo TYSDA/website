@@ -1,7 +1,15 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl } from '../../i18n/ui';
+import { anyEnName } from '../../i18n/people';
 
-const officers = [
+export function getStaticPaths() {
+	return [{ params: { lang: undefined } }, { params: { lang: 'en' } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+const officersZh = [
 	{ name: "關貫之", title: "理事長" },
 	{ name: "謝至亮", title: "常務理事" },
 	{ name: "尉遲和妘", title: "常務理事" },
@@ -16,21 +24,39 @@ const officers = [
 	{ name: "柳鈞元", title: "監事" }
 ];
 
-const secretary = [
+const secretaryZh = [
 	{ name: "邱奕寧", title: "秘書長" }
 ];
 
-const members = Array.from({ length: 11 }, () => ({
-	name: "（姓名）",
-	title: "會員"
-}));
+const titleEn = {
+	"理事長": "Chair of the Board",
+	"常務理事": "Executive Director",
+	"理事": "Director",
+	"監事": "Supervisor",
+	"秘書長": "Secretary-General",
+	"會員": "Member"
+};
+
+const localize = (m) => ({
+	name: lang === 'en' ? (anyEnName(m.name) || m.name) : m.name,
+	title: lang === 'en' ? (titleEn[m.title] || m.title) : m.title
+});
+
+const officers = officersZh.map(localize);
+const secretary = secretaryZh.map(localize);
+
+const content = {
+	zh: { pageTitle: '協會成員', officersHeading: '第一屆理監事成員', secretaryHeading: '秘書' },
+	en: { pageTitle: 'Our Members', officersHeading: 'Members of the 1st Board of Directors and Board of Supervisors', secretaryHeading: 'Secretary' }
+};
+const c = content[lang];
 ---
 
-<Layout title="協會成員">
+<Layout title={c.pageTitle}>
 	<div class="panel">
 		<div class="panel-inner">
 			<section>
-				<h2>第一屆理監事成員</h2>
+				<h2>{c.officersHeading}</h2>
 				<div class="member-card-grid">
 					{officers.map((m) => (
 						<div class="member-mini-card">
@@ -42,7 +68,7 @@ const members = Array.from({ length: 11 }, () => ({
 			</section>
 
 			<section class="second-section">
-				<h2>秘書</h2>
+				<h2>{c.secretaryHeading}</h2>
 				<div class="member-card-grid">
 					{secretary.map((m) => (
 						<div class="member-mini-card">

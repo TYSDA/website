@@ -1,94 +1,146 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, localizePath } from '../../i18n/ui';
 
-const slides = [
-	{
-		label: "最新活動",
-		title: "第一屆臺灣青少年科學發展論壇",
-		date: "2026年12月25日－12月26日・國立臺灣科學教育館",
-		link: "/forum/2026"
+export function getStaticPaths() {
+	return [{ params: { lang: undefined } }, { params: { lang: 'en' } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+const content = {
+	zh: {
+		pageTitle: '首頁',
+		slides: [
+			{
+				label: "最新活動",
+				title: "第一屆臺灣青少年科學發展論壇",
+				date: "2026年12月25日－12月26日・國立臺灣科學教育館",
+				link: "/forum/2026"
+			},
+			{
+				label: "工作坊",
+				title: "台中國際動漫博覽會 同人文創市集",
+				date: "2026年9月19日（六）－9月20日（日） 11:00-18:00・台中市政府 文心樓 1樓",
+				link: "/activities"
+			}
+		],
+		heroCta: "查看詳情 →",
+		prev: "上一張",
+		next: "下一張",
+		dotLabel: (n: number) => `第 ${n} 張`,
+		intro:
+			"我們相信每一位對科學充滿好奇的青少年，都值得公平獲取學術與研究資源的機會。\n在這裡，你可以認識我們的團隊、瀏覽最新活動，一起探索科學的世界。",
+		activitiesTitle: "協會活動",
+		activitiesAll: "查看所有活動 →",
+		categories: [
+			{ name: "論壇", link: "/activities#forum", bg: "/forum.png" },
+			{ name: "課程", link: "/activities#course", bg: "/lecture.png" },
+			{ name: "工作坊", link: "/activities#workshop", bg: "/workshop.png" },
+			{ name: "會員活動", link: "/activities#assembly", bg: "/assembly.png" }
+		],
+		membersTitle: "協會成員",
+		membersAll: "查看全部成員 →"
 	},
-	{
-		label: "工作坊",
-		title: "台中國際動漫博覽會 同人文創市集",
-		date: "2026年9月19日（六）－9月20日（日） 11:00-18:00・台中市政府 文心樓 1樓",
-		link: "/activities"
+	en: {
+		pageTitle: 'Home',
+		slides: [
+			{
+				label: "Latest Event",
+				title: "The 1st Taiwan Young Science Development Forum",
+				date: "December 25–26, 2026 · National Taiwan Science Education Center",
+				link: "/forum/2026"
+			},
+			{
+				label: "Workshop",
+				title: "Taichung International Animation & Comics Expo – Doujin & Creative Market",
+				date: "Sat–Sun, September 19–20, 2026, 11:00–18:00 · 1F, Wenxin Building, Taichung City Government",
+				link: "/activities"
+			}
+		],
+		heroCta: "Learn more →",
+		prev: "Previous slide",
+		next: "Next slide",
+		dotLabel: (n: number) => `Slide ${n}`,
+		intro:
+			"We believe every young person who is curious about science deserves fair access to academic and research resources.\nHere you can meet our team, browse our latest activities, and explore the world of science together.",
+		activitiesTitle: "Activities",
+		activitiesAll: "View all activities →",
+		categories: [
+			{ name: "Forums", link: "/activities#forum", bg: "/forum.png" },
+			{ name: "Courses", link: "/activities#course", bg: "/lecture.png" },
+			{ name: "Workshops", link: "/activities#workshop", bg: "/workshop.png" },
+			{ name: "Member Events", link: "/activities#assembly", bg: "/assembly.png" }
+		],
+		membersTitle: "Members",
+		membersAll: "View all members →"
 	}
-];
+};
 
-const categories = [
-	{ name: "論壇", link: "/activities#forum", bg: "/forum.png" },
-	{ name: "課程", link: "/activities#course", bg: "/lecture.png" },
-	{ name: "工作坊", link: "/activities#workshop", bg: "/workshop.png" },
-	{ name: "會員活動", link: "/activities#assembly", bg: "/assembly.png" }
+const c = content[lang];
+
+// en 欄位填英文姓名；留空字串時英文版會先顯示中文姓名
+const members = [
+	{ zh: "關貫之", en: "Kuan-Chih Kuan" },
+	{ zh: "謝至亮", en: "Chih-Liang Hsieh" },
+	{ zh: "尉遲和妘", en: "Ho-Yun YuChih" },
+	{ zh: "顧廣毅", en: "Kuang-Yi Ku" },
+	{ zh: "邱俊禕", en: "Chun-Wei Chiu" }
 ];
 ---
 
-<Layout title="首頁">
+<Layout title={c.pageTitle}>
 	<div class="hero-carousel">
 		<div class="hero-track" id="hero-track">
-			{slides.map((s) => (
-				<a href={s.link} class="hero-slide">
+			{c.slides.map((s) => (
+				<a href={localizePath(s.link, lang)} class="hero-slide">
 					<p class="hero-label">{s.label}</p>
 					<h2>{s.title}</h2>
 					<p class="hero-date">{s.date}</p>
-					<span class="hero-cta">查看詳情 →</span>
+					<span class="hero-cta">{c.heroCta}</span>
 				</a>
 			))}
 		</div>
-		<button class="hero-arrow hero-prev" id="hero-prev" aria-label="上一張">‹</button>
-		<button class="hero-arrow hero-next" id="hero-next" aria-label="下一張">›</button>
+		<button class="hero-arrow hero-prev" id="hero-prev" aria-label={c.prev}>‹</button>
+		<button class="hero-arrow hero-next" id="hero-next" aria-label={c.next}>›</button>
 		<div class="hero-dots" id="hero-dots">
-			{slides.map((_, i) => (
-				<button class="hero-dot" data-index={i} aria-label={`第 ${i + 1} 張`}></button>
+			{c.slides.map((_, i) => (
+				<button class="hero-dot" data-index={i} aria-label={c.dotLabel(i + 1)}></button>
 			))}
 		</div>
 	</div>
 
 	<div class="panel">
 		<div class="panel-inner">
-			<p>
-				我們相信每一位對科學充滿好奇的青少年，都值得公平獲取學術與研究資源的機會。
-				在這裡，你可以認識我們的團隊、瀏覽最新活動，一起探索科學的世界。
-			</p>
+			<p>{c.intro}</p>
 		</div>
 	</div>
 
 	<div class="panel">
 		<div class="panel-inner">
-			<h2>協會活動</h2>
+			<h2>{c.activitiesTitle}</h2>
 			<div class="category-preview-grid">
-				{categories.map((cat) => (
-					<a href={cat.link} class="category-preview-card" style={`background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${cat.bg})`}>
+				{c.categories.map((cat) => (
+					<a href={localizePath(cat.link, lang)} class="category-preview-card" style={`background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${cat.bg})`}>
 						{cat.name}
 					</a>
 				))}
 			</div>
-			<a href="/activities">查看所有活動 →</a>
+			<a href={localizePath('/activities', lang)}>{c.activitiesAll}</a>
 		</div>
 	</div>
 
 	<div class="panel">
 		<div class="panel-inner">
-			<h2>協會成員</h2>
+			<h2>{c.membersTitle}</h2>
 			<div class="member-preview-grid">
-				<div class="member-preview-card">
-					<p class="member-name">關貫之</p>
-				</div>
-				<div class="member-preview-card">
-					<p class="member-name">謝至亮</p>
-				</div>
-				<div class="member-preview-card">
-					<p class="member-name">尉遲和妘</p>
-				</div>
-				<div class="member-preview-card">
-					<p class="member-name">顧廣毅</p>
-				</div>
-				<div class="member-preview-card">
-					<p class="member-name">邱俊禕</p>
-				</div>
+				{members.map((m) => (
+					<div class="member-preview-card">
+						<p class="member-name">{lang === 'en' && m.en ? m.en : m.zh}</p>
+					</div>
+				))}
 			</div>
-			<a href="/members">查看全部成員 →</a>
+			<a href={localizePath('/members', lang)}>{c.membersAll}</a>
 		</div>
 	</div>
 

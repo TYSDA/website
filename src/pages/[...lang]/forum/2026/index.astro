@@ -1,20 +1,62 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, localizePath } from '../../../../i18n/ui';
+
+export function getStaticPaths() {
+	return [{ params: { lang: undefined } }, { params: { lang: 'en' } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+const content = {
+	zh: {
+		pageTitle: '第一屆臺灣青少年科學發展論壇',
+		label: '第一屆',
+		date: '2026年12月25日（五）－12月26日（六）・國立臺灣科學教育館',
+		organizer: '主辦單位：臺灣青少年科學發展協會、國立臺灣科學教育館',
+		speakers: '講者陣容',
+		schedule: '議程時間表',
+		register: '立即報名',
+		contact: '聯絡我們',
+		linesDesktop: ['臺灣青少年科學發展論壇'],
+		linesMobile: ['臺灣青少年', '科學發展論壇']
+	},
+	en: {
+		pageTitle: 'The 1st Taiwan Young Science Development Forum',
+		label: '1st Edition',
+		date: 'Fri, December 25 – Sat, December 26, 2026 · National Taiwan Science Education Center',
+		organizer: 'Organizers: Taiwan Young Science Development Association, National Taiwan Science Education Center',
+		speakers: 'Speakers',
+		schedule: 'Schedule',
+		register: 'Register Now',
+		contact: 'Contact Us',
+		linesDesktop: ['Taiwan Young Science', 'Development Forum'],
+		linesMobile: ['Taiwan Young Science', 'Development Forum']
+	}
+};
+
+const c = content[lang];
 ---
 
-<Layout title="第一屆臺灣青少年科學發展論壇">
+<Layout title={c.pageTitle}>
 	<div class="forum-hero">
 		<canvas id="particle-canvas" class="particle-canvas"></canvas>
 		<div class="forum-hero-inner">
-			<p class="forum-hero-label anim-item anim-1">第一屆</p>
-			<div id="title-hitbox" class="title-hitbox"></div>
-			<p class="forum-hero-date anim-item anim-3">2026年12月25日（五）－12月26日（六）・國立臺灣科學教育館</p>
-			<p class="forum-hero-organizer anim-item anim-3">主辦單位：臺灣青少年科學發展協會、國立臺灣科學教育館</p>
+			<p class="forum-hero-label anim-item anim-1">{c.label}</p>
+			<div
+				id="title-hitbox"
+				class="title-hitbox"
+				data-lang={lang}
+				data-lines-desktop={JSON.stringify(c.linesDesktop)}
+				data-lines-mobile={JSON.stringify(c.linesMobile)}
+			></div>
+			<p class="forum-hero-date anim-item anim-3">{c.date}</p>
+			<p class="forum-hero-organizer anim-item anim-3">{c.organizer}</p>
 			<div class="quick-links">
-				<a href="/forum/2026/speakers" class="quick-link anim-item anim-4">講者陣容</a>
-				<a href="/forum/2026/schedule" class="quick-link anim-item anim-5">議程時間表</a>
-				<a href="/forum/2026/register" class="quick-link register anim-item anim-6">立即報名</a>
-				<a href="/about" class="quick-link anim-item anim-6">聯絡我們</a>
+				<a href={localizePath('/forum/2026/speakers', lang)} class="quick-link anim-item anim-4">{c.speakers}</a>
+				<a href={localizePath('/forum/2026/schedule', lang)} class="quick-link anim-item anim-5">{c.schedule}</a>
+				<a href={localizePath('/forum/2026/register', lang)} class="quick-link register anim-item anim-6">{c.register}</a>
+				<a href={localizePath('/about', lang)} class="quick-link anim-item anim-6">{c.contact}</a>
 			</div>
 		</div>
 	</div>
@@ -178,8 +220,9 @@ import Layout from '../../../layouts/Layout.astro';
 		const ctx = canvas.getContext('2d');
 		const hero = canvas.closest('.forum-hero');
 		const PARTICLE_COLOR = '#6FBF98';
-		const TITLE_TEXT = '臺灣青少年科學發展論壇';
-		const TITLE_LINES_MOBILE = ['臺灣青少年', '科學發展論壇'];
+		const TITLE_LANG = titleHitbox.dataset.lang;
+		const TITLE_LINES_DESKTOP = JSON.parse(titleHitbox.dataset.linesDesktop);
+		const TITLE_LINES_MOBILE = JSON.parse(titleHitbox.dataset.linesMobile);
 		const TITLE_FONT_WEIGHT = 500;
 		const REPEL_RADIUS = 40;
 		const REPEL_STRENGTH = 22;
@@ -217,21 +260,31 @@ import Layout from '../../../layouts/Layout.astro';
 			offCtx.textAlign = 'center';
 			offCtx.textBaseline = 'middle';
 
-			if (isMobile) {
-				const lineCount = TITLE_LINES_MOBILE.length;
-				const fontSize = boxH * 0.34;
-				const lineHeight = boxH / lineCount;
+			const lines = isMobile ? TITLE_LINES_MOBILE : TITLE_LINES_DESKTOP;
+			const lineCount = lines.length;
+			const lineHeight = boxH / lineCount;
 
-				TITLE_LINES_MOBILE.forEach((line, i) => {
-					offCtx.font = `${TITLE_FONT_WEIGHT} ${fontSize}px system-ui, sans-serif`;
-					const lineCenterY = offsetY + lineHeight * i + lineHeight / 2;
-					offCtx.fillText(line, offsetX + boxW / 2, lineCenterY);
-				});
+			let fontSize;
+			if (TITLE_LANG === 'zh') {
+				fontSize = isMobile ? boxH * 0.34 : boxH * 0.8;
 			} else {
-				const fontSize = boxH * 0.8;
-				offCtx.font = `${TITLE_FONT_WEIGHT} ${fontSize}px system-ui, sans-serif`;
-				offCtx.fillText(TITLE_TEXT, offsetX + boxW / 2, offsetY + boxH / 2);
+				fontSize = lineCount === 1 ? boxH * 0.8 : lineHeight * (isMobile ? 0.68 : 0.78);
 			}
+			offCtx.font = `${TITLE_FONT_WEIGHT} ${fontSize}px system-ui, sans-serif`;
+
+			if (TITLE_LANG === 'en') {
+				const widest = Math.max(...lines.map((line) => offCtx.measureText(line).width));
+				const maxWidth = boxW * 0.96;
+				if (widest > maxWidth) {
+					fontSize = fontSize * (maxWidth / widest);
+					offCtx.font = `${TITLE_FONT_WEIGHT} ${fontSize}px system-ui, sans-serif`;
+				}
+			}
+
+			lines.forEach((line, i) => {
+				const lineCenterY = offsetY + lineHeight * i + lineHeight / 2;
+				offCtx.fillText(line, offsetX + boxW / 2, lineCenterY);
+			});
 
 			const imageData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
 			const points = [];

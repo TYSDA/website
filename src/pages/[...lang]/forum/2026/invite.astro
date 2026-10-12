@@ -1,0 +1,175 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, localizePath } from '../../../../i18n/ui';
+
+export function getStaticPaths() {
+	return [{ params: { lang: undefined } }, { params: { lang: 'en' } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+const content = {
+	zh: {
+		layoutTitle: '專屬邀請 | 第一屆臺灣青少年科學發展論壇',
+		back: '返回論壇詳情',
+		heading: '專屬邀請報名',
+		notice: '感謝您受邀參與第一屆臺灣青少年科學發展論壇。',
+		s1Title: '完成匯款',
+		s1Desc: '請依下方資訊完成報名費匯款，並記下匯款帳號後五碼、日期與金額。',
+		s2Title: '填寫報名表單',
+		s2Desc: '匯款完成後，請填寫線上表單並附上匯款資訊，完成初步報名。',
+		s3Title: '等待確認通知',
+		s3Desc: '我們將於確認匯款後，以 Email 通知您報名成功，此時報名才正式完成。',
+		payTitle: '匯款資訊',
+		bank: '銀行：（待補）',
+		account: '戶名：（待補）',
+		number: '帳號：（待補）',
+		fee: '報名費：（待補）',
+		button: '前往報名表單'
+	},
+	en: {
+		layoutTitle: 'Exclusive Invitation | The 1st Taiwan Young Science Development Forum',
+		back: 'Back to forum details',
+		heading: 'Invitation Registration',
+		notice: 'Thank you for being invited to the 1st Taiwan Young Science Development Forum.',
+		s1Title: 'Complete the payment',
+		s1Desc: 'Please transfer the registration fee using the information below, and note the last five digits of the sending account, the date and the amount.',
+		s2Title: 'Fill in the registration form',
+		s2Desc: 'After the transfer, fill in the online form and attach your payment details to complete your initial registration.',
+		s3Title: 'Wait for confirmation',
+		s3Desc: 'Once we confirm your payment, we will notify you by email that your registration is successful; only then is your registration complete.',
+		payTitle: 'Payment Information',
+		bank: 'Bank: (TBA)',
+		account: 'Account name: (TBA)',
+		number: 'Account number: (TBA)',
+		fee: 'Registration fee: (TBA)',
+		button: 'Go to Registration Form'
+	}
+};
+
+const t = content[lang];
+---
+
+<Layout title={t.layoutTitle}>
+	<div class="panel">
+		<div class="panel-inner">
+			<a href={localizePath('/forum/2026', lang)}>← {t.back}</a>
+
+			<h2>{t.heading}</h2>
+			<p class="notice">{t.notice}</p>
+
+			<div class="steps">
+				<div class="step">
+					<span class="step-num">1</span>
+					<div>
+						<h3>{t.s1Title}</h3>
+						<p>{t.s1Desc}</p>
+					</div>
+				</div>
+				<div class="step">
+					<span class="step-num">2</span>
+					<div>
+						<h3>{t.s2Title}</h3>
+						<p>{t.s2Desc}</p>
+					</div>
+				</div>
+				<div class="step">
+					<span class="step-num">3</span>
+					<div>
+						<h3>{t.s3Title}</h3>
+						<p>{t.s3Desc}</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="payment-info">
+				<h3>{t.payTitle}</h3>
+				<p>{t.bank}</p>
+				<p>{t.account}</p>
+				<p>{t.number}</p>
+				<p>{t.fee}</p>
+			</div>
+
+			<a href="#" class="register-button">{t.button}</a>
+		</div>
+	</div>
+
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+			padding-top: var(--header-h, 90px);
+		}
+		.panel h1, .panel h2, .panel h3 {
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+		.notice {
+			color: var(--orange);
+			font-weight: 600;
+			margin: 0.5rem 0 2rem;
+		}
+		.steps {
+			display: flex;
+			flex-direction: column;
+			gap: 1.25rem;
+			margin-bottom: 2rem;
+		}
+		.step {
+			display: flex;
+			gap: 1rem;
+			align-items: flex-start;
+		}
+		.step-num {
+			flex-shrink: 0;
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			background: var(--orange);
+			color: #FFFFFF;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 700;
+			font-size: 0.95rem;
+		}
+		.step h3 {
+			margin: 0 0 0.3rem;
+			font-size: 1rem;
+		}
+		.step p {
+			margin: 0;
+			font-size: 0.9rem;
+			color: var(--card-text-muted);
+		}
+		.payment-info {
+			background: var(--card-bg);
+			border-radius: 12px;
+			padding: 1.5rem;
+			margin-bottom: 2rem;
+		}
+		.payment-info h3 {
+			margin: 0 0 1rem;
+		}
+		.payment-info p {
+			margin: 0.4rem 0;
+			font-size: 0.95rem;
+		}
+		.register-button {
+			display: inline-block;
+			background: var(--orange);
+			color: #FFFFFF;
+			padding: 0.9rem 2.5rem;
+			border-radius: 8px;
+			font-weight: 600;
+			text-decoration: none;
+		}
+		.register-button:hover {
+			opacity: 0.9;
+		}
+	</style>
+</Layout>

@@ -1,0 +1,58 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getLangFromUrl, localizePath } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+	return [{ params: { lang: undefined } }, { params: { lang: 'en' } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+const content = {
+	zh: {
+		title: '第一屆第二次會員大會',
+		back: '返回活動列表',
+		time: '時間：2026年8月30日（日）16:00',
+		place: '地點：喝點兒小酒 風味小館（臺中市西區市府路35號）',
+		note: '本次大會通知既有會員參加，會前請留意協會通知信件，無需另行報名。'
+	},
+	en: {
+		title: 'The 2nd General Assembly of the 1st Term',
+		back: 'Back to activities',
+		time: 'Time: Sunday, August 30, 2026, 4:00 PM',
+		place: 'Venue: 喝點兒小酒 風味小館, No. 35, Shifu Rd., West Dist., Taichung City',
+		note: 'This assembly is for existing members. Please watch for notification emails from the Association before the meeting; no separate registration is required.'
+	}
+};
+
+const c = content[lang];
+---
+
+<Layout title={c.title}>
+	<div class="panel">
+		<div class="panel-inner">
+			<a href={localizePath('/activities', lang)}>← {c.back}</a>
+
+			<h2>{c.title}</h2>
+			<p>{c.time}</p>
+			<p>{c.place}</p>
+			<p>{c.note}</p>
+		</div>
+	</div>
+
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+			padding-top: var(--header-h, 90px);
+		}
+		.panel h1, .panel h2, .panel h3 {
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+	</style>
+</Layout>

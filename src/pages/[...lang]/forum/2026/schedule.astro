@@ -1,47 +1,106 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, localizePath } from '../../../../i18n/ui';
+import { personName, type PersonKey } from '../../../../i18n/people';
 
-const days = [
-	{
-		label: "DAY 1",
-		theme: "12/25（五）・青年科學家論壇與教育現場對話",
-		color: "green",
-		items: [
-			{ time: "08:30", tag: "報到", title: "現場報到", desc: "請提前完成報到，準備進入論壇會場。" },
-			{ time: "09:00", tag: "開幕", title: "開幕式", desc: "" },
-			{ time: "09:20", tag: "論壇一", title: "青年科學家論壇", desc: "講者：謝至亮博士、尉遲和妘、王翊語（10:00 起開放問答）" },
-			{ time: "10:40", tag: "論壇二", title: "大學科學參與論壇", desc: "講者：徐士展、許禾臻、張雨恩（11:20 起開放問答）" },
-			{ time: "12:00", tag: "午餐", title: "午餐時間", desc: "" },
-			{ time: "13:30", tag: "論壇三", title: "高中老師科學發展論壇", desc: "講者陣容確認中，敬請期待正式公告（14:30 起開放問答）" },
-			{ time: "15:20", tag: "論壇四", title: "大學老師科學發展論壇", desc: "講者：紀凱容老師、李後鋒老師（16:00 起開放問答）" },
-			{ time: "18:20", tag: "自由參加", title: "晚宴暨臺灣青少年科學發展協會會員大會", desc: "" }
+export function getStaticPaths() {
+	return [{ params: { lang: undefined } }, { params: { lang: 'en' } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+const sep = lang === 'en' ? ', ' : '、';
+const list = (...keys: PersonKey[]) => keys.map((k) => personName(k, lang)).join(sep);
+
+const content = {
+	zh: {
+		layoutTitle: '議程時間表 | 第一屆臺灣青少年科學發展論壇',
+		backLabel: '返回論壇詳情',
+		pageTitle: '議程時間表',
+		timeHint: '時段為預定安排，正式議程時間將於活動前公布。',
+		days: [
+			{
+				label: "DAY 1",
+				theme: "12/25（五）・青年科學家論壇與教育現場對話",
+				color: "green",
+				items: [
+					{ time: "08:30", tag: "報到", title: "現場報到", desc: "請提前完成報到，準備進入論壇會場。" },
+					{ time: "09:00", tag: "開幕", title: "開幕式", desc: "" },
+					{ time: "09:20", tag: "論壇一", title: "青年科學家論壇", desc: `講者：${list('xie', 'yuchih', 'wang')}（10:00 起開放問答）` },
+					{ time: "10:40", tag: "論壇二", title: "大學科學參與論壇", desc: `講者：${list('xuShizhan', 'xuHezhen', 'zhang')}（11:20 起開放問答）` },
+					{ time: "12:00", tag: "午餐", title: "午餐時間", desc: "" },
+					{ time: "13:30", tag: "論壇三", title: "高中老師科學發展論壇", desc: "講者陣容確認中，敬請期待正式公告（14:30 起開放問答）" },
+					{ time: "15:20", tag: "論壇四", title: "大學老師科學發展論壇", desc: `講者：${list('ji', 'li')}（16:00 起開放問答）` },
+					{ time: "18:20", tag: "自由參加", title: "晚宴暨臺灣青少年科學發展協會會員大會", desc: "" }
+				]
+			},
+			{
+				label: "DAY 2",
+				theme: "12/26（六）・科創科教論壇與工作坊",
+				color: "yellow",
+				items: [
+					{ time: "09:00", tag: "論壇五", title: "科教論壇", desc: `講者：${list('zheng')}` },
+					{ time: "10:20", tag: "論壇六", title: "科創論壇", desc: `講者：${list('shi')}（11:15 起開放問答）` },
+					{ time: "12:00", tag: "午餐", title: "午餐時間", desc: "" },
+					{ time: "13:30", tag: "工作坊一", title: "科學藝術工作坊", desc: `講者：${list('gu')}` },
+					{ time: "13:30", tag: "工作坊二", title: "科學漫畫工作坊", desc: `講者：${list('guan', 'e')}` },
+					{ time: "13:30", tag: "工作坊三", title: "科學教育工作坊", desc: "主辦：國立臺灣科學教育館" },
+					{ time: "16:30", tag: "閉幕", title: "閉幕及頒獎", desc: "" }
+				]
+			}
 		]
 	},
-	{
-		label: "DAY 2",
-		theme: "12/26（六）・科創科教論壇與工作坊",
-		color: "yellow",
-		items: [
-			{ time: "09:00", tag: "論壇四", title: "科教論壇", desc: "講者：鄭夢慈教授" },
-			{ time: "10:20", tag: "論壇五", title: "科創論壇", desc: "講者：施鈞瀚博士（11:15 起開放問答）" },
-			{ time: "12:00", tag: "午餐", title: "午餐時間", desc: "" },
-			{ time: "13:30", tag: "工作坊一", title: "科學藝術工作坊", desc: "講者：顧廣毅老師" },
-			{ time: "13:30", tag: "工作坊二", title: "科學漫畫工作坊", desc: "講者：關貫之老師、鄂禹臻老師" },
-			{ time: "13:30", tag: "工作坊三", title: "科學教育工作坊", desc: "主辦：國立臺灣科學教育館" },
-			{ time: "16:30", tag: "閉幕", title: "閉幕及頒獎", desc: "" }
+	en: {
+		layoutTitle: 'Schedule | The 1st Taiwan Young Science Development Forum',
+		backLabel: 'Back to forum details',
+		pageTitle: 'Schedule',
+		timeHint: 'Times are tentative; the official schedule will be announced before the event.',
+		days: [
+			{
+				label: "DAY 1",
+				theme: "Fri, Dec 25 · Young Scientists Forum & Conversations with Educators",
+				color: "green",
+				items: [
+					{ time: "08:30", tag: "Check-in", title: "On-site Check-in", desc: "Please check in early so you are ready to enter the forum venue." },
+					{ time: "09:00", tag: "Opening", title: "Opening Ceremony", desc: "" },
+					{ time: "09:20", tag: "Forum 1", title: "Young Scientists Forum", desc: `Speakers: ${list('xie', 'yuchih', 'wang')} (Q&A opens at 10:00)` },
+					{ time: "10:40", tag: "Forum 2", title: "University Science Engagement Forum", desc: `Speakers: ${list('xuShizhan', 'xuHezhen', 'zhang')} (Q&A opens at 11:20)` },
+					{ time: "12:00", tag: "Lunch", title: "Lunch Break", desc: "" },
+					{ time: "13:30", tag: "Forum 3", title: "High School Teachers' Science Development Forum", desc: "Speakers to be confirmed; official announcement coming soon (Q&A opens at 14:30)" },
+					{ time: "15:20", tag: "Forum 4", title: "University Faculty Science Development Forum", desc: `Speakers: ${list('ji', 'li')} (Q&A opens at 16:00)` },
+					{ time: "18:20", tag: "Optional", title: "Banquet & General Assembly of the Taiwan Young Science Development Association", desc: "" }
+				]
+			},
+			{
+				label: "DAY 2",
+				theme: "Sat, Dec 26 · Science Education & Innovation Forums and Workshops",
+				color: "yellow",
+				items: [
+					{ time: "09:00", tag: "Forum 5", title: "Science Education Forum", desc: `Speaker: ${list('zheng')}` },
+					{ time: "10:20", tag: "Forum 6", title: "Science Innovation Forum", desc: `Speaker: ${list('shi')} (Q&A opens at 11:15)` },
+					{ time: "12:00", tag: "Lunch", title: "Lunch Break", desc: "" },
+					{ time: "13:30", tag: "Workshop 1", title: "Science & Art Workshop", desc: `Speaker: ${list('gu')}` },
+					{ time: "13:30", tag: "Workshop 2", title: "Science Comics Workshop", desc: `Speakers: ${list('guan', 'e')}` },
+					{ time: "13:30", tag: "Workshop 3", title: "Science Education Workshop", desc: "Hosted by: National Taiwan Science Education Center" },
+					{ time: "16:30", tag: "Closing", title: "Closing Ceremony & Awards", desc: "" }
+				]
+			}
 		]
 	}
-];
+};
+
+const c = content[lang];
+const days = c.days;
 ---
 
-<Layout title="議程時間表 | 第一屆臺灣青少年科學發展論壇">
-	<a href="/forum/2026" class="back-fab" aria-label="返回論壇詳情">←</a>
+<Layout title={c.layoutTitle}>
+	<a href={localizePath('/forum/2026', lang)} class="back-fab" aria-label={c.backLabel}>←</a>
 
 	<div class="panel">
 		<div class="starfield"></div>
 		<div class="panel-inner">
-			<h1 class="page-title">議程時間表</h1>
-			<p class="time-hint">時段為預定安排，正式議程時間將於活動前公布。</p>
+			<h1 class="page-title">{c.pageTitle}</h1>
+			<p class="time-hint">{c.timeHint}</p>
 
 			<div class="day-tabs">
 				{days.map((day, i) => (

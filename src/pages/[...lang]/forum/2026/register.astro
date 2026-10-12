@@ -1,22 +1,69 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, localizePath } from '../../../../i18n/ui';
 
-const steps = [
-	{ time: "STEP 1", tag: "填表", title: "填寫線上報名表單", desc: "請先填寫報名表單，完成初步報名。" },
-	{ time: "STEP 2", tag: "審核", title: "等待審核通知", desc: "我們將審核報名資料，並以 Email 通知是否錄取。" },
-	{ time: "STEP 3", tag: "匯款", title: "審核通過後完成繳費", desc: "審核通過後，我們會另行通知匯款資訊與繳費方式，完成繳費後報名才正式確定。" }
-];
+export function getStaticPaths() {
+	return [{ params: { lang: undefined } }, { params: { lang: 'en' } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+const content = {
+	zh: {
+		layoutTitle: '立即報名 | 第一屆臺灣青少年科學發展論壇',
+		back: '返回論壇詳情',
+		pageTitle: '立即報名',
+		hintBase: '名額有限，額滿即止。',
+		feeTitle: '費用資訊',
+		feeLoading: '費用資訊載入中...',
+		feeSub: '費用包含兩日午餐、科教館門票。審核通過後將另行通知匯款帳號等繳費資訊，請先完成報名表單。',
+		formButton: '前往報名表單',
+		steps: [
+			{ time: "STEP 1", tag: "填表", title: "填寫線上報名表單", desc: "請先填寫報名表單，完成初步報名。" },
+			{ time: "STEP 2", tag: "審核", title: "等待審核通知", desc: "我們將審核報名資料，並以 Email 通知是否錄取。" },
+			{ time: "STEP 3", tag: "匯款", title: "審核通過後完成繳費", desc: "審核通過後，我們會另行通知匯款資訊與繳費方式，完成繳費後報名才正式確定。" }
+		],
+		js: {
+			earlyBird: '報名費 NT$%FEE%・早鳥價至 10/15 止',
+			late: '報名費 NT$%FEE%・已超過早鳥期限',
+			hint: '名額有限，額滿即止・目前報名費 NT$%FEE%'
+		}
+	},
+	en: {
+		layoutTitle: 'Register | The 1st Taiwan Young Science Development Forum',
+		back: 'Back to forum details',
+		pageTitle: 'Register Now',
+		hintBase: 'Limited seats, first come first served.',
+		feeTitle: 'Fee Information',
+		feeLoading: 'Loading fee information...',
+		feeSub: 'The fee covers lunch on both days and admission to the Science Education Center. After approval, we will send payment details such as the bank account separately; please complete the registration form first.',
+		formButton: 'Go to Registration Form',
+		steps: [
+			{ time: "STEP 1", tag: "Form", title: "Fill in the online registration form", desc: "Please complete the registration form first to submit your initial registration." },
+			{ time: "STEP 2", tag: "Review", title: "Wait for the review notice", desc: "We will review your registration and notify you by email whether it has been accepted." },
+			{ time: "STEP 3", tag: "Payment", title: "Pay the fee once approved", desc: "After approval, we will send the remittance details and payment instructions separately. Your registration is confirmed only after payment is completed." }
+		],
+		js: {
+			earlyBird: 'Registration fee: NT$%FEE% · Early-bird price until Oct 15',
+			late: 'Registration fee: NT$%FEE% · Early-bird period has ended',
+			hint: 'Limited seats, first come first served · Current fee: NT$%FEE%'
+		}
+	}
+};
+
+const t = content[lang];
+const steps = t.steps;
 ---
 
-<Layout title="立即報名 | 第一屆臺灣青少年科學發展論壇">
-	<a href="/forum/2026" class="back-fab" aria-label="返回論壇詳情">←</a>
+<Layout title={t.layoutTitle}>
+	<a href={localizePath('/forum/2026', lang)} class="back-fab" aria-label={t.back}>←</a>
 
 	<div class="panel">
 		<div class="starfield"></div>
-		<div class="panel-inner">
+		<div class="panel-inner" data-i18n={JSON.stringify(t.js)}>
 			<div class="page-title-row">
-				<h1 class="page-title">立即報名</h1>
-				<p class="time-hint" id="price-hint">名額有限，額滿即止。</p>
+				<h1 class="page-title">{t.pageTitle}</h1>
+				<p class="time-hint" id="price-hint">{t.hintBase}</p>
 			</div>
 
 			<div class="vline">
@@ -40,12 +87,12 @@ const steps = [
 			</div>
 
 			<div class="payment-info">
-				<h3>費用資訊</h3>
-				<p class="fee-note" id="fee-note">費用資訊載入中...</p>
-				<p class="fee-sub">費用包含兩日午餐、科教館門票。審核通過後將另行通知匯款帳號等繳費資訊，請先完成報名表單。</p>
+				<h3>{t.feeTitle}</h3>
+				<p class="fee-note" id="fee-note">{t.feeLoading}</p>
+				<p class="fee-sub">{t.feeSub}</p>
 			</div>
 
-			<a href="/forum/2026/register/form" class="register-button">前往報名表單</a>
+			<a href={localizePath('/forum/2026/register/form', lang)} class="register-button">{t.formButton}</a>
 		</div>
 	</div>
 
@@ -292,6 +339,7 @@ const steps = [
 			footer.style.display = 'none';
 		}
 
+		const i18n = JSON.parse(document.querySelector('[data-i18n]').dataset.i18n);
 		const EARLY_BIRD_DEADLINE = new Date('2026-10-15T23:59:59+08:00');
 		const EARLY_BIRD_PRICE = 800;
 		const REGULAR_PRICE = 1200;
@@ -305,14 +353,14 @@ const steps = [
 			const fee = getCurrentFee();
 			const isEarlyBird = fee === EARLY_BIRD_PRICE;
 			feeNote.textContent = isEarlyBird
-				? `報名費 NT$${fee}・早鳥價至 10/15 止`
-				: `報名費 NT$${fee}・已超過早鳥期限`;
+				? i18n.earlyBird.replace('%FEE%', fee)
+				: i18n.late.replace('%FEE%', fee);
 		}
 
 		const priceHint = document.getElementById('price-hint');
 		if (priceHint) {
 			const fee = getCurrentFee();
-			priceHint.textContent = `名額有限，額滿即止・目前報名費 NT$${fee}`;
+			priceHint.textContent = i18n.hint.replace('%FEE%', fee);
 		}
 	</script>
 </Layout>

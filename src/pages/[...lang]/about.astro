@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl } from '../../i18n/ui';
+
+export function getStaticPaths() {
+	return [{ params: { lang: undefined } }, { params: { lang: 'en' } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+const content = {
+	zh: {
+		pageTitle: '關於我們',
+		aboutHeading: '協會簡介',
+		intro:
+			'臺灣青少年科學發展協會於民國114年發起籌組，同年10月召開第一屆第一次會員大會正式成立， 是一個依法設立、非以營利為目的之公益性社會團體，以促進臺灣青少年的科學發展為宗旨。 我們致力於：',
+		goals: [
+			'提供臺灣青少年公平獲取學術及研究資源的機會',
+			'促進大專院校學術資源對青少年的開放與流通',
+			'提升青少年之科學素養及興趣',
+			'增進青少年對於科學研究工作的認識',
+			'協助對科學有興趣之青少年得到較好的科學訓練',
+			'協助參與科學研究之青少年得到較好的研究資源'
+		],
+		contactHeading: '聯繫方式',
+		email: 'Email：ScienceJourney.ctw@outlook.com',
+		address: '地址：402台中市南區興大路145號'
+	},
+	en: {
+		pageTitle: 'About Us',
+		aboutHeading: 'About the Association',
+		intro:
+			'The Taiwan Young Science Development Association was initiated in 2025 (ROC year 114) and formally established in October of the same year at its first general assembly. It is a legally incorporated, non-profit public-interest social organization whose purpose is to promote the scientific development of young people in Taiwan. We are committed to:',
+		goals: [
+			'Giving young people in Taiwan fair access to academic and research resources',
+			'Promoting the opening and circulation of university academic resources to young people',
+			'Raising young people\'s scientific literacy and interest',
+			'Deepening young people\'s understanding of scientific research',
+			'Helping young people interested in science receive better scientific training',
+			'Helping young people engaged in scientific research obtain better research resources'
+		],
+		contactHeading: 'Contact',
+		email: 'Email: ScienceJourney.ctw@outlook.com',
+		address: 'Address: No. 145, Xingda Rd., South Dist., Taichung City 402, Taiwan'
+	}
+};
+
+const c = content[lang];
+---
+
+<Layout title={c.pageTitle}>
+	<div class="panel">
+		<div class="panel-inner">
+			<section>
+				<h2>{c.aboutHeading}</h2>
+				<p>{c.intro}</p>
+				<ul>
+					{c.goals.map((g) => <li>{g}</li>)}
+				</ul>
+			</section>
+
+			<section>
+				<h2>{c.contactHeading}</h2>
+				<p>{c.email}</p>
+				<p>{c.address}</p>
+			</section>
+		</div>
+	</div>
+
+	<style>
+		.panel {
+			background: var(--panel-bg);
+			color: var(--card-text);
+			margin-top: -6rem;
+			padding-top: 6rem;
+		}
+		.panel h1, .panel h2, .panel h3 {
+			color: var(--card-text);
+		}
+		.panel-inner {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem;
+		}
+	</style>
+</Layout>
