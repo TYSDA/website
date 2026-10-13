@@ -287,6 +287,9 @@ const c = content[lang];
 		resizeCanvas();
 		window.addEventListener('resize', resizeCanvas);
 
+		let lastBox = null;
+		let introPlayed = false;
+
 		function buildTextPoints() {
 			const boxRect = titleHitbox.getBoundingClientRect();
 			const heroRect = hero.getBoundingClientRect();
@@ -294,6 +297,7 @@ const c = content[lang];
 			const offsetY = boxRect.top - heroRect.top;
 			const boxW = boxRect.width;
 			const boxH = boxRect.height;
+			lastBox = [offsetX, offsetY, boxW, boxH, hero.offsetWidth, hero.offsetHeight].map(Math.round);
 
 			const isMobile = boxW < 500;
 
@@ -440,9 +444,46 @@ const c = content[lang];
 			mouseY = -9999;
 		});
 
-		window.addEventListener('load', () => {
-			setTimeout(playIntro, 200);
-		});
+		function layoutDrifted() {
+			const b = titleHitbox.getBoundingClientRect();
+			const h = hero.getBoundingClientRect();
+			const now = [b.left - h.left, b.top - h.top, b.width, b.height, hero.offsetWidth, hero.offsetHeight].map(Math.round);
+			return !lastBox || now.some((v, i) => Math.abs(v - lastBox[i]) > 1);
+		}
+
+		function refreshIfDrifted() {
+			if (!introPlayed) return;
+			if (layoutDrifted()) {
+				resizeCanvas();
+				initParticles();
+			}
+		}
+
+		function startIntro() {
+			setTimeout(() => {
+				introPlayed = true;
+				playIntro();
+
+				let ticks = 0;
+				const timer = setInterval(() => {
+					refreshIfDrifted();
+					if (++ticks > 15) clearInterval(timer);
+				}, 400);
+
+				if (document.fonts && document.fonts.ready) {
+					document.fonts.ready.then(refreshIfDrifted);
+				}
+				if (window.ResizeObserver) {
+					new ResizeObserver(refreshIfDrifted).observe(hero);
+				}
+			}, 200);
+		}
+
+		if (document.readyState === 'complete') {
+			startIntro();
+		} else {
+			window.addEventListener('load', startIntro);
+		}
 		window.addEventListener('resize', () => {
 			resizeCanvas();
 			initParticles();
