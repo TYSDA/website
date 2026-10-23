@@ -24,9 +24,9 @@ const content = {
 			{ time: "STEP 3", tag: "匯款", title: "審核通過後完成繳費", desc: "審核通過後，我們會另行通知匯款資訊與繳費方式，完成繳費後報名才正式確定。" }
 		],
 		js: {
-			earlyBird: '報名費 NT$%FEE%・早鳥價至 10/15 止',
-			late: '報名費 NT$%FEE%・已超過早鳥期限',
-			hint: '名額有限，額滿即止・目前報名費 NT$%FEE%'
+			earlyBird: '報名費 NT$%FEE%',
+			late: '報名費 NT$%FEE%',
+			hint: '名額有限，額滿即止・報名費 NT$%FEE%'
 		}
 	},
 	en: {
@@ -44,9 +44,9 @@ const content = {
 			{ time: "STEP 3", tag: "Payment", title: "Pay the fee once approved", desc: "After approval, we will send the remittance details and payment instructions separately. Your registration is confirmed only after payment is completed." }
 		],
 		js: {
-			earlyBird: 'Registration fee: NT$%FEE% · Early-bird price until Oct 15',
-			late: 'Registration fee: NT$%FEE% · Early-bird period has ended',
-			hint: 'Limited seats, first come first served · Current fee: NT$%FEE%'
+			earlyBird: 'Registration fee: NT$%FEE%',
+			late: 'Registration fee: NT$%FEE%',
+			hint: 'Limited seats, first come first served · Fee: NT$%FEE%'
 		}
 	}
 };
@@ -345,6 +345,7 @@ const steps = t.steps;
 		const REGULAR_PRICE = 1200;
 
 		function getCurrentFee() {
+			return REGULAR_PRICE;
 			return new Date() <= EARLY_BIRD_DEADLINE ? EARLY_BIRD_PRICE : REGULAR_PRICE;
 		}
 

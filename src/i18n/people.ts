@@ -3,7 +3,7 @@ import type { Lang } from './ui';
 export type PersonKey =
 	| 'xie' | 'yuchih' | 'wang'
 	| 'xuShizhan' | 'xuHezhen' | 'zhang'
-	| 'cai' | 'gong' | 'ji' | 'li'
+	| 'cai' | 'gong' | 'huoqin' | 'wanglong' | 'ji' | 'li'
 	| 'zheng' | 'shi' | 'xuWeiting'
 	| 'gu' | 'guan' | 'e';
 
@@ -19,6 +19,8 @@ export const people: Record<PersonKey, Person> = {
 	zhang:     { zh: '張雨恩', en: 'Yu-En Chang', titleZh: '', titleEn: '' },
 	cai:       { zh: '蔡任圃', en: 'Jen-Pu Tsai', titleZh: '老師', titleEn: '' },
 	gong:      { zh: '龔雍任', en: 'Yung-Jen Kung', titleZh: '老師', titleEn: '' },
+	huoqin:    { zh: '劉火欽', en: 'Huo-Chin Liu', titleZh: '館長', titleEn: 'Director' },
+	wanglong:  { zh: '李旺龍', en: 'Wang-Lung Lee', titleZh: '教授', titleEn: 'Prof.' },
 	ji:        { zh: '紀凱容', en: 'Kai-Jung Chi', titleZh: '老師', titleEn: 'Prof.' },
 	li:        { zh: '李後鋒', en: 'Hou-Feng Lee', titleZh: '老師', titleEn: 'Prof.' },
 	zheng:     { zh: '鄭夢慈', en: 'Meng-Tzu Cheng', titleZh: '教授', titleEn: 'Prof.' },
