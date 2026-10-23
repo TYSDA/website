@@ -3,7 +3,7 @@ import type { Lang } from './ui';
 export type PersonKey =
 	| 'xie' | 'yuchih' | 'wang'
 	| 'xuShizhan' | 'xuHezhen' | 'zhang'
-	| 'cai' | 'gong' | 'huoqin' | 'wanglong' | 'ji' | 'li'
+	| 'cai' | 'gong' | 'huoqin' | 'wanglong' | 'xieZhaolin' | 'ji' | 'li'
 	| 'zheng' | 'shi' | 'xuWeiting'
 	| 'gu' | 'guan' | 'e';
 
@@ -21,6 +21,7 @@ export const people: Record<PersonKey, Person> = {
 	gong:      { zh: '龔雍任', en: 'Yung-Jen Kung', titleZh: '老師', titleEn: '' },
 	huoqin:    { zh: '劉火欽', en: 'Huo-Chin Liu', titleZh: '館長', titleEn: 'Director' },
 	wanglong:  { zh: '李旺龍', en: 'Wang-Lung Lee', titleZh: '教授', titleEn: 'Prof.' },
+	xieZhaolin: { zh: '謝肇霖', en: 'Chao-Lin Hsieh', titleZh: '老師', titleEn: '' },
 	ji:        { zh: '紀凱容', en: 'Kai-Jung Chi', titleZh: '老師', titleEn: 'Prof.' },
 	li:        { zh: '李後鋒', en: 'Hou-Feng Lee', titleZh: '老師', titleEn: 'Prof.' },
 	zheng:     { zh: '鄭夢慈', en: 'Meng-Tzu Cheng', titleZh: '教授', titleEn: 'Prof.' },
@@ -49,6 +50,7 @@ export const speakerEn: Record<string, { name: string; title: string }> = {
 	'張雨恩': { name: 'Yu-En Chang', title: '' },
 	'蔡任圃': { name: 'Jen-Pu Tsai', title: '' },
 	'龔雍任': { name: 'Yung-Jen Kung', title: '' },
+	'謝肇霖': { name: 'Chao-Lin Hsieh', title: '' },
 	'紀凱容': { name: 'Kai-Jung Chi', title: 'Prof.' },
 	'李後鋒': { name: 'Hou-Feng Lee', title: 'Prof.' },
 	'鄭夢慈': { name: 'Meng-Tzu Cheng', title: 'Prof.' },
