@@ -281,29 +281,49 @@ const c = content[lang];
 		let mouseY = -9999;
 
 		function resizeCanvas() {
-			canvas.width = hero.offsetWidth;
-			canvas.height = hero.offsetHeight;
+			const w = hero.offsetWidth;
+			const h = hero.offsetHeight;
+			if (canvas.width !== w) canvas.width = w;
+			if (canvas.height !== h) canvas.height = h;
 		}
 		resizeCanvas();
-		window.addEventListener('resize', resizeCanvas);
 
-		let lastBox = null;
+		let mouseClientX = -9999;
+		let mouseClientY = -9999;
+		let box = { w: 0, h: 0 };
+		let particles = [];
 		let introPlayed = false;
 
+		// 標題容器相對於畫布的位置（每一幀重新讀，不依賴載入時機）
+		function getFrame() {
+			const b = titleHitbox.getBoundingClientRect();
+			const c = canvas.getBoundingClientRect();
+			const sx = c.width ? canvas.width / c.width : 1;
+			const sy = c.height ? canvas.height / c.height : 1;
+			return { b, ox: b.left - c.left, oy: b.top - c.top, sx, sy };
+		}
+
+		function beginFrame() {
+			const f = getFrame();
+			ctx.setTransform(1, 0, 0, 1, 0, 0);
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.setTransform(f.sx, 0, 0, f.sy, f.ox * f.sx, f.oy * f.sy);
+			ctx.fillStyle = PARTICLE_COLOR;
+			return f;
+		}
+
+		// 粒子座標：相對於標題容器左上角
 		function buildTextPoints() {
-			const boxRect = titleHitbox.getBoundingClientRect();
-			const heroRect = hero.getBoundingClientRect();
-			const offsetX = boxRect.left - heroRect.left;
-			const offsetY = boxRect.top - heroRect.top;
-			const boxW = boxRect.width;
-			const boxH = boxRect.height;
-			lastBox = [offsetX, offsetY, boxW, boxH, hero.offsetWidth, hero.offsetHeight].map(Math.round);
+			const boxW = titleHitbox.offsetWidth;
+			const boxH = titleHitbox.offsetHeight;
+			box = { w: boxW, h: boxH };
+			if (boxW < 10 || boxH < 10) return [];
 
 			const isMobile = boxW < 500;
 
 			const offCanvas = document.createElement('canvas');
-			offCanvas.width = canvas.width;
-			offCanvas.height = canvas.height;
+			offCanvas.width = Math.ceil(boxW);
+			offCanvas.height = Math.ceil(boxH);
 			const offCtx = offCanvas.getContext('2d');
 			offCtx.fillStyle = '#fff';
 			offCtx.textAlign = 'center';
@@ -321,23 +341,19 @@ const c = content[lang];
 			}
 			offCtx.font = `${TITLE_FONT_WEIGHT} ${fontSize}px system-ui, sans-serif`;
 
-			{
-				const widest = Math.max(...lines.map((line) => offCtx.measureText(line).width));
-				const maxWidth = boxW * 0.96;
-				if (widest > maxWidth) {
-					fontSize = fontSize * (maxWidth / widest);
-					offCtx.font = `${TITLE_FONT_WEIGHT} ${fontSize}px system-ui, sans-serif`;
-				}
+			const widest = Math.max(...lines.map((line) => offCtx.measureText(line).width));
+			const maxWidth = boxW * 0.96;
+			if (widest > maxWidth) {
+				fontSize = fontSize * (maxWidth / widest);
+				offCtx.font = `${TITLE_FONT_WEIGHT} ${fontSize}px system-ui, sans-serif`;
 			}
 
 			lines.forEach((line, i) => {
-				const lineCenterY = offsetY + lineHeight * i + lineHeight / 2;
-				offCtx.fillText(line, offsetX + boxW / 2, lineCenterY);
+				offCtx.fillText(line, boxW / 2, lineHeight * i + lineHeight / 2);
 			});
 
 			const imageData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
 			const points = [];
-
 			for (let y = 0; y < offCanvas.height; y += PARTICLE_GAP) {
 				for (let x = 0; x < offCanvas.width; x += PARTICLE_GAP) {
 					const idx = (Math.floor(y) * offCanvas.width + Math.floor(x)) * 4;
@@ -349,30 +365,32 @@ const c = content[lang];
 			return points;
 		}
 
-		let particles = [];
-
-		function initParticles() {
-			const points = buildTextPoints();
-			particles = points.map((pt) => ({
-				homeX: pt.x,
-				homeY: pt.y,
-				x: Math.random() * canvas.width,
-				y: Math.random() * canvas.height
-			}));
-		}
-
 		function randomScatterPos(dim) {
 			// 範圍擴大到超出畫布邊界，讓粒子從更遠的地方飄進來，避免矩形邊框收合的視覺感
 			return (Math.random() * (1 + INTRO_SCATTER_MARGIN * 2) - INTRO_SCATTER_MARGIN) * dim;
 		}
 
+		function initParticles() {
+			const points = buildTextPoints();
+			const f = getFrame();
+			const cw = canvas.width / f.sx;
+			const ch = canvas.height / f.sy;
+			particles = points.map((pt) => ({
+				homeX: pt.x,
+				homeY: pt.y,
+				x: randomScatterPos(cw) - f.ox,
+				y: randomScatterPos(ch) - f.oy
+			}));
+		}
+
 		function drawLoop() {
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.fillStyle = PARTICLE_COLOR;
+			const f = beginFrame();
+			const mx = mouseClientX - f.b.left;
+			const my = mouseClientY - f.b.top;
 
 			particles.forEach((p) => {
-				const dx = p.x - mouseX;
-				const dy = p.y - mouseY;
+				const dx = p.x - mx;
+				const dy = p.y - my;
 				const dist = Math.sqrt(dx * dx + dy * dy);
 
 				let targetX = p.homeX;
@@ -403,18 +421,12 @@ const c = content[lang];
 			let frame = 0;
 			const totalFrames = 80;
 
-			particles.forEach((p) => {
-				p.x = randomScatterPos(canvas.width);
-				p.y = randomScatterPos(canvas.height);
-			});
-
 			function animateIntro() {
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				beginFrame();
 				frame++;
 				const progress = Math.min(frame / totalFrames, 1);
 				const ease = 1 - Math.pow(1 - progress, 3);
 
-				ctx.fillStyle = PARTICLE_COLOR;
 				particles.forEach((p) => {
 					p.x = p.x + (p.homeX - p.x) * ease * 0.3;
 					p.y = p.y + (p.homeY - p.y) * ease * 0.3;
@@ -435,46 +447,37 @@ const c = content[lang];
 		}
 
 		hero.addEventListener('mousemove', (e) => {
-			const rect = hero.getBoundingClientRect();
-			mouseX = e.clientX - rect.left;
-			mouseY = e.clientY - rect.top;
+			mouseClientX = e.clientX;
+			mouseClientY = e.clientY;
 		});
 		hero.addEventListener('mouseleave', () => {
-			mouseX = -9999;
-			mouseY = -9999;
+			mouseClientX = -9999;
+			mouseClientY = -9999;
 		});
 
-		function layoutDrifted() {
-			const b = titleHitbox.getBoundingClientRect();
-			const h = hero.getBoundingClientRect();
-			const now = [b.left - h.left, b.top - h.top, b.width, b.height, hero.offsetWidth, hero.offsetHeight].map(Math.round);
-			return !lastBox || now.some((v, i) => Math.abs(v - lastBox[i]) > 1);
-		}
-
-		function refreshIfDrifted() {
-			if (!introPlayed) return;
-			if (layoutDrifted()) {
+		// 畫布大小或標題容器大小改變時才重建粒子
+		let rebuildQueued = false;
+		function requestRebuild() {
+			if (!introPlayed || rebuildQueued) return;
+			rebuildQueued = true;
+			requestAnimationFrame(() => {
+				rebuildQueued = false;
 				resizeCanvas();
-				initParticles();
-			}
+				if (titleHitbox.offsetWidth !== box.w || titleHitbox.offsetHeight !== box.h) {
+					initParticles();
+				}
+			});
 		}
 
 		function startIntro() {
 			setTimeout(() => {
 				introPlayed = true;
 				playIntro();
-
-				let ticks = 0;
-				const timer = setInterval(() => {
-					refreshIfDrifted();
-					if (++ticks > 15) clearInterval(timer);
-				}, 400);
-
-				if (document.fonts && document.fonts.ready) {
-					document.fonts.ready.then(refreshIfDrifted);
-				}
+				window.addEventListener('resize', requestRebuild);
 				if (window.ResizeObserver) {
-					new ResizeObserver(refreshIfDrifted).observe(hero);
+					const ro = new ResizeObserver(requestRebuild);
+					ro.observe(hero);
+					ro.observe(titleHitbox);
 				}
 			}, 200);
 		}
@@ -484,9 +487,5 @@ const c = content[lang];
 		} else {
 			window.addEventListener('load', startIntro);
 		}
-		window.addEventListener('resize', () => {
-			resizeCanvas();
-			initParticles();
-		});
 	</script>
 </Layout>
