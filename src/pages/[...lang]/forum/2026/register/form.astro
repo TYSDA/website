@@ -45,8 +45,9 @@ const content = {
 		noticeSub: '（如果想要問兩名以上的講者，就選其中一名，剩下的在描述中寫明）',
 		speakerLabel: '想提問的講者',
 		speakerPlaceholder: '請選擇講者',
+		speakerNone: '無提問（略過）',
 		questionLabel: '問題描述',
-		questionHint: '（至少 50 字）',
+		questionHint: '（選填；如要提問，請至少 50 字）',
 		workshopLabel: '第二天下午工作坊',
 		workshopHint: '（各工作坊限額 30 人，額滿將自動鎖定）',
 		workshopLoading: '載入名額中...',
@@ -77,8 +78,9 @@ const content = {
 		noticeSub: '(If you want to ask more than one speaker, choose one here and describe the others in your question.)',
 		speakerLabel: 'Speaker you would like to ask',
 		speakerPlaceholder: 'Select a speaker',
+		speakerNone: 'No question (skip)',
 		questionLabel: 'Your question',
-		questionHint: '(at least 50 characters)',
+		questionHint: '(optional; if you submit one, at least 50 characters)',
 		workshopLabel: 'Day 2 afternoon workshop',
 		workshopHint: '(30 seats per workshop; a workshop locks automatically when full)',
 		workshopLoading: 'Loading availability...',
@@ -145,19 +147,19 @@ const t = content[lang];
 				</div>
 
 				<div class="form-group">
-					<label for="question_speaker">{t.speakerLabel} <span class="req">*</span></label>
-					<select id="question_speaker" name="question_speaker" required>
-						<option value="" disabled selected>{t.speakerPlaceholder}</option>
+					<label for="question_speaker">{t.speakerLabel}</label>
+					<select id="question_speaker" name="question_speaker">
+						<option value="" selected>{t.speakerNone}</option>
 						{speakerOptions.map((s) => <option value={s.value}>{s.label}</option>)}
 					</select>
 				</div>
 
 				<div class="form-group">
 					<label for="question_content">
-						{t.questionLabel} <span class="req">*</span>
+						{t.questionLabel}
 						<span class="hint-inline">{t.questionHint}</span>
 					</label>
-					<textarea id="question_content" name="question_content" rows="4" required></textarea>
+					<textarea id="question_content" name="question_content" rows="4"></textarea>
 					<div class="char-count" id="char-count">{t.js.charCount.replace('%N%', '0')}</div>
 				</div>
 
@@ -536,7 +538,7 @@ const t = content[lang];
 				const questionText = (data.get('question_content') || '').toString().trim();
 				const chosenWorkshop = (data.get('workshop_choice') || '').toString();
 
-				if (questionText.length < 50) {
+				if (questionText.length > 0 && questionText.length < 50) {
 					showError(i18n.errMinLen);
 					questionContent?.focus();
 					return;
@@ -573,7 +575,7 @@ const t = content[lang];
 						phone: data.get('phone'),
 						email: data.get('email'),
 						school: data.get('school'),
-						question_speaker: data.get('question_speaker'),
+						question_speaker: (data.get('question_speaker') || '').toString(),
 						question_content: questionText,
 						workshop_choice: chosenWorkshop,
 						event_year: EVENT_YEAR
