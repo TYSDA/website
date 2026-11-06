@@ -59,6 +59,8 @@ const enHref = new URL(localizePath(cleanPath, 'en'), Astro.url.origin).toString
 
       html {
         scroll-behavior: smooth;
+        /* 有無捲軸都保留同樣寬度，避免頁面之間背景圖因寬度不同而微微位移 */
+        scrollbar-gutter: stable;
       }
 
       body {
@@ -415,6 +417,7 @@ const enHref = new URL(localizePath(cleanPath, 'en'), Astro.url.origin).toString
           <a href={localizePath('/members', lang)}>{t('nav.members')}</a>
           <a href={localizePath('/activities', lang)}>{t('nav.activities')}</a>
           <a href={localizePath('/charter', lang)}>{t('nav.charter')}</a>
+          <a href="/weekly/">{t('nav.weekly')}</a>
           <a
             href={switchHref}
             class="lang-switch"
