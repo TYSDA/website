@@ -1,0 +1,445 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, localizePath } from '../../../../i18n/ui';
+
+export function getStaticPaths() {
+	return [{ params: { lang: undefined } }, { params: { lang: 'en' } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+// value 是送進資料庫的值（永遠是中文）；label 是畫面上顯示的文字
+const content = {
+	zh: {
+		layoutTitle: '繳費確認 | 第一屆臺灣青少年科學發展論壇',
+		back: '返回論壇詳情',
+		pageTitle: '繳費確認',
+		lead: '完成匯款後，請在此回報匯款資料與餐點。收到款項並核對無誤後，我們會寄出錄取確認。',
+		regNumber: '報名編號（密鑰）',
+		regNumberHint: '報名成功時取得的編號，格式如 2026-ABCDE',
+		email: '報名時使用的 Email',
+		remitter: '匯款人姓名',
+		last5: '匯款帳號末五碼',
+		last5Hint: '請填 5 位數字',
+		day1: '12/25（五）餐點',
+		day2: '12/26（六）餐點',
+		mealPlaceholder: '請選擇',
+		meat: '葷食',
+		veg: '素食',
+		dietary: '飲食禁忌或過敏',
+		dietaryHint: '（選填）',
+		successTitle: '已收到您的繳費確認',
+		successLead: '我們會核對款項，確認無誤後寄出錄取通知。如需更正資料，重新填寫一次即可，會以最新一次為準。',
+		js: {
+			submitting: '送出中...',
+			submit: '送出繳費確認',
+			errLast5: '帳號末五碼請填 5 位數字。',
+			errNotFound: '找不到符合的報名資料，請確認報名編號與 Email 是否正確。',
+			errFail: '送出失敗，請稍後再試。若持續失敗，請與主辦單位聯絡。'
+		}
+	},
+	en: {
+		layoutTitle: 'Payment Confirmation | 1st Taiwan Youth Science Development Forum',
+		back: 'Back to forum details',
+		pageTitle: 'Payment Confirmation',
+		lead: 'After you have transferred the fee, please report your payment details and meal choices here. Once we receive and verify the payment, we will send you the admission confirmation.',
+		regNumber: 'Registration number (key)',
+		regNumberHint: 'The number you received when you registered, e.g. 2026-ABCDE',
+		email: 'Email used for registration',
+		remitter: 'Name of the remitter',
+		last5: 'Last 5 digits of the remitting account',
+		last5Hint: 'Enter 5 digits',
+		day1: 'Meal on 12/25 (Fri)',
+		day2: 'Meal on 12/26 (Sat)',
+		mealPlaceholder: 'Please choose',
+		meat: 'Regular',
+		veg: 'Vegetarian',
+		dietary: 'Dietary restrictions or allergies',
+		dietaryHint: '(optional)',
+		successTitle: 'Your payment confirmation has been received',
+		successLead: 'We will verify the payment and then send you the admission notice. To correct anything, simply submit this form again; the latest submission is used.',
+		js: {
+			submitting: 'Submitting...',
+			submit: 'Submit Payment Confirmation',
+			errLast5: 'The last 5 digits of the account must be 5 numbers.',
+			errNotFound: 'No matching registration was found. Please check the registration number and email.',
+			errFail: 'Submission failed. Please try again later. If the problem persists, please contact the organizers.'
+		}
+	}
+};
+
+const t = content[lang];
+---
+
+<Layout title={t.layoutTitle}>
+	<a href={localizePath('/forum/2026', lang)} class="back-fab" aria-label={t.back}>←</a>
+
+	<div class="panel">
+		<div class="starfield"></div>
+		<div class="panel-inner">
+			<h1 class="page-title">{t.pageTitle}</h1>
+			<p class="pay-lead">{t.lead}</p>
+
+			<form id="payment-form" class="register-form" data-i18n={JSON.stringify(t.js)}>
+				<div class="form-group">
+					<label for="registration_number">{t.regNumber} <span class="req">*</span> <span class="hint-inline">{t.regNumberHint}</span></label>
+					<input type="text" id="registration_number" name="registration_number" required autocomplete="off" autocapitalize="characters" spellcheck="false" />
+				</div>
+
+				<div class="form-group">
+					<label for="email">{t.email} <span class="req">*</span></label>
+					<input type="email" id="email" name="email" required />
+				</div>
+
+				<div class="form-group">
+					<label for="remitter_name">{t.remitter} <span class="req">*</span></label>
+					<input type="text" id="remitter_name" name="remitter_name" required />
+				</div>
+
+				<div class="form-group">
+					<label for="account_last5">{t.last5} <span class="req">*</span> <span class="hint-inline">{t.last5Hint}</span></label>
+					<input type="text" id="account_last5" name="account_last5" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="off" />
+				</div>
+
+				<div class="form-group">
+					<label for="meal_day1">{t.day1} <span class="req">*</span></label>
+					<select id="meal_day1" name="meal_day1" required>
+						<option value="" disabled selected>{t.mealPlaceholder}</option>
+						<option value="葷食">{t.meat}</option>
+						<option value="素食">{t.veg}</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="meal_day2">{t.day2} <span class="req">*</span></label>
+					<select id="meal_day2" name="meal_day2" required>
+						<option value="" disabled selected>{t.mealPlaceholder}</option>
+						<option value="葷食">{t.meat}</option>
+						<option value="素食">{t.veg}</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="dietary_note">{t.dietary} <span class="hint-inline">{t.dietaryHint}</span></label>
+					<textarea id="dietary_note" name="dietary_note" rows="3"></textarea>
+				</div>
+
+				<div id="form-error" class="form-error hidden"></div>
+
+				<button type="submit" class="register-button" id="submit-btn">{t.js.submit}</button>
+			</form>
+
+			<div id="success-message" class="success-message hidden">
+				<h3>{t.successTitle}</h3>
+				<p>{t.successLead}</p>
+			</div>
+		</div>
+	</div>
+
+	<style>
+		.back-fab {
+			position: fixed;
+			top: calc(var(--header-h, 74px) + 1.25rem);
+			left: 2rem;
+			width: 42px;
+			height: 42px;
+			border-radius: 50%;
+			background: rgba(255,255,255,0.1);
+			backdrop-filter: blur(8px);
+			border: 1px solid rgba(255,255,255,0.2);
+			color: #E8E9ED;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.2rem;
+			text-decoration: none;
+			z-index: 20;
+			transition: background 0.2s;
+		}
+		.back-fab:hover {
+			background: rgba(255,255,255,0.2);
+		}
+		.panel {
+			position: relative;
+			background: #14181A;
+			color: var(--text);
+			overflow: hidden;
+		}
+		.starfield {
+			position: absolute;
+			inset: 0;
+			background-image:
+				radial-gradient(1px 1px at 20% 30%, rgba(212,184,118,0.4), transparent),
+				radial-gradient(1px 1px at 70% 15%, rgba(212,184,118,0.3), transparent),
+				radial-gradient(1px 1px at 40% 70%, rgba(212,184,118,0.35), transparent),
+				radial-gradient(1px 1px at 85% 60%, rgba(212,184,118,0.25), transparent),
+				radial-gradient(1px 1px at 10% 85%, rgba(212,184,118,0.3), transparent);
+			pointer-events: none;
+		}
+		.panel-inner {
+			position: relative;
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2.5rem 2rem 4rem;
+			box-sizing: border-box;
+		}
+		.page-title {
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.1em;
+			color: #D4B876;
+			margin: 0 0 2.5rem;
+		}
+		.register-form {
+			display: flex;
+			flex-direction: column;
+			gap: 1.25rem;
+		}
+		.form-group {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+		.form-group label {
+			font-size: 0.88rem;
+			font-weight: 600;
+			color: #E8E9ED;
+		}
+		.req {
+			color: #D4876C;
+		}
+		.hint-inline {
+			font-weight: 400;
+			color: #7C8090;
+			font-size: 0.8rem;
+		}
+		.question-notice {
+			background: rgba(212, 184, 118, 0.08);
+			border: 1px solid rgba(212, 184, 118, 0.25);
+			border-radius: 10px;
+			padding: 1rem 1.15rem;
+			box-sizing: border-box;
+		}
+		.question-notice p {
+			margin: 0;
+			font-size: 0.88rem;
+			color: #E8E9ED;
+			line-height: 1.65;
+		}
+		.question-notice-sub {
+			margin-top: 0.5rem !important;
+			font-size: 0.8rem !important;
+			color: #A8ACBA !important;
+		}
+		.form-group input,
+		.form-group textarea {
+			width: 100%;
+			box-sizing: border-box;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			border-radius: 8px;
+			padding: 0.7rem 0.9rem;
+			color: #E8E9ED;
+			font-size: 0.95rem;
+			font-family: inherit;
+		}
+		.form-group select {
+			width: 100%;
+			box-sizing: border-box;
+			appearance: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			background-color: rgba(255, 255, 255, 0.04);
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23D4B876' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+			background-repeat: no-repeat;
+			background-position: right 0.9rem center;
+			background-size: 12px 8px;
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			border-radius: 8px;
+			padding: 0.7rem 2.5rem 0.7rem 0.9rem;
+			color: #E8E9ED;
+			font-size: 0.95rem;
+			font-family: inherit;
+		}
+		.form-group select option {
+			background: #14181A;
+			color: #E8E9ED;
+		}
+		.form-group select option:disabled {
+			color: #5C6070;
+		}
+		.form-group input:focus,
+		.form-group select:focus,
+		.form-group textarea:focus {
+			outline: none;
+			border-color: rgba(212, 184, 118, 0.6);
+		}
+		.form-group textarea {
+			resize: vertical;
+		}
+		.char-count {
+			font-size: 0.78rem;
+			color: #7C8090;
+			text-align: right;
+		}
+		.char-count.ok {
+			color: #6FBF98;
+		}
+		.hidden {
+			display: none !important;
+		}
+		.form-error {
+			background: rgba(212, 135, 108, 0.12);
+			border: 1px solid rgba(212, 135, 108, 0.4);
+			border-radius: 8px;
+			padding: 0.8rem 1rem;
+			color: #E8A38F;
+			font-size: 0.88rem;
+			box-sizing: border-box;
+		}
+		.register-button {
+			position: relative;
+			display: block;
+			width: fit-content;
+			margin-left: auto;
+			background: #D4B876;
+			color: #14181A;
+			padding: 0.9rem 2.5rem;
+			border-radius: 8px;
+			font-weight: 700;
+			text-decoration: none;
+			border: none;
+			cursor: pointer;
+			font-size: 1rem;
+			font-family: inherit;
+			box-shadow: 0 0 24px rgba(212, 184, 118, 0.35);
+			box-sizing: border-box;
+		}
+		.register-button:hover {
+			opacity: 0.9;
+		}
+		.register-button:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		.success-message {
+			text-align: center;
+			padding: 2rem;
+			background: rgba(111, 191, 152, 0.08);
+			border: 1px solid rgba(111, 191, 152, 0.3);
+			border-radius: 14px;
+			box-sizing: border-box;
+		}
+		.success-message h3 {
+			color: #6FBF98;
+			margin: 0 0 0.75rem;
+		}
+		.success-message p {
+			color: #E8E9ED;
+			font-size: 0.92rem;
+			margin: 0.5rem 0;
+		}
+		.reg-number {
+			font-size: 1.6rem;
+			font-weight: 700;
+			letter-spacing: 0.05em;
+			color: #D4B876;
+			margin: 1rem 0;
+		}
+		.success-note {
+			color: #A8ACBA !important;
+			font-size: 0.85rem !important;
+		}
+
+		@media (max-width: 700px) {
+			.back-fab {
+				left: 1.25rem;
+				width: 36px;
+				height: 36px;
+				font-size: 1.05rem;
+				top: calc(var(--header-h, 74px) + 0.75rem);
+			}
+			.page-title {
+				font-size: 0.7rem;
+			}
+		}
+		@media (max-width: 600px) {
+			.register-button {
+				margin-left: 0;
+				width: 100%;
+				text-align: center;
+			}
+		}
+		.pay-lead {
+			color: #E8E9ED;
+			font-size: 0.95rem;
+			line-height: 1.7;
+			margin: -1rem 0 2rem;
+		}
+	</style>
+
+	<script>
+		import { createClient } from '@supabase/supabase-js';
+
+		const SUPABASE_URL = 'https://ckcxcdolmkcccolpnggb.supabase.co';
+		const SUPABASE_KEY = 'sb_publishable___5qC_1Aoz2OqXUr2iYMKg_PZokDoeG';
+		const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+		const form = document.getElementById('payment-form') as HTMLFormElement;
+		const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+		const formError = document.getElementById('form-error') as HTMLElement;
+		const successMessage = document.getElementById('success-message') as HTMLElement;
+		const i18n = JSON.parse(form.dataset.i18n || '{}');
+
+		function showError(msg: string) {
+			formError.textContent = msg;
+			formError.classList.remove('hidden');
+		}
+
+		function resetButton() {
+			submitBtn.disabled = false;
+			submitBtn.textContent = i18n.submit;
+		}
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			formError.classList.add('hidden');
+
+			const data = new FormData(form);
+			const last5 = (data.get('account_last5') || '').toString().trim();
+			if (!/^[0-9]{5}$/.test(last5)) {
+				showError(i18n.errLast5);
+				return;
+			}
+
+			submitBtn.disabled = true;
+			submitBtn.textContent = i18n.submitting;
+
+			const { data: result, error } = await supabase.rpc('submit_payment_confirmation', {
+				p_registration_number: (data.get('registration_number') || '').toString().trim().toUpperCase(),
+				p_email: (data.get('email') || '').toString().trim(),
+				p_remitter_name: (data.get('remitter_name') || '').toString().trim(),
+				p_account_last5: last5,
+				p_meal_day1: (data.get('meal_day1') || '').toString(),
+				p_meal_day2: (data.get('meal_day2') || '').toString(),
+				p_dietary_note: (data.get('dietary_note') || '').toString().trim()
+			});
+
+			if (error) {
+				console.error('Payment confirmation failed:', error);
+				showError(i18n.errFail);
+				resetButton();
+				return;
+			}
+			if (result === 'not_found') {
+				showError(i18n.errNotFound);
+				resetButton();
+				return;
+			}
+
+			form.classList.add('hidden');
+			successMessage.classList.remove('hidden');
+		});
+	</script>
+</Layout>

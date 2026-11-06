@@ -50,7 +50,7 @@ export function stripLang(pathname: string): string {
 }
 
 /** 已經有英文版的頁面（以中文版路徑表示）。每完成一頁就加進來。 */
-export const translatedPaths = new Set<string>(['/', '/about', '/members', '/charter', '/activities', '/activities/assembly', '/forum', '/forum/2026', '/forum/2026/schedule', '/forum/2026/speakers', '/forum/2026/register', '/forum/2026/register/form', '/forum/2026/invite']);
+export const translatedPaths = new Set<string>(['/', '/about', '/members', '/charter', '/activities', '/activities/assembly', '/forum', '/forum/2026', '/forum/2026/schedule', '/forum/2026/speakers', '/forum/2026/register', '/forum/2026/register/form', '/forum/2026/payment', '/forum/2026/invite']);
 
 /** 依語言產生連結；英文版尚未完成的頁面會自動指向中文版。支援 #錨點。 */
 export function localizePath(path: string, lang: Lang): string {
