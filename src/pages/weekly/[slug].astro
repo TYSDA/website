@@ -158,13 +158,14 @@ const issueNo = String(fm.issue).padStart(3, '0');
 
 		/* 內文：報紙式雙欄 */
 		.weekly-body {
+			font-size: 1rem;
+		}
+		.weekly-body :global(.cols) {
 			column-count: 2;
 			column-gap: 2.4rem;
 			column-rule: 1px solid var(--rule);
-			font-size: 1rem;
 		}
 		.weekly-body :global(h2) {
-			column-span: all;
 			margin: 1.8rem 0 1rem;
 			padding: 0.4rem 0.9rem;
 			background: var(--ink);
@@ -219,6 +220,13 @@ const issueNo = String(fm.issue).padStart(3, '0');
 		.weekly-body :global(strong) {
 			font-weight: 900;
 		}
+		/* 論文引用（英文）靠左，避免兩端對齊把字距拉太開 */
+		.weekly-body :global(p:has(> strong:only-child) + p) {
+			text-align: left;
+			text-indent: 0;
+			font-size: 0.9rem;
+			color: var(--ink-soft);
+		}
 		/* 圖片與圖說 */
 		.weekly-body :global(p:has(> img)) {
 			text-indent: 0;
@@ -229,7 +237,7 @@ const issueNo = String(fm.issue).padStart(3, '0');
 			display: block;
 			width: 100%;
 			height: auto;
-			max-height: 340px;
+			max-height: 520px;
 			object-fit: contain;
 			background: #e9e1cf;
 			border: 1px solid var(--rule);
@@ -259,7 +267,6 @@ const issueNo = String(fm.issue).padStart(3, '0');
 			text-decoration-style: solid;
 		}
 		.weekly-body :global(hr) {
-			column-span: all;
 			border: 0;
 			border-top: 3px double var(--ink);
 			margin: 2rem 0 1rem;
@@ -303,7 +310,7 @@ const issueNo = String(fm.issue).padStart(3, '0');
 			.paper {
 				padding: 1rem 1.25rem 2rem;
 			}
-			.weekly-body {
+			.weekly-body :global(.cols) {
 				column-count: 1;
 			}
 			.mast-top {

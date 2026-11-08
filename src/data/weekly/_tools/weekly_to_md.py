@@ -205,7 +205,8 @@ def convert(text: str):
                 )
             if found:
                 imgs = "\n\n".join(f"![第 {num} 篇的圖片 {k}](/weekly/{img_dir.name}/{f.name})" for k, f in enumerate(found, 1))
-                resolved.append(("p", imgs + "\n\n*圖片來源：原始資料*"))
+                src_note = "本篇論文" if series_slug == "nature" else "原始資料"
+                resolved.append(("p", imgs + f"\n\n*圖片來源：{src_note}*"))
             continue
         resolved.append((kind, text))
     blocks = resolved

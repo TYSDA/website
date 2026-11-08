@@ -10,13 +10,19 @@ summary: "這個星期，人類又多知道了哪些關於地球、宇宙與其�
 period: "2026 年 10 月 26 日－11 月 1 日"
 ---
 
+<div class="cols">
+
 這個星期，人類又多知道了哪些關於地球、宇宙與其他生命的事情？
 
 《自然科學週報》由臺灣青少年科學發展協會整理，每週精選值得關注的自然科學研究，涵蓋動物行為、生物力學、演化、古生物、地球科學與天文學等領域。
 
 本期收錄 10 篇當週研究，以及 2 篇近期發現的有趣研究「拾遺」。每篇均附原始論文資訊，歡迎大家進一步閱讀！
 
+</div>
+
 ## 🇹🇼【臺灣本週科學】
+
+<div class="cols">
 
 ### 🔬 1\. 臺灣長鬃山羊爬樹，可能連樹木的形狀都被改變！
 
@@ -31,7 +37,11 @@ period: "2026 年 10 月 26 日－11 月 1 日"
 Takada, H., Tezuka, N., Sun, N. C.-M., & Pei, K. J.-C. (2026). Climbing ungulates as modifiers of tree morphology: a case from the Formosan serow. Scientific Reports.  
 DOI：[10.1038/s41598-026-77603-5](https://doi.org/10.1038/s41598-026-77603-5)
 
+</div>
+
 ## 🦿【動物運動與生物力學】
+
+<div class="cols">
 
 ### 🔬 2\. 果蠅走路的節拍器，核心竟然可以縮小到三個神經元！
 
@@ -50,7 +60,7 @@ DOI：[10.1038/s41586-026-11195-y](https://doi.org/10.1038/s41586-026-11195-y)
 
 ![第 3 篇的圖片 1](/weekly/nature-2026-w44/3.jpg)
 
-*圖片來源：原始資料*
+*圖片來源：本篇論文*
 
 槍蝦又稱鼓蝦，能高速閉合特化的大螯，產生空化泡，並在氣泡崩潰時形成強烈壓力波。
 
@@ -80,13 +90,17 @@ DOI：[10.1038/s41598-026-77517-2](https://doi.org/10.1038/s41598-026-77517-2)
 Berg, O. B., Fischer, D., Rein, A. M. C., Nyakatura, J. A., & Wölfer, J. (2026). Influence of body size and locomotor behaviour on trabecular bone structure in the humeral and femoral heads of Muroidea. Mammalian Biology.  
 DOI：[10.1007/s42991-026-00628-w](https://doi.org/10.1007/s42991-026-00628-w)
 
+</div>
+
 ## 🦕【演化與古生物】
+
+<div class="cols">
 
 ### 🔬 5\. 兩棲類竟然曾經成功「下海」？認識兩億多年前的海異螈！
 
 ![第 5 篇的圖片 1](/weekly/nature-2026-w44/5.jpg)
 
-*圖片來源：原始資料*
+*圖片來源：本篇論文*
 
 今天的兩棲類，又稱兩生類，包括我們熟悉的青蛙、蟾蜍、蠑螈、山椒魚及蚓螈。由於皮膚對水分與鹽分的交換十分敏感，現生兩棲類沒有真正完全海生的物種。
 
@@ -105,7 +119,7 @@ DOI：[10.1038/s41559-026-03209-9](https://doi.org/10.1038/s41559-026-03209-9)
 
 ![第 6 篇的圖片 1](/weekly/nature-2026-w44/6.jpg)
 
-*圖片來源：原始資料*
+*圖片來源：本篇論文*
 
 今天我們熟悉的鳥蛋，通常有堅硬的鈣化蛋殼。但早期恐龍的蛋也都是這樣嗎？
 
@@ -120,7 +134,11 @@ DOI：[10.1038/s41559-026-03209-9](https://doi.org/10.1038/s41559-026-03209-9)
 Di, Z., Wang, H., Wang, T., et al. (2026). An Early Jurassic soft eggshell provides insights into the evolutionary history of dinosaur eggs. Nature Communications.  
 DOI：[10.1038/s41467-026-78709-0](https://doi.org/10.1038/s41467-026-78709-0)
 
+</div>
+
 ## 🌍【地球與環境】
+
+<div class="cols">
 
 ### 🔬 7\. 植物缺水，可能愈來愈常是因為「空氣太乾」！
 
@@ -150,7 +168,11 @@ DOI：[10.1038/s41561-026-02107-w](https://doi.org/10.1038/s41561-026-02107-w)
 Lodolo, E., Vuan, A., Polonia, A., et al. (2026). Large intraplate earthquakes on an extinct oceanic plate reveal fracture zone reactivation. Communications Earth & Environment.  
 DOI：[10.1038/s43247-026-04197-1](https://doi.org/10.1038/s43247-026-04197-1)
 
+</div>
+
 ## 🔭【宇宙與行星】
+
+<div class="cols">
 
 ### 🔬 9\. 宇宙還很年輕時，兩個超大質量黑洞已經一起快速成長！
 
@@ -182,7 +204,11 @@ DOI：[10.1038/s41550-026-03008-z](https://doi.org/10.1038/s41550-026-03008-z)
 Gentile Fusillo, N. P., Lagos-Vilches, F., Gänsicke, B. T., Manser, C. J., & Koester, D. (2026). A double debris disc around a white dwarf sculpted by two planetary bodies. Nature Astronomy.  
 DOI：[10.1038/s41550-026-03004-3](https://doi.org/10.1038/s41550-026-03004-3)
 
+</div>
+
 ## 📚【拾遺：最近才發現的有趣研究】
+
+<div class="cols">
 
 科學研究的價值不會因為出版了幾個月就消失！從本期開始，我們另外設立「拾遺」專區，補充近期才發現、過去尚未報導的有趣論文。
 
@@ -190,7 +216,7 @@ DOI：[10.1038/s41550-026-03004-3](https://doi.org/10.1038/s41550-026-03004-3)
 
 ![第 11 篇的圖片 1](/weekly/nature-2026-w44/11.jpg)
 
-*圖片來源：原始資料*
+*圖片來源：本篇論文*
 
 如果企鵝游泳時突然受到更大的阻力，會不會更加努力划水？
 
@@ -222,10 +248,16 @@ DOI：[10.1242/jeb.252912](https://doi.org/10.1242/jeb.252912)
 Argenziano, M., Cutolo, A., Zingales, M., & Fraldi, M. (2026). Allowing caterpillar locomotion on any substrates: towards hybrid soft robots design. Journal of the Royal Society Interface, 23(243), 20260288.  
 DOI：[10.1098/rsif.2026.0288](https://doi.org/10.1098/rsif.2026.0288)
 
+</div>
+
 ## 📌【關於自然科學週報】
+
+<div class="cols">
 
 《自然科學週報》是臺灣青少年科學發展協會的科學資訊整理計畫，希望讓更多青年學子與一般大眾，持續接觸來自世界各地的自然科學新發現。
 
 你對本期哪一篇研究最有興趣？歡迎留言分享！
 
 臺灣青少年科學發展協會
+
+</div>
