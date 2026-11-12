@@ -110,8 +110,17 @@ const weeklySlides = weeklyLatest.map((w) => ({
 	link: `/weekly/${w.slug}/`,
 	raw: true
 }));
+const wpoySlide = {
+	kind: 'wpoy',
+	label: '英國倫敦自然史博物館主辦・徵件中',
+	title: 'Wildlife Photographer of the Year 野生動物攝影大賽',
+	date: '截止：2026 年 12 月 3 日（四）臺灣時間 19:30',
+	link: '/wpoy-2026/',
+	raw: true
+};
 const slides = [
 	{ kind: 'forum', ...c.slides[0] },
+	wpoySlide,
 	...weeklySlides,
 	...c.slides.slice(1).map((x) => ({ kind: 'workshop', ...x }))
 ] as Array<{ kind: string; label: string; title: string; date: string; link: string; raw?: boolean; images?: string[] }>;
@@ -235,6 +244,9 @@ const members = [
 				url('/workshop.png');
 			background-size: cover;
 			background-position: center;
+		}
+		.hero-slide--wpoy {
+			background: radial-gradient(circle at 80% 20%, rgba(78, 153, 117, 0.45), transparent 55%), linear-gradient(135deg, #1d2c24, #1b211d);
 		}
 		.hero-slide--museum {
 			background: radial-gradient(circle at 80% 20%, rgba(166, 134, 60, 0.35), transparent 55%), linear-gradient(135deg, #2a261c, #1b211d);
