@@ -14,7 +14,7 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/c
 			<header class="hero">
 				<p class="kicker">📷 讓世界看見，你眼中的臺灣自然</p>
 				<h1>Wildlife Photographer of the Year<br />野生動物攝影大賽</h1>
-				<p class="host">英國倫敦自然史博物館主辦｜徵件倒數21天！</p>
+				<p class="host">英國倫敦自然史博物館主辦｜<span data-wpoy="host">徵件倒數21天！</span></p>
 			</header>
 
 			<div class="photos">
@@ -41,7 +41,7 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/c
 					<li>年齡以2026年12月3日截止當天計算。</li>
 					<li>相機、手機拍攝的原創作品皆有參賽機會。</li>
 					<li>截止：2026年12月3日（四）臺灣時間晚上7:30。</li>
-					<li>以11月12日計，距離截止還有21天。</li>
+					<li data-wpoy="bullet">以11月12日計，距離截止還有21天。</li>
 				</ul>
 			</section>
 
@@ -180,6 +180,29 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/c
 			</footer>
 		</article>
 	</div>
+
+	<script is:inline>
+		(function () {
+			// 截止：2026-12-03 19:30（臺灣時間）；天數以臺灣日期計算，每天自動減少
+			var end = new Date('2026-12-03T19:30:00+08:00');
+			var now = new Date();
+			var parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now).split('-');
+			var today = Date.UTC(+parts[0], +parts[1] - 1, +parts[2]);
+			var days = Math.round((Date.UTC(2026, 11, 3) - today) / 86400000);
+			var host = document.querySelector('[data-wpoy="host"]');
+			var bullet = document.querySelector('[data-wpoy="bullet"]');
+			if (now > end) {
+				if (host) host.textContent = '徵件已截止';
+				if (bullet) bullet.textContent = '本屆徵件已截止。';
+			} else if (days <= 0) {
+				if (host) host.textContent = '今天截止！';
+				if (bullet) bullet.textContent = '今天（臺灣時間晚上7:30）截止。';
+			} else {
+				if (host) host.textContent = '徵件倒數' + days + '天！';
+				if (bullet) bullet.textContent = '距離截止還有' + days + '天。';
+			}
+		})();
+	</script>
 
 	<style>
 		.panel {
