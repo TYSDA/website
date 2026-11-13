@@ -116,6 +116,7 @@ const wpoySlide = {
 	title: 'Wildlife Photographer of the Year 野生動物攝影大賽',
 	date: '截止：2026 年 12 月 3 日（四）臺灣時間 19:30',
 	link: '/wpoy-2026/',
+	images: ['/wpoy-2026-hero.jpg'],
 	raw: true
 };
 const slides = [
@@ -168,6 +169,23 @@ const members = [
 	</div>
 
 	<div class="panel">
+		<div class="panel-inner panel-inner--wide">
+			<h2>{lang === 'en' ? 'Weekly' : '週報'}</h2>
+			<div class="weekly-home-grid">
+				{weeklyLatest.map((w) => (
+					<a href={`/weekly/${w.slug}/`} class="weekly-home-card">
+						<p class="weekly-home-meta">{w.seriesName}・第 {String(w.issue).padStart(3, '0')} 期</p>
+						<h3>{w.title}</h3>
+						<p class="weekly-home-date">{w.period ?? w.date}</p>
+						{w.summary && <p class="weekly-home-summary">{w.summary}</p>}
+					</a>
+				))}
+			</div>
+			<a href="/weekly/">{lang === 'en' ? 'View all weekly issues →' : '查看所有週報 →'}</a>
+		</div>
+	</div>
+
+	<div class="panel">
 		<div class="panel-inner">
 			<h2>{c.activitiesTitle}</h2>
 			<div class="category-preview-grid">
@@ -203,6 +221,36 @@ const members = [
 		}
 		.panel h1, .panel h2, .panel h3 {
 			color: var(--card-text);
+		}
+		.panel-inner--wide { max-width: 1000px; }
+		.weekly-home-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 1.2rem;
+			margin: 1rem 0 1.2rem;
+		}
+		.weekly-home-card {
+			display: block;
+			padding: 1.2rem 1.3rem;
+			background: var(--card-bg);
+			border: 1px solid rgba(42, 38, 32, 0.15);
+			border-radius: 14px;
+			text-decoration: none;
+			color: var(--card-text);
+		}
+		.weekly-home-card:hover { border-color: var(--yellow); }
+		.weekly-home-card p { margin: 0 0 0.4rem; }
+		.weekly-home-meta { color: var(--green); font-weight: 700; font-size: 0.9rem; }
+		.weekly-home-card h3 { margin: 0 0 0.4rem; font-size: 1.1rem; line-height: 1.5; }
+		.weekly-home-date { color: var(--card-text-muted); font-size: 0.9rem; }
+		.weekly-home-summary {
+			color: var(--card-text-muted);
+			font-size: 0.95rem;
+			line-height: 1.7;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
 		}
 		.panel-inner {
 			max-width: 800px;

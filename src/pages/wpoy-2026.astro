@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// 官方連結：目前放的是搜尋到的青少年組、成人組規章頁。若有正式的「投稿入口」網址，換掉下面這個即可。
-const youngRulesUrl = 'https://www.nhm.ac.uk/wpy/competition/young-wpy/rules';
-const adultRulesUrl = 'https://www.nhm.ac.uk/visit/wpy/competition/adult-competition/rules.html';
+// 官方競賽頁（已去掉 Facebook 追蹤參數）；下面兩個是青少年組、成人組規章頁。
+const officialUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/competition.html';
+const youngRulesUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/competition/young-wpy-rules.html';
+const entryUrl = 'https://www.wpy-entry.com/';
+const adultRulesUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/competition/rules.html';
 ---
 
 <Layout title="Wildlife Photographer of the Year 野生動物攝影大賽｜徵件中">
@@ -14,6 +16,11 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/visit/wpy/competition/adult-competi
 				<h1>Wildlife Photographer of the Year<br />野生動物攝影大賽</h1>
 				<p class="host">英國倫敦自然史博物館主辦｜徵件倒數21天！</p>
 			</header>
+
+			<figure class="photo">
+				<img src="/wpoy-2026-hero.jpg" alt="從冰面下方的洞口向上望，一隻北極熊探頭看向鏡頭" />
+				<figcaption>攝影：Audun Rikardsen（圖中標示）</figcaption>
+			</figure>
 
 			<p>校園裡的昆蟲、河岸邊的鳥類、城市縫隙中的野生生命，都可能成為值得被世界看見的故事。</p>
 			<p>臺灣青少年科學發展協會持續推廣 Wildlife Photographer of the Year，邀請臺灣的青少年與攝影愛好者，從生活周遭出發，用觀察與影像呈現家鄉的生物多樣性。</p>
@@ -41,6 +48,10 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/visit/wpy/competition/adult-competi
 				<p>一段日常觀察、一個被忽略的角落，也能帶來獨特的作品。現在就翻看你的自然攝影紀錄，挑選最想與世界分享的故事。</p>
 				<p class="links">
 					<strong>👉 官方競賽資訊與投稿入口</strong><br />
+					<a href={officialUrl} target="_blank" rel="noopener noreferrer">官方競賽頁（Competition）</a>
+					<span class="sep">｜</span>
+					<a href={entryUrl} target="_blank" rel="noopener noreferrer">投稿系統（Entry portal）</a>
+					<span class="sep">｜</span>
 					<a href={youngRulesUrl} target="_blank" rel="noopener noreferrer">青少年組規章（Young Competition）</a>
 					<span class="sep">｜</span>
 					<a href={adultRulesUrl} target="_blank" rel="noopener noreferrer">成人組規章（Adult Competition）</a>
@@ -148,6 +159,10 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/visit/wpy/competition/adult-competi
 			<p class="disclaimer">本篇為中文參賽重點整理，並非完整規章翻譯；參賽資格、作品規格、授權條款及更新，均以主辦方官網為準。</p>
 			<p class="links">
 				<strong>官方資訊與投稿入口：</strong><br />
+				<a href={officialUrl} target="_blank" rel="noopener noreferrer">官方競賽頁（Competition）</a>
+					<span class="sep">｜</span>
+					<a href={entryUrl} target="_blank" rel="noopener noreferrer">投稿系統（Entry portal）</a>
+				<span class="sep">｜</span>
 				<a href={youngRulesUrl} target="_blank" rel="noopener noreferrer">青少年組規章（Young Competition）</a>
 				<span class="sep">｜</span>
 				<a href={adultRulesUrl} target="_blank" rel="noopener noreferrer">成人組規章（Adult Competition）</a>
@@ -181,6 +196,21 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/visit/wpy/competition/adult-competi
 			background-size: cover;
 			background-position: center;
 			color: var(--text);
+		}
+		.photo {
+			margin: 0 0 1.8rem;
+		}
+		.photo img {
+			display: block;
+			width: 100%;
+			height: auto;
+			border-radius: 12px;
+		}
+		.photo figcaption {
+			margin-top: 0.4rem;
+			font-size: 0.85rem;
+			color: var(--card-text-muted);
+			text-align: right;
 		}
 		.kicker {
 			margin: 0 0 0.6rem;
