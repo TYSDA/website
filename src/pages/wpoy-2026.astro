@@ -20,11 +20,11 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/c
 			<div class="photos">
 				<figure>
 					<img src="/wpy-adult-winner.jpg" alt="一頭成年母象用象鼻捲起一隻小象，黑白照片" />
-					<figcaption>成年組總冠軍《The Aftermath》<br />攝影：Federico Veronesi</figcaption>
+					<figcaption>2026 年成年組總冠軍《The Aftermath》<br />攝影：Federico Veronesi</figcaption>
 				</figure>
 				<figure>
 					<img src="/wpy-young-winner.jpg" alt="一隻糞金龜推著糞球，周圍有小蟲飛散，黑白照片" />
-					<figcaption>青少年組總冠軍《Labour of Love》<br />攝影：Oscar Whitfield</figcaption>
+					<figcaption>2026 年青少年組總冠軍《Labour of Love》<br />攝影：Oscar Whitfield</figcaption>
 				</figure>
 			</div>
 
@@ -193,15 +193,9 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/c
 			box-sizing: border-box;
 		}
 		.hero {
-			margin: 0 0 2rem;
-			padding: 1.8rem 1.6rem;
-			border-radius: 16px;
-			background:
-				linear-gradient(rgba(27, 33, 29, 0.78), rgba(27, 33, 29, 0.88)),
-				url('/RRRRR.png');
-			background-size: cover;
-			background-position: center;
-			color: var(--text);
+			margin: 0 0 1.8rem;
+			padding: 0 0 1.4rem;
+			border-bottom: 4px double var(--card-text);
 		}
 		.photos {
 			display: grid;
@@ -230,25 +224,25 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/c
 				grid-template-columns: 1fr;
 			}
 		}
-		.kicker {
+		.inner .kicker {
 			margin: 0 0 0.6rem;
-			color: var(--yellow);
+			color: var(--green);
 			font-weight: 700;
 		}
 		.hero h1 {
-			margin: 0 0 0.8rem;
+			margin: 0 0 0.9rem;
 			font-size: clamp(1.5rem, 4.4vw, 2.2rem);
 			line-height: 1.4;
-			color: var(--text);
+			color: var(--card-text);
 		}
-		.host {
+		.inner .host {
 			margin: 0;
 			display: inline-block;
 			padding: 0.25rem 0.9rem;
-			border: 1px solid rgba(212, 184, 118, 0.5);
+			border: 1px solid var(--yellow);
 			border-radius: 999px;
-			color: #d4b876;
-			font-weight: 600;
+			color: var(--yellow);
+			font-weight: 700;
 			font-size: 0.95rem;
 		}
 		.inner p {
