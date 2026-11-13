@@ -17,10 +17,16 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/c
 				<p class="host">英國倫敦自然史博物館主辦｜徵件倒數21天！</p>
 			</header>
 
-			<figure class="photo">
-				<img src="/wpoy-2026-hero.jpg" alt="從冰面下方的洞口向上望，一隻北極熊探頭看向鏡頭" />
-				<figcaption>攝影：Audun Rikardsen（圖中標示）</figcaption>
-			</figure>
+			<div class="photos">
+				<figure>
+					<img src="/wpy-adult-winner.jpg" alt="一頭成年母象用象鼻捲起一隻小象，黑白照片" />
+					<figcaption>成年組總冠軍《The Aftermath》<br />攝影：Federico Veronesi</figcaption>
+				</figure>
+				<figure>
+					<img src="/wpy-young-winner.jpg" alt="一隻糞金龜推著糞球，周圍有小蟲飛散，黑白照片" />
+					<figcaption>青少年組總冠軍《Labour of Love》<br />攝影：Oscar Whitfield</figcaption>
+				</figure>
+			</div>
 
 			<p>校園裡的昆蟲、河岸邊的鳥類、城市縫隙中的野生生命，都可能成為值得被世界看見的故事。</p>
 			<p>臺灣青少年科學發展協會持續推廣 Wildlife Photographer of the Year，邀請臺灣的青少年與攝影愛好者，從生活周遭出發，用觀察與影像呈現家鄉的生物多樣性。</p>
@@ -197,20 +203,32 @@ const adultRulesUrl = 'https://www.nhm.ac.uk/wildlife-photographer-of-the-year/c
 			background-position: center;
 			color: var(--text);
 		}
-		.photo {
+		.photos {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+			gap: 1rem;
+			align-items: start;
 			margin: 0 0 1.8rem;
 		}
-		.photo img {
+		.photos figure {
+			margin: 0;
+		}
+		.photos img {
 			display: block;
 			width: 100%;
 			height: auto;
 			border-radius: 12px;
 		}
-		.photo figcaption {
+		.photos figcaption {
 			margin-top: 0.4rem;
 			font-size: 0.85rem;
+			line-height: 1.6;
 			color: var(--card-text-muted);
-			text-align: right;
+		}
+		@media (max-width: 600px) {
+			.photos {
+				grid-template-columns: 1fr;
+			}
 		}
 		.kicker {
 			margin: 0 0 0.6rem;
