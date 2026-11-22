@@ -28,6 +28,7 @@ const content = {
 		veg: '素食',
 		dietary: '飲食禁忌或過敏',
 		dietaryHint: '（選填）',
+		emergency: '緊急聯絡人電話',
 		successTitle: '已收到您的繳費確認',
 		successLead: '我們會核對款項，確認無誤後寄出錄取通知。如需更正資料，重新填寫一次即可，會以最新一次為準。',
 		js: {
@@ -56,6 +57,7 @@ const content = {
 		veg: 'Vegetarian',
 		dietary: 'Dietary restrictions or allergies',
 		dietaryHint: '(optional)',
+		emergency: 'Emergency contact phone',
 		successTitle: 'Your payment confirmation has been received',
 		successLead: 'We will verify the payment and then send you the admission notice. To correct anything, simply submit this form again; the latest submission is used.',
 		js: {
@@ -122,6 +124,11 @@ const t = content[lang];
 				<div class="form-group">
 					<label for="dietary_note">{t.dietary} <span class="hint-inline">{t.dietaryHint}</span></label>
 					<textarea id="dietary_note" name="dietary_note" rows="3"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="emergency_phone">{t.emergency} <span class="req">*</span></label>
+					<input type="tel" id="emergency_phone" name="emergency_phone" required />
 				</div>
 
 				<div id="form-error" class="form-error hidden"></div>
@@ -423,7 +430,8 @@ const t = content[lang];
 				p_account_last5: last5,
 				p_meal_day1: (data.get('meal_day1') || '').toString(),
 				p_meal_day2: (data.get('meal_day2') || '').toString(),
-				p_dietary_note: (data.get('dietary_note') || '').toString().trim()
+				p_dietary_note: (data.get('dietary_note') || '').toString().trim(),
+				p_emergency_phone: (data.get('emergency_phone') || '').toString().trim()
 			});
 
 			if (error) {
