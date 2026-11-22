@@ -39,7 +39,6 @@ const content = {
 		pageTitle: '報名表單',
 		name: '姓名',
 		phone: '電話',
-		emergencyPhone: '緊急聯絡人電話',
 		school: '學校',
 		notice: '本次論壇非常注重學生的提問，請在閱讀各個老師的基本資料之後，提出與科學發展相關之問題。問題獲選的參與者會在論壇時代表提問，並且頒發相關的證明獎狀。',
 		noticeSub: '（如果想要問兩名以上的講者，就選其中一名，剩下的在描述中寫明）',
@@ -73,7 +72,6 @@ const content = {
 		pageTitle: 'Registration Form',
 		name: 'Name',
 		phone: 'Phone',
-		emergencyPhone: 'Emergency contact phone',
 		school: 'School',
 		notice: "This forum places great emphasis on questions from students. After reading each speaker's profile, please submit a question related to the development of science. Participants whose questions are selected will ask them on behalf of the audience at the forum and will receive a certificate of recognition.",
 		noticeSub: '(If you want to ask more than one speaker, choose one here and describe the others in your question.)',
@@ -130,11 +128,6 @@ const t = content[lang];
 				<div class="form-group">
 					<label for="phone">{t.phone} <span class="req">*</span></label>
 					<input type="tel" id="phone" name="phone" required />
-				</div>
-
-				<div class="form-group">
-					<label for="emergency_phone">{t.emergencyPhone} <span class="req">*</span></label>
-					<input type="tel" id="emergency_phone" name="emergency_phone" required />
 				</div>
 
 				<div class="form-group">
@@ -579,7 +572,6 @@ const t = content[lang];
 						registration_number: regNumber,
 						name: data.get('name'),
 						phone: data.get('phone'),
-						emergency_phone: data.get('emergency_phone'),
 						email: data.get('email'),
 						school: data.get('school'),
 						question_speaker: (data.get('question_speaker') || '').toString(),
